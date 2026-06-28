@@ -1,1 +1,3 @@
-<Solution />
+<Solution>
+  <Project Path="FirstC#Project/FirstC#Project.csproj" />
+</Solution>
