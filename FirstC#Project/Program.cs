@@ -44,34 +44,86 @@
 
 
             /////////////////////////////////////////////////////////////////////////////////
-            
 
-            Console.WriteLine("mark 1: ");
-            double mark1 = double.Parse(Console.ReadLine());
-            Console.WriteLine("mark 2: ");
-            double mark2 = double.Parse(Console.ReadLine());
-            double result = (mark1 + mark2) / 2;
-            Console.WriteLine("result: " + result);
-            if (result < 50)
+
+            //Console.WriteLine("mark 1: ");
+            //double mark1 = double.Parse(Console.ReadLine());
+            //Console.WriteLine("mark 2: ");
+            //double mark2 = double.Parse(Console.ReadLine());
+            //double result = (mark1 + mark2) / 2;
+            //Console.WriteLine("result: " + result);
+            //if (result < 50)
+            //{
+            //    Console.WriteLine("Fail");
+            //}
+            //else if (result < 65 && result > 50)
+            //{
+            //    Console.WriteLine("Pass");
+            //}
+            //else if (result < 80 && result > 65)
+            //{
+            //    Console.WriteLine("Good");
+            //}
+            //else if (result < 90 && result > 80)
+            //{
+            //    Console.WriteLine("Very Good");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Excellent");
+            //}
+
+
+            /////////////////////////////////////////////////////////////////////////////////
+            bool is_running = true;
+            while(is_running)
             {
-                Console.WriteLine("Fail");
-            }
-            else if (result < 65 && result > 50)
+            Console.WriteLine("******************************************");
+            Console.WriteLine("welcome to Bank:");
+            Console.WriteLine("1.Withdraw");
+            Console.WriteLine("2.Deposite");
+            Console.WriteLine("3.Balance check");
+            Console.WriteLine("4.Quit");
+
+            double balance = 1000;
+            Console.WriteLine("choose an option: ");
+                
+            int option = int.Parse(Console.ReadLine());
+            Console.WriteLine("******************************************");
+            switch (option)
             {
-                Console.WriteLine("Pass");
+                case 1:
+                    Console.WriteLine("your balance = "+ balance);
+                    Console.WriteLine("enter amount to withdraw: ");
+                    double withdraw = double.Parse(Console.ReadLine());
+                    double result = balance - withdraw;
+                    Console.WriteLine("your new balance = " + result);
+                    Console.WriteLine("your withdrawed amount = " + withdraw);
+                    break;
+
+
+                case 2:
+                    Console.WriteLine("your balance =" + balance);
+                    Console.WriteLine("enter amount to deposite: ");
+                    double deposite = double.Parse(Console.ReadLine());
+                    double result2 = balance + deposite;
+                    Console.WriteLine("your new balance = " + result2);
+                    break;
+
+
+                case 3:
+                    Console.WriteLine("your balance = " + balance);
+                    break;
+
+                case 4:
+                        is_running = false;
+                        break;  
+                    default:
+                    Console.WriteLine("please choose a correct option");
+                    break;
             }
-            else if (result < 80 && result > 65)
-            {
-                Console.WriteLine("Good");
-            }
-            else if (result < 90 && result > 80)
-            {
-                Console.WriteLine("Very Good");
-            }
-            else
-            {
-                Console.WriteLine("Excellent");
-            }
+
         }
+    }
 }
 }
