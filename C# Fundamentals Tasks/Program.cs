@@ -283,49 +283,133 @@ namespace C__Fundamentals_Tasks
 
             // Task 11:
 
-            Console.WriteLine("Enter your age: ");
-            int age = int.Parse(Console.ReadLine());
-            Console.WriteLine("Ebter your monthly income: ");
-            double income = double.Parse(Console.ReadLine());
-            Console.WriteLine("Do you have existing loan?: (yes/no) ");
-            string hasLoan = Console.ReadLine().ToLower();
-            bool canloan = false;
-            if (hasLoan == "yes")
+            //Console.WriteLine("Enter your age: ");
+            //int age = int.Parse(Console.ReadLine());
+            //Console.WriteLine("Ebter your monthly income: ");
+            //double income = double.Parse(Console.ReadLine());
+            //Console.WriteLine("Do you have existing loan?: (yes/no) ");
+            //string hasLoan = Console.ReadLine().ToLower();
+            //bool canloan = false;
+            //if (hasLoan == "yes")
+            //{
+            //    canloan = false;
+            //}else if (hasLoan == "no")
+            //{
+            //    canloan = true;
+            //}
+
+            //if (age >= 21 && age <= 60 && income >= 400 && canloan)
+            //{
+            //    Console.WriteLine("You are eligible for the loan.");
+            //}
+            //else if (age < 21)
+            //{
+            //    Console.WriteLine("You are not eligible for the loan Because you are Under 21.");
+            //}
+            //else if (age > 60)
+            //{
+            //    Console.WriteLine("You are not eligible for the loan Because you are Over 60.");
+            //}
+            //else if (!canloan)
+            //{
+            //    Console.WriteLine("You are not eligible for the loan Because you have an existing loan.");
+            //}
+            //else if (income < 400)
+            //{
+            //    Console.WriteLine("You are not eligible for the loan Because your income is less than 400.");
+            //}
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Task 12:
+
+            Console.WriteLine("Enter The package weight (KG): ");
+            double weight = double.Parse(Console.ReadLine());
+            Console.WriteLine("Enter a region: \n A) local\n B) national\n C) International");
+            char region = char.Parse(Console.ReadLine().ToUpper());
+            double cost = 0;
+            switch (region) 
             {
-                canloan = false;
-            }else if (hasLoan == "no")
-            {
-                canloan = true;
+                case 'A':
+                    cost = 1.000;
+                    if(weight <= 5)
+                    {
+                        Console.WriteLine("Shipping cost: " + cost + " OMR");
+                    }
+                    else if (weight > 5 && weight <= 10)
+                    {
+                        Console.WriteLine("Shipping cost: " + cost + " OMR");
+                        Console.WriteLine("Additional cost for weight over 5 KG: 2.000 OMR");
+                        cost += 2.000;
+                        Console.WriteLine("total Shipping cost: "+cost + " OMR");
+
+                    }
+                    else if (weight > 10)
+                    {
+                        Console.WriteLine("Shipping cost: " + cost + " OMR");
+                        Console.WriteLine("Additional cost for weight over 10 KG: 5.000 OMR");
+                        cost += 5.000;
+                        Console.WriteLine("Shipping cost: " + cost + " OMR");
+                    }
+                    break;
+
+                case 'B':
+                    cost = 3.000;
+                    if (weight <= 5)
+                    {
+                        Console.WriteLine("Shipping cost: " + cost + " OMR");
+                    }
+                    else if (weight > 5 && weight <= 10)
+                    {
+                        Console.WriteLine("Shipping cost: " + cost + " OMR");
+                        Console.WriteLine("Additional cost for weight over 5 KG: 2.000 OMR");
+                        cost += 2.000;
+                        Console.WriteLine("Shipping cost: " + cost + " OMR");
+
+                    }
+                    else if (weight > 10)
+                    {
+                        Console.WriteLine("Shipping cost: " + cost + " OMR");
+                        Console.WriteLine("Additional cost for weight over 10 KG: 5.000 OMR");
+                        cost += 5.000;
+                        Console.WriteLine("Shipping cost: " + cost + " OMR");
+                    }
+                    break;
+
+                case 'C':
+                    cost = 7.000;
+                    if (weight <= 5)
+                    {
+                        Console.WriteLine("Shipping cost: " + cost + " OMR");
+                    }
+                    else if (weight > 5 && weight <=10)
+                    {
+                        Console.WriteLine("Shipping cost: " + cost + " OMR");
+                        Console.WriteLine("Additional cost for weight over 5 KG: 2.000 OMR");
+                        cost += 2.000;
+                        Console.WriteLine("Shipping cost: " + cost + " OMR");
+
+                    }
+                    else if (weight > 10)
+                    {
+                        Console.WriteLine("Shipping cost: " + cost + " OMR");
+                        Console.WriteLine("Additional cost for weight over 10 KG: 5.000 OMR");
+                        cost += 5.000;
+                        Console.WriteLine("Shipping cost: " + cost + " OMR");
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid region entered.");
+                    break;
             }
-
-            if (age >= 21 && age <= 60 && income >= 400 && canloan)
-            {
-                Console.WriteLine("You are eligible for the loan.");
-            }
-            else if (age < 21)
-            {
-                Console.WriteLine("You are not eligible for the loan Because you are Under 21.");
-            }
-            else if (age > 60)
-            {
-                Console.WriteLine("You are not eligible for the loan Because you are Over 60.");
-            }
-            else if (!canloan)
-            {
-                Console.WriteLine("You are not eligible for the loan Because you have an existing loan.");
-            }
-            else if (income < 400)
-            {
-                Console.WriteLine("You are not eligible for the loan Because your income is less than 400.");
-            }
+        
 
 
 
+    }
 
-
-        }
-
-        }
+    }
 }
 
 
