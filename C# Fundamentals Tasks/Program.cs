@@ -323,93 +323,133 @@ namespace C__Fundamentals_Tasks
 
             // Task 12:
 
-            Console.WriteLine("Enter The package weight (KG): ");
-            double weight = double.Parse(Console.ReadLine());
-            Console.WriteLine("Enter a region: \n A) local\n B) national\n C) International");
-            char region = char.Parse(Console.ReadLine().ToUpper());
-            double cost = 0;
-            switch (region) 
+            //Console.WriteLine("Enter The package weight (KG): ");
+            //double weight = double.Parse(Console.ReadLine());
+            //Console.WriteLine("Enter a region: \n A) local\n B) national\n C) International");
+            //char region = char.Parse(Console.ReadLine().ToUpper());
+            //double cost = 0;
+            //switch (region) 
+            //{
+            //    case 'A':
+            //        cost = 1.000;
+            //        if(weight <= 5)
+            //        {
+            //            Console.WriteLine("Shipping cost: " + cost + " OMR");
+            //        }
+            //        else if (weight > 5 && weight <= 10)
+            //        {
+            //            Console.WriteLine("Shipping cost: " + cost + " OMR");
+            //            Console.WriteLine("Additional cost for weight over 5 KG: 2.000 OMR");
+            //            cost += 2.000;
+            //            Console.WriteLine("total Shipping cost: "+cost + " OMR");
+
+            //        }
+            //        else if (weight > 10)
+            //        {
+            //            Console.WriteLine("Shipping cost: " + cost + " OMR");
+            //            Console.WriteLine("Additional cost for weight over 10 KG: 5.000 OMR");
+            //            cost += 5.000;
+            //            Console.WriteLine("Shipping cost: " + cost + " OMR");
+            //        }
+            //        break;
+
+            //    case 'B':
+            //        cost = 3.000;
+            //        if (weight <= 5)
+            //        {
+            //            Console.WriteLine("Shipping cost: " + cost + " OMR");
+            //        }
+            //        else if (weight > 5 && weight <= 10)
+            //        {
+            //            Console.WriteLine("Shipping cost: " + cost + " OMR");
+            //            Console.WriteLine("Additional cost for weight over 5 KG: 2.000 OMR");
+            //            cost += 2.000;
+            //            Console.WriteLine("Shipping cost: " + cost + " OMR");
+
+            //        }
+            //        else if (weight > 10)
+            //        {
+            //            Console.WriteLine("Shipping cost: " + cost + " OMR");
+            //            Console.WriteLine("Additional cost for weight over 10 KG: 5.000 OMR");
+            //            cost += 5.000;
+            //            Console.WriteLine("Shipping cost: " + cost + " OMR");
+            //        }
+            //        break;
+
+            //    case 'C':
+            //        cost = 7.000;
+            //        if (weight <= 5)
+            //        {
+            //            Console.WriteLine("Shipping cost: " + cost + " OMR");
+            //        }
+            //        else if (weight > 5 && weight <=10)
+            //        {
+            //            Console.WriteLine("Shipping cost: " + cost + " OMR");
+            //            Console.WriteLine("Additional cost for weight over 5 KG: 2.000 OMR");
+            //            cost += 2.000;
+            //            Console.WriteLine("Shipping cost: " + cost + " OMR");
+
+            //        }
+            //        else if (weight > 10)
+            //        {
+            //            Console.WriteLine("Shipping cost: " + cost + " OMR");
+            //            Console.WriteLine("Additional cost for weight over 10 KG: 5.000 OMR");
+            //            cost += 5.000;
+            //            Console.WriteLine("Shipping cost: " + cost + " OMR");
+            //        }
+            //        break;
+
+            //    default:
+            //        Console.WriteLine("Invalid region entered.");
+            //        break;
+            //}
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Task 13:
+
+
+            Console.WriteLine("Enter the 1st length of the triangle: ");
+            double length1 = double.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the 2nd length of the triangle: ");
+            double length2 = double.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the 3rd length of the triangle: ");
+            double length3 = double.Parse(Console.ReadLine());
+
+            if (!(length1 + length2 > length3))
             {
-                case 'A':
-                    cost = 1.000;
-                    if(weight <= 5)
-                    {
-                        Console.WriteLine("Shipping cost: " + cost + " OMR");
-                    }
-                    else if (weight > 5 && weight <= 10)
-                    {
-                        Console.WriteLine("Shipping cost: " + cost + " OMR");
-                        Console.WriteLine("Additional cost for weight over 5 KG: 2.000 OMR");
-                        cost += 2.000;
-                        Console.WriteLine("total Shipping cost: "+cost + " OMR");
-
-                    }
-                    else if (weight > 10)
-                    {
-                        Console.WriteLine("Shipping cost: " + cost + " OMR");
-                        Console.WriteLine("Additional cost for weight over 10 KG: 5.000 OMR");
-                        cost += 5.000;
-                        Console.WriteLine("Shipping cost: " + cost + " OMR");
-                    }
-                    break;
-
-                case 'B':
-                    cost = 3.000;
-                    if (weight <= 5)
-                    {
-                        Console.WriteLine("Shipping cost: " + cost + " OMR");
-                    }
-                    else if (weight > 5 && weight <= 10)
-                    {
-                        Console.WriteLine("Shipping cost: " + cost + " OMR");
-                        Console.WriteLine("Additional cost for weight over 5 KG: 2.000 OMR");
-                        cost += 2.000;
-                        Console.WriteLine("Shipping cost: " + cost + " OMR");
-
-                    }
-                    else if (weight > 10)
-                    {
-                        Console.WriteLine("Shipping cost: " + cost + " OMR");
-                        Console.WriteLine("Additional cost for weight over 10 KG: 5.000 OMR");
-                        cost += 5.000;
-                        Console.WriteLine("Shipping cost: " + cost + " OMR");
-                    }
-                    break;
-
-                case 'C':
-                    cost = 7.000;
-                    if (weight <= 5)
-                    {
-                        Console.WriteLine("Shipping cost: " + cost + " OMR");
-                    }
-                    else if (weight > 5 && weight <=10)
-                    {
-                        Console.WriteLine("Shipping cost: " + cost + " OMR");
-                        Console.WriteLine("Additional cost for weight over 5 KG: 2.000 OMR");
-                        cost += 2.000;
-                        Console.WriteLine("Shipping cost: " + cost + " OMR");
-
-                    }
-                    else if (weight > 10)
-                    {
-                        Console.WriteLine("Shipping cost: " + cost + " OMR");
-                        Console.WriteLine("Additional cost for weight over 10 KG: 5.000 OMR");
-                        cost += 5.000;
-                        Console.WriteLine("Shipping cost: " + cost + " OMR");
-                    }
-                    break;
-
-                default:
-                    Console.WriteLine("Invalid region entered.");
-                    break;
+                Console.WriteLine("The lengths do not form a valid triangle.");
             }
+            else if (!(length1 + length3 > length2))
+            {
+                Console.WriteLine("The lengths do not form a valid triangle.");
+            }
+            else if (!(length2 + length3 > length1))
+            {
+                Console.WriteLine("The lengths do not form a valid triangle.");
+            }
+            else
+            {
+                if (length1 == length2 && length2 == length3)
+                {
+                    Console.WriteLine("The triangle is equilateral.");
+                }
+                else if (length1 == length2 || length1 == length3 || length2 == length3)
+                {
+                    Console.WriteLine("The triangle is isosceles.");
+                }
+                else
+                {
+                    Console.WriteLine("The triangle is scalene.");
+                }
+
+            }
+
         
 
-
-
     }
-
-    }
+}
 }
 
 
