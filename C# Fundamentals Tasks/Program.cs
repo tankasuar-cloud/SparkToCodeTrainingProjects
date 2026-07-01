@@ -184,49 +184,103 @@ namespace C__Fundamentals_Tasks
 
             // Task 9:
 
-            Console.WriteLine("enter a number from 1 to 7");
-            int dayNumber = int.Parse(Console.ReadLine());
-            
-            switch(dayNumber) 
+            //Console.WriteLine("enter a number from 1 to 7");
+            //int dayNumber = int.Parse(Console.ReadLine());
+
+            //switch(dayNumber) 
+            //{
+            //    case 1:
+            //        Console.WriteLine("Sunday");
+            //        break;
+
+            //    case 2:
+            //        Console.WriteLine("Monday");
+            //        break;
+
+            //    case 3:
+            //        Console.WriteLine("Tuesday");
+            //        break;
+
+            //    case 4:
+            //        Console.WriteLine("Wednesday");
+            //        break;
+
+            //    case 5:
+            //        Console.WriteLine("Thursday");
+            //        break;
+
+            //    case 6:
+            //        Console.WriteLine("Friday");
+            //        break;
+
+            //    case 7:
+            //        Console.WriteLine("Saturday");
+            //        break;
+
+            //    default:
+            //        Console.WriteLine("nvalid day number");
+            //        break;
+            //}
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Task 10:
+
+            Console.WriteLine("Enter First number: ");
+            double num1 = double.Parse(Console.ReadLine());
+            Console.WriteLine("Enter Second number: ");
+            double num2 = double.Parse(Console.ReadLine());
+            Console.WriteLine("Enter an operator\n 1)+\n 2)-\n 3)*\n 4)/\n 5)%");
+            int option = int.Parse(Console.ReadLine());
+            switch (option)
             {
                 case 1:
-                    Console.WriteLine("Sunday");
+                    double resault = num1 + num2;
+                    Console.WriteLine("The result of addition is: " + resault);
                     break;
 
                 case 2:
-                    Console.WriteLine("Monday");
+                    double resault2 = num1 - num2;
+                    Console.WriteLine("The result of subtraction is: " + resault2);
                     break;
 
                 case 3:
-                    Console.WriteLine("Tuesday");
+                    double resault3 = num1 * num2;
+                    Console.WriteLine("The result of multiplication is: " + resault3);
                     break;
 
                 case 4:
-                    Console.WriteLine("Wednesday");
+                    if (num2 != 0)
+                    {
+                        double resault4 = num1 / num2;
+                        Console.WriteLine("The result of division is: " + resault4);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Cannot divide by zero");
+                    }
                     break;
 
                 case 5:
-                    Console.WriteLine("Thursday");
-                    break;
-                
-                case 6:
-                    Console.WriteLine("Friday");
-                    break;
-
-                case 7:
-                    Console.WriteLine("Saturday");
+                    if (num2 != 0)
+                    {
+                        double resault5 = num1 % num2;
+                        Console.WriteLine("The result of modulus is: " + resault5);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Cannot divide by zero");
+                    }
                     break;
 
                 default:
-                    Console.WriteLine("nvalid day number");
+                    Console.WriteLine("Invalid operator");
                     break;
+
+
             }
-
-
-
-
-
     }
-    }
+}
 }
 
