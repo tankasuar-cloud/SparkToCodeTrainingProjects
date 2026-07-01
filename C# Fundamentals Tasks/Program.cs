@@ -410,45 +410,128 @@ namespace C__Fundamentals_Tasks
             // Task 13:
 
 
-            Console.WriteLine("Enter the 1st length of the triangle: ");
-            double length1 = double.Parse(Console.ReadLine());
-            Console.WriteLine("Enter the 2nd length of the triangle: ");
-            double length2 = double.Parse(Console.ReadLine());
-            Console.WriteLine("Enter the 3rd length of the triangle: ");
-            double length3 = double.Parse(Console.ReadLine());
+            //Console.WriteLine("Enter the 1st length of the triangle: ");
+            //double length1 = double.Parse(Console.ReadLine());
+            //Console.WriteLine("Enter the 2nd length of the triangle: ");
+            //double length2 = double.Parse(Console.ReadLine());
+            //Console.WriteLine("Enter the 3rd length of the triangle: ");
+            //double length3 = double.Parse(Console.ReadLine());
 
-            if (!(length1 + length2 > length3))
+            //if (!(length1 + length2 > length3))
+            //{
+            //    Console.WriteLine("The lengths do not form a valid triangle.");
+            //}
+            //else if (!(length1 + length3 > length2))
+            //{
+            //    Console.WriteLine("The lengths do not form a valid triangle.");
+            //}
+            //else if (!(length2 + length3 > length1))
+            //{
+            //    Console.WriteLine("The lengths do not form a valid triangle.");
+            //}
+            //else
+            //{
+            //    if (length1 == length2 && length2 == length3)
+            //    {
+            //        Console.WriteLine("The triangle is equilateral.");
+            //    }
+            //    else if (length1 == length2 || length1 == length3 || length2 == length3)
+            //    {
+            //        Console.WriteLine("The triangle is isosceles.");
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("The triangle is scalene.");
+            //    }
+
+            //}
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Task 14:
+
+            Console.WriteLine("Enter a region: \n 1) Headphones (8.500 OMR)\n 2) Keyboard (12.000 OMR)\n 3) Mouse (5.000 OMR)");
+            int option = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the quantity: ");
+            int quantity = int.Parse(Console.ReadLine());
+            Console.WriteLine("Do you have a Coupon code? (yes/no): ");
+            string hasCoupon = Console.ReadLine().ToLower();
+            double cost = 0;
+            switch (option) 
             {
-                Console.WriteLine("The lengths do not form a valid triangle.");
-            }
-            else if (!(length1 + length3 > length2))
-            {
-                Console.WriteLine("The lengths do not form a valid triangle.");
-            }
-            else if (!(length2 + length3 > length1))
-            {
-                Console.WriteLine("The lengths do not form a valid triangle.");
-            }
-            else
-            {
-                if (length1 == length2 && length2 == length3)
-                {
-                    Console.WriteLine("The triangle is equilateral.");
-                }
-                else if (length1 == length2 || length1 == length3 || length2 == length3)
-                {
-                    Console.WriteLine("The triangle is isosceles.");
-                }
-                else
-                {
-                    Console.WriteLine("The triangle is scalene.");
-                }
+                case 1:
+                    Console.WriteLine("Headphones seleted, quantity= "+ quantity);
+                    cost = 8.500 * quantity;
+                    if (cost > 20 && hasCoupon == "yes")
+                    {
+                        Console.WriteLine("Total cost for Headphones: " + cost + " OMR");
+                        cost = cost - (cost * 0.10);
+                        Console.WriteLine("discount = 10%");
+                        Console.WriteLine("Total cost for Headphones after 10% discount: " + cost + " OMR");
+                        cost = cost + (cost * 0.05);
+                        Console.WriteLine("tax = 5%");
+                        Console.WriteLine("Total cost for Headphones after 5% tax: " + cost + " OMR");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Total cost for Headphones: " + cost + " OMR");
+                        cost = cost + (cost * 0.05);
+                        Console.WriteLine("tax = 5%");
+                        Console.WriteLine("Total cost for Headphones after 5% tax: " + cost + " OMR");
+
+                    }
+                    break;
+
+                case 2:
+                    Console.WriteLine("Keyboard seleted, quantity= " + quantity);
+                    cost = 12.000 * quantity;
+                    if (cost > 20 && hasCoupon == "yes")
+                    {
+                        Console.WriteLine("Total cost for Keyboard: " + cost + " OMR");
+                        cost = cost - (cost * 0.10);
+                        Console.WriteLine("discount = 10%");
+                        Console.WriteLine("Total cost for Keyboard after 10% discount: " + cost + " OMR");
+                        cost = cost + (cost * 0.05);
+                        Console.WriteLine("tax = 5%");
+                        Console.WriteLine("Total cost for Keyboard after 5% tax: " + cost + " OMR");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Total cost for Keyboard: " + cost + " OMR");
+                        cost = cost + (cost * 0.05);
+                        Console.WriteLine("tax = 5%");
+                        Console.WriteLine("Total cost for Keyboard after 5% tax: " + cost + " OMR");
+
+                    }
+                    break;
+                case 3:
+                    Console.WriteLine("Mouse seleted, quantity= " + quantity);
+                    cost = 5.000 * quantity;
+                    if (cost > 20 && hasCoupon == "yes")
+                    {
+                        Console.WriteLine("Total cost for Mouse: " + cost + " OMR");
+                        cost = cost - (cost * 0.10);
+                        Console.WriteLine("discount = 10%");
+                        Console.WriteLine("Total cost for Mouse after 10% discount: " + cost + " OMR");
+                        cost = cost + (cost * 0.05);
+                        Console.WriteLine("tax = 5%");
+                        Console.WriteLine("Total cost for Mouse after 5% tax: " + cost + " OMR");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Total cost for Mouse: " + cost + " OMR");
+                        cost = cost + (cost * 0.05);
+                        Console.WriteLine("tax = 5%");
+                        Console.WriteLine("Total cost for Mouse after 5% tax: " + cost + " OMR");
+
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Invalid option selected.");
+                    break;
 
             }
-
-        
-
-    }
+}
 }
 }
 
