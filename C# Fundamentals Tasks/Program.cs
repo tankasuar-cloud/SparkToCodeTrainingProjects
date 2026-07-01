@@ -158,35 +158,75 @@ namespace C__Fundamentals_Tasks
 
             // Task 8:
 
-            Console.WriteLine("Enter The Bill Amount: ");
-            double billAmount = double.Parse(Console.ReadLine());
-            Console.WriteLine("Are you a Loyal Member? (yes/no): ");
-            string isLoyalMember = Console.ReadLine().ToLower();
-            double discount = 0;
-            double finalAmount = 0;
-            if (billAmount > 20 && isLoyalMember == "yes")
-            {
-                finalAmount = billAmount - (billAmount * 0.15);
-                Console.WriteLine("Original Bill Amount: " + billAmount + " OMR ");
-                Console.WriteLine("discount: 15%");
-                Console.WriteLine("final Bill: " + finalAmount + " OMR ");
-            }
-            else
-            {
-                finalAmount = billAmount;
-                Console.WriteLine("Original Bill Amount: " + billAmount + " OMR ");
-                Console.WriteLine("discount: 0%");
-                Console.WriteLine("final Bill: " + finalAmount + " OMR ");
-            }
-                
-                
-                    
-                
-                
-                    
-            
+            //Console.WriteLine("Enter The Bill Amount: ");
+            //double billAmount = double.Parse(Console.ReadLine());
+            //Console.WriteLine("Are you a Loyal Member? (yes/no): ");
+            //string isLoyalMember = Console.ReadLine().ToLower();
+            //double discount = 0;
+            //double finalAmount = 0;
+            //if (billAmount > 20 && isLoyalMember == "yes")
+            //{
+            //    finalAmount = billAmount - (billAmount * 0.15);
+            //    Console.WriteLine("Original Bill Amount: " + billAmount + " OMR ");
+            //    Console.WriteLine("discount: 15%");
+            //    Console.WriteLine("final Bill: " + finalAmount + " OMR ");
+            //}
+            //else
+            //{
+            //    finalAmount = billAmount;
+            //    Console.WriteLine("Original Bill Amount: " + billAmount + " OMR ");
+            //    Console.WriteLine("discount: 0%");
+            //    Console.WriteLine("final Bill: " + finalAmount + " OMR ");
+            //}
 
-        }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Task 9:
+
+            Console.WriteLine("enter a number from 1 to 7");
+            int dayNumber = int.Parse(Console.ReadLine());
+            
+            switch(dayNumber) 
+            {
+                case 1:
+                    Console.WriteLine("Sunday");
+                    break;
+
+                case 2:
+                    Console.WriteLine("Monday");
+                    break;
+
+                case 3:
+                    Console.WriteLine("Tuesday");
+                    break;
+
+                case 4:
+                    Console.WriteLine("Wednesday");
+                    break;
+
+                case 5:
+                    Console.WriteLine("Thursday");
+                    break;
+                
+                case 6:
+                    Console.WriteLine("Friday");
+                    break;
+
+                case 7:
+                    Console.WriteLine("Saturday");
+                    break;
+
+                default:
+                    Console.WriteLine("nvalid day number");
+                    break;
+            }
+
+
+
+
+
+    }
     }
 }
 
