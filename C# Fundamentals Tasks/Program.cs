@@ -131,28 +131,61 @@ namespace C__Fundamentals_Tasks
 
             // Task 7:
 
-            Console.WriteLine("Enter your Age: ");
-            int age = int.Parse(Console.ReadLine());
+            //Console.WriteLine("Enter your Age: ");
+            //int age = int.Parse(Console.ReadLine());
 
-            if (age < 13 && age >0)
+            //if (age < 13 && age >0)
+            //{
+            //    Console.WriteLine("You are a child.");
+            //    Console.WriteLine("Ticket cost 2.000 OMR");
+            //}
+            //else if (age >= 13 && age < 60)
+            //{
+            //    Console.WriteLine("You are a Adult.");
+            //    Console.WriteLine("Ticket cost 5.000 OMR");
+            //}
+            //else if (age >=60)
+            //{
+            //    Console.WriteLine("You are an Seniors .");
+            //    Console.WriteLine("Ticket cost 3.000 OMR");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("You entered a invalid age.");
+            //}
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Task 8:
+
+            Console.WriteLine("Enter The Bill Amount: ");
+            double billAmount = double.Parse(Console.ReadLine());
+            Console.WriteLine("Are you a Loyal Member? (yes/no): ");
+            string isLoyalMember = Console.ReadLine().ToLower();
+            double discount = 0;
+            double finalAmount = 0;
+            if (billAmount > 20 && isLoyalMember == "yes")
             {
-                Console.WriteLine("You are a child.");
-                Console.WriteLine("Ticket cost 2.000 OMR");
-            }
-            else if (age >= 13 && age < 60)
-            {
-                Console.WriteLine("You are a Adult.");
-                Console.WriteLine("Ticket cost 5.000 OMR");
-            }
-            else if (age >=60)
-            {
-                Console.WriteLine("You are an Seniors .");
-                Console.WriteLine("Ticket cost 3.000 OMR");
+                finalAmount = billAmount - (billAmount * 0.15);
+                Console.WriteLine("Original Bill Amount: " + billAmount + " OMR ");
+                Console.WriteLine("discount: 15%");
+                Console.WriteLine("final Bill: " + finalAmount + " OMR ");
             }
             else
             {
-                Console.WriteLine("You entered a invalid age.");
+                finalAmount = billAmount;
+                Console.WriteLine("Original Bill Amount: " + billAmount + " OMR ");
+                Console.WriteLine("discount: 0%");
+                Console.WriteLine("final Bill: " + finalAmount + " OMR ");
             }
+                
+                
+                    
+                
+                
+                    
+            
+
         }
     }
 }
