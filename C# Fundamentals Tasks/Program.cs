@@ -32,34 +32,48 @@ namespace C__Fundamentals_Tasks
 
             // Task 2:
 
-            Console.WriteLine("Enter your Age: ");
-            int age = int.Parse(Console.ReadLine());
-            Console.WriteLine("Do you have a national ID? (yes/no): ");
-            string hasNationalID = Console.ReadLine().ToLower();
-            bool hasNational = false;
+            //Console.WriteLine("Enter your Age: ");
+            //int age = int.Parse(Console.ReadLine());
+            //Console.WriteLine("Do you have a national ID? (yes/no): ");
+            //string hasNationalID = Console.ReadLine().ToLower();
+            //bool hasNational = false;
 
 
-            if (hasNationalID == "yes")
+            //if (hasNationalID == "yes")
+            //{
+            //    hasNational = true;
+            //}
+            //else if (hasNationalID == "no")
+            //{
+            //    hasNational = false;
+            //}
+
+            //if (age >= 18 && hasNational == true)
+            //{
+            //    Console.WriteLine("You are eligible to vote.");
+
+            //}
+            //else
+            //{
+            //    Console.WriteLine("You are not eligible to vote.");
+            //}
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Task 4: 
+
+            Console.WriteLine("Enter a number: ");
+            double number = double.Parse(Console.ReadLine());
+            if (number % 2==0)
             {
-                hasNational = true;
+                Console.WriteLine("The number "+number+" is even.");
             }
-            else if (hasNationalID == "no")
+            else if (number % 2 == 1)
             {
-                hasNational = false;
+                Console.WriteLine("The number " + number + " is odd.");
             }
-
-            if (age >= 18 && hasNational == true)
-            {
-                Console.WriteLine("You are eligible to vote.");
-
-            }
-            else
-            {
-                Console.WriteLine("You are not eligible to vote.");
-                
-
-            }
-
-    }
 }
 }
+}
+
