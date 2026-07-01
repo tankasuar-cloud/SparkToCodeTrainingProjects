@@ -63,17 +63,52 @@ namespace C__Fundamentals_Tasks
 
             // Task 4: 
 
-            Console.WriteLine("Enter a number: ");
-            double number = double.Parse(Console.ReadLine());
-            if (number % 2==0)
-            {
-                Console.WriteLine("The number "+number+" is even.");
+            //Console.WriteLine("Enter a number: ");
+            //double number = double.Parse(Console.ReadLine());
+            //if (number % 2==0)
+            //{
+            //    Console.WriteLine("The number "+number+" is even.");
+            //}
+            //else if (number % 2 == 1)
+            //{
+            //    Console.WriteLine("The number " + number + " is odd.");
+            //}
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Task 5: 
+
+            Console.WriteLine("Enter a Grade: ('A', 'B', 'C', 'D', or 'F') ");
+            char grade = char.Parse(Console.ReadLine().ToUpper());
+            switch(grade) 
+            { 
+                case 'A':
+                    Console.WriteLine("Excellent");
+                    break;
+
+                case 'B':
+                    Console.WriteLine("Very Good");
+                    break;
+
+                case 'C':
+                    Console.WriteLine("Good");
+                    break;
+
+                case 'D':
+                    Console.WriteLine("Pass");
+                    break;
+
+                case 'F':
+                    Console.WriteLine("Fail");
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid grade entered.");
+                    break;
             }
-            else if (number % 2 == 1)
-            {
-                Console.WriteLine("The number " + number + " is odd.");
-            }
-}
-}
+        
+
+    }
+    }
 }
 
