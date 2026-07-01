@@ -78,37 +78,56 @@ namespace C__Fundamentals_Tasks
 
             // Task 5: 
 
-            Console.WriteLine("Enter a Grade: ('A', 'B', 'C', 'D', or 'F') ");
-            char grade = char.Parse(Console.ReadLine().ToUpper());
-            switch(grade) 
-            { 
-                case 'A':
-                    Console.WriteLine("Excellent");
-                    break;
+            //Console.WriteLine("Enter a Grade: ('A', 'B', 'C', 'D', or 'F') ");
+            //char grade = char.Parse(Console.ReadLine().ToUpper());
+            //switch(grade) 
+            //{ 
+            //    case 'A':
+            //        Console.WriteLine("Excellent");
+            //        break;
 
-                case 'B':
-                    Console.WriteLine("Very Good");
-                    break;
+            //    case 'B':
+            //        Console.WriteLine("Very Good");
+            //        break;
 
-                case 'C':
-                    Console.WriteLine("Good");
-                    break;
+            //    case 'C':
+            //        Console.WriteLine("Good");
+            //        break;
 
-                case 'D':
-                    Console.WriteLine("Pass");
-                    break;
+            //    case 'D':
+            //        Console.WriteLine("Pass");
+            //        break;
 
-                case 'F':
-                    Console.WriteLine("Fail");
-                    break;
+            //    case 'F':
+            //        Console.WriteLine("Fail");
+            //        break;
 
-                default:
-                    Console.WriteLine("Invalid grade entered.");
-                    break;
+            //    default:
+            //        Console.WriteLine("Invalid grade entered.");
+            //        break;
+            //}
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Task 6:
+
+            Console.WriteLine("Enter a temperature in Celsius= ");
+            double celsius = double.Parse(Console.ReadLine());
+            double fahrenheit = (celsius * 9 / 5) + 32;
+            if (fahrenheit < 10)
+            {
+                Console.WriteLine("It is "+ fahrenheit+ " fahrenheit So It is Cold");
             }
-        
+            else if (fahrenheit >= 10 && fahrenheit < 30)
+            {
+                Console.WriteLine("It is " + fahrenheit + " fahrenheit So It is Mild");
+            }
+            else
+            {
+                Console.WriteLine("It is " + fahrenheit + " fahrenheit So It is Hot");
+            }
 
-    }
+        }
     }
 }
 
