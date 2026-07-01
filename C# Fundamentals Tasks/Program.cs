@@ -18,15 +18,48 @@ namespace C__Fundamentals_Tasks
 
             // Task 2:
 
-            Console.WriteLine("Enter Rectangle length: ");
-            double length = double.Parse(Console.ReadLine());
+            //Console.WriteLine("Enter Rectangle length: ");
+            //double length = double.Parse(Console.ReadLine());
 
-            Console.WriteLine("Enter Rectangle width: ");
-            double width = double.Parse(Console.ReadLine());
-            double area = length * width;
-            double Perimeter = 2* (length + width);
-            Console.WriteLine("Area: " + area);
-            Console.WriteLine("Perimeter: " + Perimeter);
-        }
+            //Console.WriteLine("Enter Rectangle width: ");
+            //double width = double.Parse(Console.ReadLine());
+            //double area = length * width;
+            //double Perimeter = 2* (length + width);
+            //Console.WriteLine("Area: " + area);
+            //Console.WriteLine("Perimeter: " + Perimeter);
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Task 2:
+
+            Console.WriteLine("Enter your Age: ");
+            int age = int.Parse(Console.ReadLine());
+            Console.WriteLine("Do you have a national ID? (yes/no): ");
+            string hasNationalID = Console.ReadLine().ToLower();
+            bool hasNational = false;
+
+
+            if (hasNationalID == "yes")
+            {
+                hasNational = true;
+            }
+            else if (hasNationalID == "no")
+            {
+                hasNational = false;
+            }
+
+            if (age >= 18 && hasNational == true)
+            {
+                Console.WriteLine("You are eligible to vote.");
+
+            }
+            else
+            {
+                Console.WriteLine("You are not eligible to vote.");
+                
+
+            }
+
     }
+}
 }
