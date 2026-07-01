@@ -111,22 +111,48 @@ namespace C__Fundamentals_Tasks
 
             // Task 6:
 
-            Console.WriteLine("Enter a temperature in Celsius= ");
-            double celsius = double.Parse(Console.ReadLine());
-            double fahrenheit = (celsius * 9 / 5) + 32;
-            if (fahrenheit < 10)
+            //Console.WriteLine("Enter a temperature in Celsius= ");
+            //double celsius = double.Parse(Console.ReadLine());
+            //double fahrenheit = (celsius * 9 / 5) + 32;
+            //if (fahrenheit < 10)
+            //{
+            //    Console.WriteLine("It is "+ fahrenheit+ " fahrenheit So It is Cold");
+            //}
+            //else if (fahrenheit >= 10 && fahrenheit < 30)
+            //{
+            //    Console.WriteLine("It is " + fahrenheit + " fahrenheit So It is Mild");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("It is " + fahrenheit + " fahrenheit So It is Hot");
+            //}
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Task 7:
+
+            Console.WriteLine("Enter your Age: ");
+            int age = int.Parse(Console.ReadLine());
+
+            if (age < 13 && age >0)
             {
-                Console.WriteLine("It is "+ fahrenheit+ " fahrenheit So It is Cold");
+                Console.WriteLine("You are a child.");
+                Console.WriteLine("Ticket cost 2.000 OMR");
             }
-            else if (fahrenheit >= 10 && fahrenheit < 30)
+            else if (age >= 13 && age < 60)
             {
-                Console.WriteLine("It is " + fahrenheit + " fahrenheit So It is Mild");
+                Console.WriteLine("You are a Adult.");
+                Console.WriteLine("Ticket cost 5.000 OMR");
+            }
+            else if (age >=60)
+            {
+                Console.WriteLine("You are an Seniors .");
+                Console.WriteLine("Ticket cost 3.000 OMR");
             }
             else
             {
-                Console.WriteLine("It is " + fahrenheit + " fahrenheit So It is Hot");
+                Console.WriteLine("You entered a invalid age.");
             }
-
         }
     }
 }
