@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata;
-
-namespace C__Fundamentals_Tasks
+﻿namespace C__Fundamentals_Tasks
 {
     internal class Program
     {
@@ -450,90 +448,143 @@ namespace C__Fundamentals_Tasks
 
             // Task 14:
 
-            Console.WriteLine("Enter a region: \n 1) Headphones (8.500 OMR)\n 2) Keyboard (12.000 OMR)\n 3) Mouse (5.000 OMR)");
-            int option = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter the quantity: ");
-            int quantity = int.Parse(Console.ReadLine());
-            Console.WriteLine("Do you have a Coupon code? (yes/no): ");
-            string hasCoupon = Console.ReadLine().ToLower();
-            double cost = 0;
-            switch (option) 
+            //Console.WriteLine("Enter a region: \n 1) Headphones (8.500 OMR)\n 2) Keyboard (12.000 OMR)\n 3) Mouse (5.000 OMR)");
+            //int option = int.Parse(Console.ReadLine());
+            //Console.WriteLine("Enter the quantity: ");
+            //int quantity = int.Parse(Console.ReadLine());
+            //Console.WriteLine("Do you have a Coupon code? (yes/no): ");
+            //string hasCoupon = Console.ReadLine().ToLower();
+            //double cost = 0;
+            //switch (option) 
+            //{
+            //    case 1:
+            //        Console.WriteLine("Headphones seleted, quantity= "+ quantity);
+            //        cost = 8.500 * quantity;
+            //        if (cost > 20 && hasCoupon == "yes")
+            //        {
+            //            Console.WriteLine("Total cost for Headphones: " + cost + " OMR");
+            //            cost = cost - (cost * 0.10);
+            //            Console.WriteLine("discount = 10%");
+            //            Console.WriteLine("Total cost for Headphones after 10% discount: " + cost + " OMR");
+            //            cost = cost + (cost * 0.05);
+            //            Console.WriteLine("tax = 5%");
+            //            Console.WriteLine("Total cost for Headphones after 5% tax: " + cost + " OMR");
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine("Total cost for Headphones: " + cost + " OMR");
+            //            cost = cost + (cost * 0.05);
+            //            Console.WriteLine("tax = 5%");
+            //            Console.WriteLine("Total cost for Headphones after 5% tax: " + cost + " OMR");
+
+            //        }
+            //        break;
+
+            //    case 2:
+            //        Console.WriteLine("Keyboard seleted, quantity= " + quantity);
+            //        cost = 12.000 * quantity;
+            //        if (cost > 20 && hasCoupon == "yes")
+            //        {
+            //            Console.WriteLine("Total cost for Keyboard: " + cost + " OMR");
+            //            cost = cost - (cost * 0.10);
+            //            Console.WriteLine("discount = 10%");
+            //            Console.WriteLine("Total cost for Keyboard after 10% discount: " + cost + " OMR");
+            //            cost = cost + (cost * 0.05);
+            //            Console.WriteLine("tax = 5%");
+            //            Console.WriteLine("Total cost for Keyboard after 5% tax: " + cost + " OMR");
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine("Total cost for Keyboard: " + cost + " OMR");
+            //            cost = cost + (cost * 0.05);
+            //            Console.WriteLine("tax = 5%");
+            //            Console.WriteLine("Total cost for Keyboard after 5% tax: " + cost + " OMR");
+
+            //        }
+            //        break;
+            //    case 3:
+            //        Console.WriteLine("Mouse seleted, quantity= " + quantity);
+            //        cost = 5.000 * quantity;
+            //        if (cost > 20 && hasCoupon == "yes")
+            //        {
+            //            Console.WriteLine("Total cost for Mouse: " + cost + " OMR");
+            //            cost = cost - (cost * 0.10);
+            //            Console.WriteLine("discount = 10%");
+            //            Console.WriteLine("Total cost for Mouse after 10% discount: " + cost + " OMR");
+            //            cost = cost + (cost * 0.05);
+            //            Console.WriteLine("tax = 5%");
+            //            Console.WriteLine("Total cost for Mouse after 5% tax: " + cost + " OMR");
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine("Total cost for Mouse: " + cost + " OMR");
+            //            cost = cost + (cost * 0.05);
+            //            Console.WriteLine("tax = 5%");
+            //            Console.WriteLine("Total cost for Mouse after 5% tax: " + cost + " OMR");
+
+            //        }
+            //        break;
+            //    default:
+            //        Console.WriteLine("Invalid option selected.");
+            //        break;
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Task 15:
+
+            Console.WriteLine("enter the program type ('S' for Science, 'A' for Arts)");
+            char programType = char.Parse(Console.ReadLine().ToUpper());
+            Console.WriteLine("enter your gpa: (0-4.0");
+            double gpa = double.Parse(Console.ReadLine());
+            Console.WriteLine("entrance exam score: (0-100)");
+            double examScore = double.Parse(Console.ReadLine());
+            Console.WriteLine("Do you have an extracurricular achievement (yes/no).");
+            string hasAchievement = Console.ReadLine().ToLower();
+
+
+            switch(programType) 
             {
-                case 1:
-                    Console.WriteLine("Headphones seleted, quantity= "+ quantity);
-                    cost = 8.500 * quantity;
-                    if (cost > 20 && hasCoupon == "yes")
+                case 'S':
+                    if (gpa >= 3 && examScore >= 75)
                     {
-                        Console.WriteLine("Total cost for Headphones: " + cost + " OMR");
-                        cost = cost - (cost * 0.10);
-                        Console.WriteLine("discount = 10%");
-                        Console.WriteLine("Total cost for Headphones after 10% discount: " + cost + " OMR");
-                        cost = cost + (cost * 0.05);
-                        Console.WriteLine("tax = 5%");
-                        Console.WriteLine("Total cost for Headphones after 5% tax: " + cost + " OMR");
+                        Console.WriteLine("You are Admitted to the Science program.");
                     }
+                    else if (hasAchievement == "yes") 
+                    {
+                        Console.WriteLine("You are Conditionally Admitted to the Science program due to your extracurricular achievement.");
+                    } 
                     else
                     {
-                        Console.WriteLine("Total cost for Headphones: " + cost + " OMR");
-                        cost = cost + (cost * 0.05);
-                        Console.WriteLine("tax = 5%");
-                        Console.WriteLine("Total cost for Headphones after 5% tax: " + cost + " OMR");
-
+                        Console.WriteLine("You are Not Admitted to the Science program.");
                     }
                     break;
 
-                case 2:
-                    Console.WriteLine("Keyboard seleted, quantity= " + quantity);
-                    cost = 12.000 * quantity;
-                    if (cost > 20 && hasCoupon == "yes")
+                case 'A':
+                    if (gpa >= 2.5 && examScore >= 60)
                     {
-                        Console.WriteLine("Total cost for Keyboard: " + cost + " OMR");
-                        cost = cost - (cost * 0.10);
-                        Console.WriteLine("discount = 10%");
-                        Console.WriteLine("Total cost for Keyboard after 10% discount: " + cost + " OMR");
-                        cost = cost + (cost * 0.05);
-                        Console.WriteLine("tax = 5%");
-                        Console.WriteLine("Total cost for Keyboard after 5% tax: " + cost + " OMR");
+                        Console.WriteLine("You are Admitted to the Arts program.");
+                    }
+                    else if (hasAchievement == "yes")
+                    {
+                        Console.WriteLine("You are Conditionally Admitted to the Art program due to your extracurricular achievement.");
                     }
                     else
                     {
-                        Console.WriteLine("Total cost for Keyboard: " + cost + " OMR");
-                        cost = cost + (cost * 0.05);
-                        Console.WriteLine("tax = 5%");
-                        Console.WriteLine("Total cost for Keyboard after 5% tax: " + cost + " OMR");
-
+                        Console.WriteLine("You are Not Admitted to the Arts program.");
                     }
                     break;
-                case 3:
-                    Console.WriteLine("Mouse seleted, quantity= " + quantity);
-                    cost = 5.000 * quantity;
-                    if (cost > 20 && hasCoupon == "yes")
-                    {
-                        Console.WriteLine("Total cost for Mouse: " + cost + " OMR");
-                        cost = cost - (cost * 0.10);
-                        Console.WriteLine("discount = 10%");
-                        Console.WriteLine("Total cost for Mouse after 10% discount: " + cost + " OMR");
-                        cost = cost + (cost * 0.05);
-                        Console.WriteLine("tax = 5%");
-                        Console.WriteLine("Total cost for Mouse after 5% tax: " + cost + " OMR");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Total cost for Mouse: " + cost + " OMR");
-                        cost = cost + (cost * 0.05);
-                        Console.WriteLine("tax = 5%");
-                        Console.WriteLine("Total cost for Mouse after 5% tax: " + cost + " OMR");
 
-                    }
-                    break;
                 default:
-                    Console.WriteLine("Invalid option selected.");
+                    Console.WriteLine("Invalid program type entered.");
                     break;
-
             }
+        
+
+    }
+    }
 }
-}
-}
+
+
 
 
 
