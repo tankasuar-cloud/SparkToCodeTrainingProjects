@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System.Xml;
 
 namespace C__Fundamentals_Tasks_2
 {
@@ -50,27 +51,56 @@ namespace C__Fundamentals_Tasks_2
             ////////////////////////////////////////////////////////////////////////////////////////////////
 
             // Problem 4:
-            string password = "Spark2026";
-            bool passwordCorrect = false;
-            while(passwordCorrect == false)
+            //string password = "Spark2026";
+            //bool passwordCorrect = false;
+            //while(passwordCorrect == false)
+            //{
+            //    Console.Write("Enter the password: ");
+            //    string userInput = Console.ReadLine();
+            //    if (userInput != password)
+            //    {
+            //        Console.WriteLine("wrong password");
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("Correct password");
+            //        passwordCorrect = true;
+            //    }
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Problem 5:
+
+            int secretNumber = 42;
+            bool numberGuessed = false;
+            int gusses = 1;
+            do
             {
-                Console.Write("Enter the password: ");
-                string userInput = Console.ReadLine();
-                if (userInput != password)
+                Console.WriteLine("Guess the secret number between 1 and 100: ");
+                int userInput = int.Parse(Console.ReadLine());
+                if (userInput < secretNumber)
                 {
-                    Console.WriteLine("wrong password");
+                    Console.WriteLine("Too low! Try again.");
+                    gusses++;
+                }
+                else if (userInput > secretNumber)
+                {
+                    Console.WriteLine("Too high! Try again.");
+                    gusses++;
                 }
                 else
                 {
-                    Console.WriteLine("Correct password");
-                    passwordCorrect = true;
+                    Console.WriteLine("Congratulations! You guessed the secret number in " + gusses + " guesses.");
+                    numberGuessed = true;
                 }
 
+            } while (numberGuessed == false);
 
+        }
     }
 }
-}
-}
+
 
 
 
