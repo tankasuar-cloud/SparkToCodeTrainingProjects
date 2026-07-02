@@ -102,28 +102,61 @@ namespace C__Fundamentals_Tasks_2
 
             // Problem 6:
 
-            try
-            {
-                Console.Write("Enter the first number: ");
-                int num1 = int.Parse(Console.ReadLine());
-                Console.Write("Enter the second number: ");
-                int num2 = int.Parse(Console.ReadLine());
+            //try
+            //{
+            //    Console.Write("Enter the first number: ");
+            //    int num1 = int.Parse(Console.ReadLine());
+            //    Console.Write("Enter the second number: ");
+            //    int num2 = int.Parse(Console.ReadLine());
 
-                double result = (double)(num1 / num2);
-                Console.WriteLine("The result of dividing " + num1 + " by " + num2 + " is: " + result);
-            }
-            catch (DivideByZeroException)
-            {
-                Console.WriteLine("Error: Cannot divide by zero.");
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Error: Invalid input. Please enter a valid number.");
-            }
-            
+            //    double result = (double)(num1 / num2);
+            //    Console.WriteLine("The result of dividing " + num1 + " by " + num2 + " is: " + result);
+            //}
+            //catch (DivideByZeroException)
+            //{
+            //    Console.WriteLine("Error: Cannot divide by zero.");
+            //}
+            //catch (FormatException)
+            //{
+            //    Console.WriteLine("Error: Invalid input. Please enter a valid number.");
+            //}
 
 
-            
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Problem 7:
+
+            bool menu = true;
+            while (menu)
+            {
+                try { 
+                    Console.WriteLine("***********************Menu***********************");
+                    Console.WriteLine("1.Say Hello");
+                    Console.WriteLine("2.Greeting ");
+                    Console.WriteLine("3.Quit");
+                    int option = int.Parse(Console.ReadLine());
+                    Console.WriteLine("******************************************");
+                    switch(option)
+                    { 
+                        case 1:
+                            Console.WriteLine("Hello");
+                            break;
+
+                        case 2:
+                            Console.WriteLine("good morning");
+                            break;
+
+                        case 3:
+                            menu = false;
+                            break;
+
+                    }
+                }
+                catch(FormatException)
+                {
+                       Console.WriteLine("Error: Invalid input. Please enter a valid number.");
+                }
+            }
         }
     }
 }
