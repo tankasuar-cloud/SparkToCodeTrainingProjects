@@ -6,14 +6,35 @@ namespace C__Fundamentals_Tasks_2
     {
         static void Main(string[] args)
         {
-            Console.Write("Enter a number: ");
+            // Problem 1: 
+
+            //Console.Write("Enter a number: ");
+            //int num1 = int.Parse(Console.ReadLine());
+            //for (int i = num1; i >= 1; i--) 
+            //{ 
+            //    Console.WriteLine(i);
+            //}
+            //Console.WriteLine("Liftoff!");
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Problem 2:
+
+            Console.Write("Enter a positive whole number: ");
             int num1 = int.Parse(Console.ReadLine());
-            for (int i = num1; i >= 1; i--) 
-            { 
-                Console.WriteLine(i);
+            int sum = 0;
+            for (int i = 1; i <= num1; i++) 
+            {
+                
+                sum += i;
+                
             }
-            Console.WriteLine("Liftoff!");
+            Console.WriteLine("The sum from 1 to " + num1 + " is: " + sum);
         }
+
+
     }
     }
+    
 
