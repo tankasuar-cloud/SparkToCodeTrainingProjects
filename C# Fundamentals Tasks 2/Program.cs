@@ -126,37 +126,58 @@ namespace C__Fundamentals_Tasks_2
 
             // Problem 7:
 
-            bool menu = true;
-            while (menu)
+            //bool menu = true;
+            //while (menu)
+            //{
+            //    try { 
+            //        Console.WriteLine("***********************Menu***********************");
+            //        Console.WriteLine("1.Say Hello");
+            //        Console.WriteLine("2.Greeting ");
+            //        Console.WriteLine("3.Quit");
+            //        int option = int.Parse(Console.ReadLine());
+            //        Console.WriteLine("******************************************");
+            //        switch(option)
+            //        { 
+            //            case 1:
+            //                Console.WriteLine("Hello");
+            //                break;
+
+            //            case 2:
+            //                Console.WriteLine("good morning");
+            //                break;
+
+            //            case 3:
+            //                menu = false;
+            //                break;
+
+            //        }
+            //    }
+            //    catch(FormatException)
+            //    {
+            //           Console.WriteLine("Error: Invalid input. Please enter a valid number.");
+            //    }
+            //}
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Problem 8:
+
+
+            Console.Write("Enter a positive whole number: ");
+            int num1 = int.Parse(Console.ReadLine());
+            int sum = 0;
+            for (int i = 1; i <= num1; i++)
             {
-                try { 
-                    Console.WriteLine("***********************Menu***********************");
-                    Console.WriteLine("1.Say Hello");
-                    Console.WriteLine("2.Greeting ");
-                    Console.WriteLine("3.Quit");
-                    int option = int.Parse(Console.ReadLine());
-                    Console.WriteLine("******************************************");
-                    switch(option)
-                    { 
-                        case 1:
-                            Console.WriteLine("Hello");
-                            break;
-
-                        case 2:
-                            Console.WriteLine("good morning");
-                            break;
-
-                        case 3:
-                            menu = false;
-                            break;
-
-                    }
-                }
-                catch(FormatException)
+                if (i % 2 == 0)
                 {
-                       Console.WriteLine("Error: Invalid input. Please enter a valid number.");
+                    sum += i;
                 }
+
             }
+            Console.WriteLine("The sum of even numbers from 1 to " + num1 + " is: " + sum);
+
+
         }
     }
 }
