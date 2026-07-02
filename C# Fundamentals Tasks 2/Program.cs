@@ -164,22 +164,57 @@ namespace C__Fundamentals_Tasks_2
             // Problem 8:
 
 
-            Console.Write("Enter a positive whole number: ");
-            int num1 = int.Parse(Console.ReadLine());
+            //Console.Write("Enter a positive whole number: ");
+            //int num1 = int.Parse(Console.ReadLine());
+            //int sum = 0;
+            //for (int i = 1; i <= num1; i++)
+            //{
+            //    if (i % 2 == 0)
+            //    {
+            //        sum += i;
+            //    }
+
+            //}
+            //Console.WriteLine("The sum of even numbers from 1 to " + num1 + " is: " + sum);
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Problem 9:
+
+            bool is_running = true;
             int sum = 0;
+            int num1 = 0;
+            do
+            {
+                try
+                {
+                    Console.WriteLine("please enter a positive whole number: ");
+                    num1 = int.Parse(Console.ReadLine());
+                    if (num1 <= 0)
+                    {
+                        Console.WriteLine("Invalid input, please enter a positive whole number: ");
+                    }
+                    else
+                    {
+                        is_running= false;
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error: Invalid input. Please enter a valid number.");
+                }
+                
+
+            } while (is_running);
+
             for (int i = 1; i <= num1; i++)
             {
-                if (i % 2 == 0)
-                {
-                    sum += i;
-                }
-
+                sum += i;
             }
-            Console.WriteLine("The sum of even numbers from 1 to " + num1 + " is: " + sum);
-
-
+            Console.WriteLine("The sum from 1 to " + num1 + " is: " + sum);
         }
-    }
+}
 }
 
 
