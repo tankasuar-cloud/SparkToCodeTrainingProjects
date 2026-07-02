@@ -72,31 +72,58 @@ namespace C__Fundamentals_Tasks_2
 
             // Problem 5:
 
-            int secretNumber = 42;
-            bool numberGuessed = false;
-            int gusses = 1;
-            do
+            //int secretNumber = 42;
+            //bool numberGuessed = false;
+            //int gusses = 1;
+            //do
+            //{
+            //    Console.WriteLine("Guess the secret number between 1 and 100: ");
+            //    int userInput = int.Parse(Console.ReadLine());
+            //    if (userInput < secretNumber)
+            //    {
+            //        Console.WriteLine("Too low! Try again.");
+            //        gusses++;
+            //    }
+            //    else if (userInput > secretNumber)
+            //    {
+            //        Console.WriteLine("Too high! Try again.");
+            //        gusses++;
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("Congratulations! You guessed the secret number in " + gusses + " guesses.");
+            //        numberGuessed = true;
+            //    }
+
+            //} while (numberGuessed == false);
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Problem 6:
+
+            try
             {
-                Console.WriteLine("Guess the secret number between 1 and 100: ");
-                int userInput = int.Parse(Console.ReadLine());
-                if (userInput < secretNumber)
-                {
-                    Console.WriteLine("Too low! Try again.");
-                    gusses++;
-                }
-                else if (userInput > secretNumber)
-                {
-                    Console.WriteLine("Too high! Try again.");
-                    gusses++;
-                }
-                else
-                {
-                    Console.WriteLine("Congratulations! You guessed the secret number in " + gusses + " guesses.");
-                    numberGuessed = true;
-                }
+                Console.Write("Enter the first number: ");
+                int num1 = int.Parse(Console.ReadLine());
+                Console.Write("Enter the second number: ");
+                int num2 = int.Parse(Console.ReadLine());
 
-            } while (numberGuessed == false);
+                double result = (double)(num1 / num2);
+                Console.WriteLine("The result of dividing " + num1 + " by " + num2 + " is: " + result);
+            }
+            catch (DivideByZeroException)
+            {
+                Console.WriteLine("Error: Cannot divide by zero.");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Error: Invalid input. Please enter a valid number.");
+            }
+            
 
+
+            
         }
     }
 }
