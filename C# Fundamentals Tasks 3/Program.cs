@@ -226,22 +226,63 @@ namespace C__Fundamentals_Tasks_3
 
             //problem 10:
 
-            Console.WriteLine("Enter a full sentence: ");
-            string sentence = Console.ReadLine().ToLower();
-            Console.WriteLine("What word would you like to search for? ");
-            string word = Console.ReadLine().ToLower();
-            if(sentence.Contains(word))
-            {
-                
-                Console.WriteLine($"First index: {sentence.IndexOf(word)}");
-                Console.WriteLine($"Last index: {sentence.LastIndexOf(word)}");
-                
-            }
-            else
-            {
-                Console.WriteLine("not found.");
-            }
+            //Console.WriteLine("Enter a full sentence: ");
+            //string sentence = Console.ReadLine().ToLower();
+            //Console.WriteLine("What word would you like to search for? ");
+            //string word = Console.ReadLine().ToLower();
+            //if(sentence.Contains(word))
+            //{
 
+            //    Console.WriteLine($"First index: {sentence.IndexOf(word)}");
+            //    Console.WriteLine($"Last index: {sentence.LastIndexOf(word)}");
+
+            //}
+            //else
+            //{
+            //    Console.WriteLine("not found.");
+            //}
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //problem 11:
+            Random random = new Random();
+            int randompassword = random.Next(1000, 10000);
+            Console.WriteLine($"Your random password is: {randompassword}");
+            bool is_running = true;
+            int gusses = 0;
+            while (is_running)
+            {
+                try
+                {
+                    Console.WriteLine("Please enter the password: ");
+                    int userInput = int.Parse(Console.ReadLine());
+                    if(userInput == randompassword)
+                    {
+                        Console.WriteLine("Correct password.");
+                        is_running = false;
+
+                    }
+                    else
+                    {
+                        gusses += 1;
+                        
+                        Console.WriteLine("Incorrect password.");
+                        Console.WriteLine($"You have {3 - gusses} attempts left.");
+                        if (gusses >= 3)
+                        {
+                            Console.WriteLine("You have exceeded the maximum number of attempts.");
+                            is_running = false;
+                        }
+                    }
+                    
+                
+                    
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                }
+            }
 
         }
     }
