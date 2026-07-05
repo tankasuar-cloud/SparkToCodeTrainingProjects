@@ -121,7 +121,7 @@ namespace C__Fundamentals_Tasks_3
             //string password = Console.ReadLine();
             //int passwordLength = password.Length;
             //bool contain = password.ToLower().Contains("password");
-            
+
             //if (passwordLength < 8 || contain)
             //{
             //    Console.WriteLine("Weak password!");
@@ -129,7 +129,7 @@ namespace C__Fundamentals_Tasks_3
             //{
             //    Console.WriteLine("Password must be at least 8 characters long.");
             //}
-            
+
             //    if (contain)
             //{
             //    Console.WriteLine("Password must not contain the word 'password'.");
@@ -144,21 +144,61 @@ namespace C__Fundamentals_Tasks_3
 
             //problem 7:
 
-            Console.WriteLine("Enter a Name: ");
-            string name = Console.ReadLine().ToLower().Trim();
-            Console.WriteLine("Enter the same Name again: ");
-            string name2 = Console.ReadLine().ToLower().Trim();
-            if (name == name2)
-            {
-                Console.WriteLine("The names are the same.");
-            }
-            else
-            {
-                Console.WriteLine("The names are different.");
-            }
+            //Console.WriteLine("Enter a Name: ");
+            //string name = Console.ReadLine().ToLower().Trim();
+            //Console.WriteLine("Enter the same Name again: ");
+            //string name2 = Console.ReadLine().ToLower().Trim();
+            //if (name == name2)
+            //{
+            //    Console.WriteLine("The names are the same.");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("The names are different.");
+            //}
 
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+            //problem 8:
+
+                bool is_running = true;
+            while (is_running)
+            {
+                try
+                {
+                    Console.WriteLine("Enter membership start date (e.g. \"2026-01-10\")");
+                    string input = Console.ReadLine();
+                    bool success = DateTime.TryParse(input, out DateTime startDate);
+                    if (!success)
+                    {
+                        throw new FormatException();
+                    }
+                    Console.WriteLine("Enter the Number of days for the membership: ");
+                    int days = int.Parse(Console.ReadLine());
+
+                    DateTime expireDate = startDate.AddDays(days);
+                    if (expireDate < DateTime.Today)
+                    {
+                        Console.WriteLine("Membership has expired.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Membership is Active until: {expireDate.ToString("yyyy-MM-dd")}");
+                    }
+
+                    is_running = false;
+
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid date.");
+                }
+            }
+                
+                    
+                
+                
+            }
         }
     }
-}
 
