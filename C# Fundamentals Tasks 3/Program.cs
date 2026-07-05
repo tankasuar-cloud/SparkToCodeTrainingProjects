@@ -245,46 +245,84 @@ namespace C__Fundamentals_Tasks_3
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             //problem 11:
-            Random random = new Random();
-            int randompassword = random.Next(1000, 10000);
-            Console.WriteLine($"Your random password is: {randompassword}");
+            //Random random = new Random();
+            //int randompassword = random.Next(1000, 10000);
+            //Console.WriteLine($"Your random password is: {randompassword}");
+            //bool is_running = true;
+            //int gusses = 0;
+            //while (is_running)
+            //{
+            //    try
+            //    {
+            //        Console.WriteLine("Please enter the password: ");
+            //        int userInput = int.Parse(Console.ReadLine());
+            //        if(userInput == randompassword)
+            //        {
+            //            Console.WriteLine("Correct password.");
+            //            is_running = false;
+
+            //        }
+            //        else
+            //        {
+            //            gusses += 1;
+
+            //            Console.WriteLine("Incorrect password.");
+            //            Console.WriteLine($"You have {3 - gusses} attempts left.");
+            //            if (gusses >= 3)
+            //            {
+            //                Console.WriteLine("You have exceeded the maximum number of attempts.");
+            //                is_running = false;
+            //            }
+            //        }
+
+
+
+            //    }
+            //    catch (FormatException)
+            //    {
+            //        Console.WriteLine("Invalid input. Please enter a valid number.");
+            //    }
+            //}
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //problem 12:
             bool is_running = true;
-            int gusses = 0;
-            while (is_running)
+            while(is_running)
             {
                 try
                 {
-                    Console.WriteLine("Please enter the password: ");
-                    int userInput = int.Parse(Console.ReadLine());
-                    if(userInput == randompassword)
-                    {
-                        Console.WriteLine("Correct password.");
-                        is_running = false;
+                    Console.WriteLine("Enter your date of birth (e.g. \"1990-01-10\")");
+                    string input = Console.ReadLine();
 
-                    }
-                    else
+                    bool success = DateTime.TryParse(input, out DateTime birthDate);
+                    if (!success)
                     {
-                        gusses += 1;
-                        
-                        Console.WriteLine("Incorrect password.");
-                        Console.WriteLine($"You have {3 - gusses} attempts left.");
-                        if (gusses >= 3)
-                        {
-                            Console.WriteLine("You have exceeded the maximum number of attempts.");
-                            is_running = false;
-                        }
+                        throw new FormatException();
                     }
-                    
-                
-                    
+                    DateTime Today = DateTime.Today;
+                    string dayName = birthDate.DayOfWeek.ToString();
+                    Console.WriteLine($"You were born on a {dayName}.");
+                    int age = Today.Year - birthDate.Year;
+                    if(Today.Month < birthDate.Month || (Today.Month == birthDate.Month && Today.Day < birthDate.Day))
+                    {
+                        age--;
+                    }
+
+                    Console.WriteLine("Your age is: " + age);
+
+
+
+                    is_running = false;
+
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    Console.WriteLine("Invalid input. Please enter a valid date.");
                 }
             }
-
         }
     }
-}
+    }
+
 
