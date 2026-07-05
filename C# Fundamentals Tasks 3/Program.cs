@@ -84,31 +84,58 @@
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             //problem 5:
-            bool is_running = true;
-            while (is_running)
-            {
-                try
-                {
-                    Console.WriteLine("Enter the raw exam score: ");
-                    double score = double.Parse(Console.ReadLine());
-                    int roundedScore = (int)Math.Round(score);
-                    if (roundedScore >= 60)
-                    {
-                        Console.WriteLine($"Rounded score = {roundedScore}");
-                        Console.WriteLine("Pass.");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Rounded score = {roundedScore}");
-                        Console.WriteLine("Fail.");
-                    }
+            //bool is_running = true;
+            //while (is_running)
+            //{
+            //    try
+            //    {
+            //        Console.WriteLine("Enter the raw exam score: ");
+            //        double score = double.Parse(Console.ReadLine());
+            //        int roundedScore = (int)Math.Round(score);
+            //        if (roundedScore >= 60)
+            //        {
+            //            Console.WriteLine($"Rounded score = {roundedScore}");
+            //            Console.WriteLine("Pass.");
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine($"Rounded score = {roundedScore}");
+            //            Console.WriteLine("Fail.");
+            //        }
 
-                    is_running = false;
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
-                }
+            //        is_running = false;
+            //    }
+            //    catch (FormatException)
+            //    {
+            //        Console.WriteLine("Invalid input. Please enter a valid number.");
+            //    }
+            //}
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //problem 6:
+
+
+            Console.WriteLine("Enter a password: ");
+            string password = Console.ReadLine();
+            int passwordLength = password.Length;
+            bool contain = password.ToLower().Contains("password");
+            
+            if (passwordLength < 8 || contain)
+            {
+                Console.WriteLine("Weak password!");
+                if (passwordLength <8 )
+            {
+                Console.WriteLine("Password must be at least 8 characters long.");
+            }
+            
+                if (contain)
+            {
+                Console.WriteLine("Password must not contain the word 'password'.");
+            }
+            }
+            else
+            {
+                Console.WriteLine("Strong password!");
             }
         }
     }
