@@ -200,27 +200,50 @@ namespace C__Fundamentals_Tasks_3
 
             //problem 9:
 
-            bool is_running = true;
-            while (is_running)
+            //bool is_running = true;
+            //while (is_running)
+            //{
+            //    try
+            //    {
+            //        Console.WriteLine("Enter a decimal number: ");
+            //        double decimalNumber = double.Parse(Console.ReadLine());
+            //        double roundedNumber = Math.Round(decimalNumber);
+            //        Console.WriteLine("Rounded number: " + roundedNumber);
+            //        double allwaysRoundedUp = Math.Ceiling(decimalNumber);
+            //        Console.WriteLine("Always rounded up: " + allwaysRoundedUp);
+            //        double allwaysRoundedDown = Math.Floor(decimalNumber);
+            //        Console.WriteLine("Always rounded down: " + allwaysRoundedDown);
+            //        is_running = false;
+            //    }
+            //    catch (FormatException)
+            //    {
+            //        Console.WriteLine("Invalid input. Please enter a valid number.");
+            //    }
+            //}
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //problem 10:
+
+            Console.WriteLine("Enter a full sentence: ");
+            string sentence = Console.ReadLine().ToLower();
+            Console.WriteLine("What word would you like to search for? ");
+            string word = Console.ReadLine().ToLower();
+            if(sentence.Contains(word))
             {
-                try
-                {
-                    Console.WriteLine("Enter a decimal number: ");
-                    double decimalNumber = double.Parse(Console.ReadLine());
-                    double roundedNumber = Math.Round(decimalNumber);
-                    Console.WriteLine("Rounded number: " + roundedNumber);
-                    double allwaysRoundedUp = Math.Ceiling(decimalNumber);
-                    Console.WriteLine("Always rounded up: " + allwaysRoundedUp);
-                    double allwaysRoundedDown = Math.Floor(decimalNumber);
-                    Console.WriteLine("Always rounded down: " + allwaysRoundedDown);
-                    is_running = false;
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
-                }
+                
+                Console.WriteLine($"First index: {sentence.IndexOf(word)}");
+                Console.WriteLine($"Last index: {sentence.LastIndexOf(word)}");
+                
             }
+            else
+            {
+                Console.WriteLine("not found.");
+            }
+
+
         }
     }
-    }
+}
 
