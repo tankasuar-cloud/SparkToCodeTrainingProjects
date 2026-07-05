@@ -51,17 +51,37 @@
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             //problem 3:
-            
-                
-                    Console.WriteLine("Please enter your full name: ");
-                    string fullName = Console.ReadLine();
-                    string nameUpperCase = fullName.ToUpper();
-                    string nameLowerCase = fullName.ToLower();
-                    int nameLength = fullName.Length;
-                    Console.WriteLine($"Uppercase: {nameUpperCase}\nLowercase: {nameLowerCase}\nLength: {nameLength}");
+
+
+            //Console.WriteLine("Please enter your full name: ");
+            //string fullName = Console.ReadLine();
+            //string nameUpperCase = fullName.ToUpper();
+            //string nameLowerCase = fullName.ToLower();
+            //int nameLength = fullName.Length;
+            //Console.WriteLine($"Uppercase: {nameUpperCase}\nLowercase: {nameLowerCase}\nLength: {nameLength}");
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //problem 4:
+            bool is_running = true;
+            while (is_running)
+            {
+                try
+                {
+                    Console.WriteLine("Enter the free trial duration in days: ");
+                    int days = int.Parse(Console.ReadLine());
+                    DateTime today = DateTime.Now;
+                    DateTime trial = today.AddDays(days);
                     
-                
+                    Console.WriteLine("Trial expiration date: " + trial.ToString("yyyy-MM-dd"));
+                    is_running = false;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                }
             }
         }
+    }
     }
 
