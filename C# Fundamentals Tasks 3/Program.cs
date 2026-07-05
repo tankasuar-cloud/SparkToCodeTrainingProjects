@@ -63,17 +63,46 @@
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             //problem 4:
+            //bool is_running = true;
+            //while (is_running)
+            //{
+            //    try
+            //    {
+            //        Console.WriteLine("Enter the free trial duration in days: ");
+            //        int days = int.Parse(Console.ReadLine());
+            //        DateTime today = DateTime.Now;
+            //        DateTime trial = today.AddDays(days);
+
+            //        Console.WriteLine("Trial expiration date: " + trial.ToString("yyyy-MM-dd"));
+            //        is_running = false;
+            //    }
+            //    catch (FormatException)
+            //    {
+            //        Console.WriteLine("Invalid input. Please enter a valid number.");
+            //    }
+            //}
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //problem 5:
             bool is_running = true;
             while (is_running)
             {
                 try
                 {
-                    Console.WriteLine("Enter the free trial duration in days: ");
-                    int days = int.Parse(Console.ReadLine());
-                    DateTime today = DateTime.Now;
-                    DateTime trial = today.AddDays(days);
-                    
-                    Console.WriteLine("Trial expiration date: " + trial.ToString("yyyy-MM-dd"));
+                    Console.WriteLine("Enter the raw exam score: ");
+                    double score = double.Parse(Console.ReadLine());
+                    int roundedScore = (int)Math.Round(score);
+                    if (roundedScore >= 60)
+                    {
+                        Console.WriteLine($"Rounded score = {roundedScore}");
+                        Console.WriteLine("Pass.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Rounded score = {roundedScore}");
+                        Console.WriteLine("Fail.");
+                    }
+
                     is_running = false;
                 }
                 catch (FormatException)
