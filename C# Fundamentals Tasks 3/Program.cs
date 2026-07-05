@@ -30,23 +30,38 @@
             ///
             //problem 2:
 
-            bool is_running = true;
-            while (is_running)
-            {
-                try
-                {
-                    Console.WriteLine("Enter A Number: ");
-                    double Number = double.Parse(Console.ReadLine());
-                    double squareRoot = Math.Sqrt(Number);
-                    double pwr = Math.Pow(Number, 2);
-                    Console.WriteLine($"Square root = {squareRoot}, Square = {pwr}");
-                    is_running = false;
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
-                }
+            //bool is_running = true;
+            //while (is_running)
+            //{
+            //    try
+            //    {
+            //        Console.WriteLine("Enter A Number: ");
+            //        double Number = double.Parse(Console.ReadLine());
+            //        double squareRoot = Math.Sqrt(Number);
+            //        double pwr = Math.Pow(Number, 2);
+            //        Console.WriteLine($"Square root = {squareRoot}, Square = {pwr}");
+            //        is_running = false;
+            //    }
+            //    catch (FormatException)
+            //    {
+            //        Console.WriteLine("Invalid input. Please enter a valid number.");
+            //    }
+            //}
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //problem 3:
+            
+                
+                    Console.WriteLine("Please enter your full name: ");
+                    string fullName = Console.ReadLine();
+                    string nameUpperCase = fullName.ToUpper();
+                    string nameLowerCase = fullName.ToLower();
+                    int nameLength = fullName.Length;
+                    Console.WriteLine($"Uppercase: {nameUpperCase}\nLowercase: {nameLowerCase}\nLength: {nameLength}");
+                    
+                
             }
-}
-}
-}
+        }
+    }
+
