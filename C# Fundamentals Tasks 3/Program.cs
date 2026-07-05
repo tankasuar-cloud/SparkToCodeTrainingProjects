@@ -161,44 +161,66 @@ namespace C__Fundamentals_Tasks_3
 
             //problem 8:
 
-                bool is_running = true;
+            //    bool is_running = true;
+            //while (is_running)
+            //{
+            //    try
+            //    {
+            //        Console.WriteLine("Enter membership start date (e.g. \"2026-01-10\")");
+            //        string input = Console.ReadLine();
+            //        bool success = DateTime.TryParse(input, out DateTime startDate);
+            //        if (!success)
+            //        {
+            //            throw new FormatException();
+            //        }
+            //        Console.WriteLine("Enter the Number of days for the membership: ");
+            //        int days = int.Parse(Console.ReadLine());
+
+            //        DateTime expireDate = startDate.AddDays(days);
+            //        if (expireDate < DateTime.Today)
+            //        {
+            //            Console.WriteLine("Membership has expired.");
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine($"Membership is Active until: {expireDate.ToString("yyyy-MM-dd")}");
+            //        }
+
+            //        is_running = false;
+
+            //    }
+            //    catch (FormatException)
+            //    {
+            //        Console.WriteLine("Invalid input. Please enter a valid date.");
+            //    }
+            //}
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //problem 9:
+
+            bool is_running = true;
             while (is_running)
             {
                 try
                 {
-                    Console.WriteLine("Enter membership start date (e.g. \"2026-01-10\")");
-                    string input = Console.ReadLine();
-                    bool success = DateTime.TryParse(input, out DateTime startDate);
-                    if (!success)
-                    {
-                        throw new FormatException();
-                    }
-                    Console.WriteLine("Enter the Number of days for the membership: ");
-                    int days = int.Parse(Console.ReadLine());
-
-                    DateTime expireDate = startDate.AddDays(days);
-                    if (expireDate < DateTime.Today)
-                    {
-                        Console.WriteLine("Membership has expired.");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Membership is Active until: {expireDate.ToString("yyyy-MM-dd")}");
-                    }
-
+                    Console.WriteLine("Enter a decimal number: ");
+                    double decimalNumber = double.Parse(Console.ReadLine());
+                    double roundedNumber = Math.Round(decimalNumber);
+                    Console.WriteLine("Rounded number: " + roundedNumber);
+                    double allwaysRoundedUp = Math.Ceiling(decimalNumber);
+                    Console.WriteLine("Always rounded up: " + allwaysRoundedUp);
+                    double allwaysRoundedDown = Math.Floor(decimalNumber);
+                    Console.WriteLine("Always rounded down: " + allwaysRoundedDown);
                     is_running = false;
-
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid date.");
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
                 }
             }
-                
-                    
-                
-                
-            }
         }
+    }
     }
 
