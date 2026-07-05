@@ -1,4 +1,6 @@
-﻿namespace C__Fundamentals_Tasks_3
+﻿using System.Transactions;
+
+namespace C__Fundamentals_Tasks_3
 {
     internal class Program
     {
@@ -115,29 +117,48 @@
             //problem 6:
 
 
-            Console.WriteLine("Enter a password: ");
-            string password = Console.ReadLine();
-            int passwordLength = password.Length;
-            bool contain = password.ToLower().Contains("password");
+            //Console.WriteLine("Enter a password: ");
+            //string password = Console.ReadLine();
+            //int passwordLength = password.Length;
+            //bool contain = password.ToLower().Contains("password");
             
-            if (passwordLength < 8 || contain)
-            {
-                Console.WriteLine("Weak password!");
-                if (passwordLength <8 )
-            {
-                Console.WriteLine("Password must be at least 8 characters long.");
-            }
+            //if (passwordLength < 8 || contain)
+            //{
+            //    Console.WriteLine("Weak password!");
+            //    if (passwordLength <8 )
+            //{
+            //    Console.WriteLine("Password must be at least 8 characters long.");
+            //}
             
-                if (contain)
+            //    if (contain)
+            //{
+            //    Console.WriteLine("Password must not contain the word 'password'.");
+            //}
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Strong password!");
+            //}
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //problem 7:
+
+            Console.WriteLine("Enter a Name: ");
+            string name = Console.ReadLine().ToLower().Trim();
+            Console.WriteLine("Enter the same Name again: ");
+            string name2 = Console.ReadLine().ToLower().Trim();
+            if (name == name2)
             {
-                Console.WriteLine("Password must not contain the word 'password'.");
-            }
+                Console.WriteLine("The names are the same.");
             }
             else
             {
-                Console.WriteLine("Strong password!");
+                Console.WriteLine("The names are different.");
             }
+
+
         }
     }
-    }
+}
 
