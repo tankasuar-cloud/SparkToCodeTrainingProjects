@@ -1,5 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
+﻿
 namespace C__fundamentals_Task_4
 {
     internal class Program
@@ -51,11 +50,26 @@ namespace C__fundamentals_Task_4
 
         //problem 5:
 
-        public static bool IsEven(int number)
-        {
-            return number % 2 == 0;
-        }
+        //public static bool IsEven(int number)
+        //{
+        //    return number % 2 == 0;
+        //}
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //problem 6:
+
+        public static double CalculateArea(double length, double width)
+        { 
+            double result = length * width;
+            return result;
+        }
+        public static double CalculatePerimeter(double length, double width)
+        {
+            double result = 2 * (length + width);
+            return result;
+        }
 
         static void Main(string[] args)
         {
@@ -95,20 +109,34 @@ namespace C__fundamentals_Task_4
 
 
             //problem 5:
-            Console.Write("Please enter a number: ");
-            int number = int.Parse(Console.ReadLine());
-            bool result = IsEven(number);
-            if (result)
-            {
-                Console.WriteLine($"{number} is an even number.");
-            }
-            else
-            {
-                Console.WriteLine($"{number} is an odd number.");
 
-            }
+            //Console.Write("Please enter a number: ");
+            //int number = int.Parse(Console.ReadLine());
+            //bool result = IsEven(number);
+            //if (result)
+            //{
+            //    Console.WriteLine($"{number} is an even number.");
+            //}
+            //else
+            //{
+            //    Console.WriteLine($"{number} is an odd number.");
+
+            //}
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            //problem 6:
+
+            Console.Write("Please enter the length of the rectangle: ");
+            double length = double.Parse(Console.ReadLine());
+            Console.Write("Please enter the width of the rectangle: ");
+            double width = double.Parse(Console.ReadLine());
+            Console.WriteLine($"Area of the rectangle is: {CalculateArea(length, width)}");
+            Console.WriteLine($"Perimeter of the rectangle is: {CalculatePerimeter(length, width)}");
+        }
+
     }
-
-}}
+}
 
 
