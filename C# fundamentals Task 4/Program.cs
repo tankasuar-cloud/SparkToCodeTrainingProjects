@@ -123,14 +123,21 @@ namespace C__fundamentals_Task_4
 
         //problem 9:
 
-        public static int Multiply(int a, int b)
-        {  return a * b; }
-        public static double Multiply(double a, double b)
-        { return a * b; } 
-        public static int Multiply(int a, int b, int c)
-        { return a * b * c; }
+        //public static int Multiply(int a, int b)
+        //{  return a * b; }
+        //public static double Multiply(double a, double b)
+        //{ return a * b; } 
+        //public static int Multiply(int a, int b, int c)
+        //{ return a * b * c; }
 
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //problem 10:
+
+        public static double CalculateArea(double A){  return A*A; }
+        public static double CalculateArea(double A, double B) {  return A*B; }
         static void Main(string[] args)
         {
 
@@ -219,33 +226,56 @@ namespace C__fundamentals_Task_4
 
 
             //problem 9:
-            // First Overload: Two ints
-            Console.Write("Please enter a value for X: ");
-            int x = int.Parse(Console.ReadLine());
-            Console.Write("please enter value for Y: ");
-            int y = int.Parse(Console.ReadLine());
-            Console.WriteLine($"Two integers (X * Y) = {Multiply(x, y)}"); ;
-            Console.WriteLine("*****************************************************");
-            // Second Overload: Two doubles
-            Console.Write("Please enter a value for Z: ");
-            double z = double.Parse(Console.ReadLine());
-            Console.Write("Please enter a value for F");
-            double F = double.Parse(Console.ReadLine());
-            Console.WriteLine($"Two doubles (Z * F) = {Multiply(z, F)}");
-            Console.WriteLine("*****************************************************");
-            // Third Overload: Three ints
-            Console.Write("Please enter a value for A: ");
-            int A = int.Parse(Console.ReadLine());
-            Console.Write("please enter value for B: ");
-            int B = int.Parse(Console.ReadLine());
-            Console.Write("please enter value for C: ");
-            int C = int.Parse(Console.ReadLine());
-            Console.WriteLine($"Three integers (A * B * C) = {Multiply(A, B, C)}");
+
+            //// First Overload: Two ints
+            //Console.Write("Please enter a value for X: ");
+            //int x = int.Parse(Console.ReadLine());
+            //Console.Write("please enter value for Y: ");
+            //int y = int.Parse(Console.ReadLine());
+            //Console.WriteLine($"Two integers (X * Y) = {Multiply(x, y)}"); ;
+            //Console.WriteLine("*****************************************************");
+            //// Second Overload: Two doubles
+            //Console.Write("Please enter a value for Z: ");
+            //double z = double.Parse(Console.ReadLine());
+            //Console.Write("Please enter a value for F");
+            //double F = double.Parse(Console.ReadLine());
+            //Console.WriteLine($"Two doubles (Z * F) = {Multiply(z, F)}");
+            //Console.WriteLine("*****************************************************");
+            //// Third Overload: Three ints
+            //Console.Write("Please enter a value for A: ");
+            //int A = int.Parse(Console.ReadLine());
+            //Console.Write("please enter value for B: ");
+            //int B = int.Parse(Console.ReadLine());
+            //Console.Write("please enter value for C: ");
+            //int C = int.Parse(Console.ReadLine());
+            //Console.WriteLine($"Three integers (A * B * C) = {Multiply(A, B, C)}");
 
 
-        }
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            //problem 10:
+            Console.WriteLine("What shape do you want to calculate the area of? \n1)Square\n2)rectangle");
+            int option = int.Parse(Console.ReadLine());
+            switch (option)
+            {
+                case 1:
+                    Console.Write("please enter the square length: ");
+                    double square = double.Parse(Console.ReadLine());
+                    Console.WriteLine($"The area of the square is {CalculateArea(square)}");
+                    break;
+
+                case 2:
+                    Console.Write("please enter the rectangle length: ");
+                    double length = double.Parse(Console.ReadLine());
+                    Console.Write("please enter the rectangle width: ");
+                    double width = double.Parse(Console.ReadLine());
+                    Console.WriteLine($"The area of the rectangle is {CalculateArea(length, width)}");
+                        break;
+            }
 
     }
+}
 }
 
 
