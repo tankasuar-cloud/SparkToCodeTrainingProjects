@@ -16,12 +16,23 @@ namespace C__fundamentals_Task_4
 
         //problem 2:
 
-        public static int Square(int number)
-        {
-            int result = number * number;
-            return result;
+        //public static int Square(int number)
+        //{
+        //    int result = number * number;
+        //    return result;
 
+        //}
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //problem 3:
+        public static double CelsiusToFahrenheit(double Celsius)
+        {
+            double Fahrenheit = (Celsius * 9 / 5) + 32;
+            return Fahrenheit;
         }
+
 
 
         static void Main(string[] args)
@@ -38,10 +49,18 @@ namespace C__fundamentals_Task_4
 
             //problem 2:
 
-            Console.Write("Please enter a number: ");
-            int number = int.Parse(Console.ReadLine());
-            Console.WriteLine($"Square root of {number} is: {Square(number)}");
+            //Console.Write("Please enter a number: ");
+            //int number = int.Parse(Console.ReadLine());
+            //Console.WriteLine($"Square root of {number} is: {Square(number)}");
 
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            //problem 3:
+
+            Console.Write("Please enter a Celsius degree: ");
+            double Celsius = double.Parse(Console.ReadLine());
+            Console.WriteLine($"{Celsius} Celsius is equal to {CelsiusToFahrenheit(Celsius)} Fahrenheit");
         }
     }
 
