@@ -75,34 +75,48 @@ namespace C__fundamentals_Task_4
 
 
         //problem 7:
-        public static string GetGradeLetter(int score)
+
+        //public static string GetGradeLetter(int score)
+        //{
+        //    string result;
+        //    if (score >= 90)
+        //    {
+        //        result = "A";
+
+        //    }
+        //    else if (score >= 80)
+        //    {
+        //        result = "B";
+        //    }
+        //    else if (score >= 70)
+        //    {
+        //        result = "C";
+        //    }
+        //    else if (score >= 60)
+        //    {
+        //        result = "D";
+        //    }
+        //    else
+        //    {
+        //        result = "F";
+
+
+        //    }
+        //    return result;
+        //}
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //problem 8:
+        public static void Countdown(int number)
         {
-            string result;
-            if (score >= 90)
+            for (int i = number; i >= 0; i--)
             {
-                result = "A";
-
+                Console.WriteLine(i);
             }
-            else if (score >= 80)
-            {
-                result = "B";
-            }
-            else if (score >= 70)
-            {
-                result = "C";
-            }
-            else if (score >= 60)
-            {
-                result = "D";
-            }
-            else
-            {
-                result = "F";
-
-
-            }
-            return result;
         }
+
 
         static void Main(string[] args)
         {
@@ -173,9 +187,18 @@ namespace C__fundamentals_Task_4
 
             //problem 7:
 
-            Console.WriteLine("Please enter your score: ");
-            int score = int.Parse(Console.ReadLine());
-            Console.WriteLine($"Your Grade is {GetGradeLetter(score)}");
+            //Console.WriteLine("Please enter your score: ");
+            //int score = int.Parse(Console.ReadLine());
+            //Console.WriteLine($"Your Grade is {GetGradeLetter(score)}");
+
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            //problem 8:
+            Console.Write("Please enter a number: ");
+            int number = int.Parse(Console.ReadLine());
+            Countdown(number);
 
         }
 
