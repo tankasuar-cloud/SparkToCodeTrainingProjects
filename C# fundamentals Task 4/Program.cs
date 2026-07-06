@@ -38,14 +38,23 @@ namespace C__fundamentals_Task_4
 
         //problem 4:
 
-        public static void DisplayMenu()
-        {
-            Console.WriteLine("Menu:");
-            Console.WriteLine("1) Start");
-            Console.WriteLine("2) Help");
-            Console.WriteLine("3) Exit");
-        }  
+        //public static void DisplayMenu()
+        //{
+        //    Console.WriteLine("Menu:");
+        //    Console.WriteLine("1) Start");
+        //    Console.WriteLine("2) Help");
+        //    Console.WriteLine("3) Exit");
+        //}
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //problem 5:
+
+        public static bool IsEven(int number)
+        {
+            return number % 2 == 0;
+        }
 
 
         static void Main(string[] args)
@@ -79,11 +88,27 @@ namespace C__fundamentals_Task_4
 
 
             //problem 4:
-            DisplayMenu();
 
-        }
+            //DisplayMenu();
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            //problem 5:
+            Console.Write("Please enter a number: ");
+            int number = int.Parse(Console.ReadLine());
+            bool result = IsEven(number);
+            if (result)
+            {
+                Console.WriteLine($"{number} is an even number.");
+            }
+            else
+            {
+                Console.WriteLine($"{number} is an odd number.");
+
+            }
     }
 
-}
+}}
 
 
