@@ -27,11 +27,24 @@ namespace C__fundamentals_Task_4
 
 
         //problem 3:
-        public static double CelsiusToFahrenheit(double Celsius)
+        //public static double CelsiusToFahrenheit(double Celsius)
+        //{
+        //    double Fahrenheit = (Celsius * 9 / 5) + 32;
+        //    return Fahrenheit;
+        //}
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //problem 4:
+
+        public static void DisplayMenu()
         {
-            double Fahrenheit = (Celsius * 9 / 5) + 32;
-            return Fahrenheit;
-        }
+            Console.WriteLine("Menu:");
+            Console.WriteLine("1) Start");
+            Console.WriteLine("2) Help");
+            Console.WriteLine("3) Exit");
+        }  
 
 
 
@@ -58,9 +71,16 @@ namespace C__fundamentals_Task_4
 
             //problem 3:
 
-            Console.Write("Please enter a Celsius degree: ");
-            double Celsius = double.Parse(Console.ReadLine());
-            Console.WriteLine($"{Celsius} Celsius is equal to {CelsiusToFahrenheit(Celsius)} Fahrenheit");
+            //Console.Write("Please enter a Celsius degree: ");
+            //double Celsius = double.Parse(Console.ReadLine());
+            //Console.WriteLine($"{Celsius} Celsius is equal to {CelsiusToFahrenheit(Celsius)} Fahrenheit");
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            //problem 4:
+            DisplayMenu();
+
         }
     }
 
