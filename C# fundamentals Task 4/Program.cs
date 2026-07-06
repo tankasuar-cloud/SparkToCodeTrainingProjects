@@ -109,13 +109,26 @@ namespace C__fundamentals_Task_4
 
 
         //problem 8:
-        public static void Countdown(int number)
-        {
-            for (int i = number; i >= 0; i--)
-            {
-                Console.WriteLine(i);
-            }
-        }
+        //public static void Countdown(int number)
+        //{
+        //    for (int i = number; i >= 0; i--)
+        //    {
+        //        Console.WriteLine(i);
+        //    }
+        //}
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //problem 9:
+
+        public static int Multiply(int a, int b)
+        {  return a * b; }
+        public static double Multiply(double a, double b)
+        { return a * b; } 
+        public static int Multiply(int a, int b, int c)
+        { return a * b * c; }
 
 
         static void Main(string[] args)
@@ -196,9 +209,39 @@ namespace C__fundamentals_Task_4
 
 
             //problem 8:
-            Console.Write("Please enter a number: ");
-            int number = int.Parse(Console.ReadLine());
-            Countdown(number);
+
+            //Console.Write("Please enter a number: ");
+            //int number = int.Parse(Console.ReadLine());
+            //Countdown(number);
+
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            //problem 9:
+            // First Overload: Two ints
+            Console.Write("Please enter a value for X: ");
+            int x = int.Parse(Console.ReadLine());
+            Console.Write("please enter value for Y: ");
+            int y = int.Parse(Console.ReadLine());
+            Console.WriteLine($"Two integers (X * Y) = {Multiply(x, y)}"); ;
+            Console.WriteLine("*****************************************************");
+            // Second Overload: Two doubles
+            Console.Write("Please enter a value for Z: ");
+            double z = double.Parse(Console.ReadLine());
+            Console.Write("Please enter a value for F");
+            double F = double.Parse(Console.ReadLine());
+            Console.WriteLine($"Two doubles (Z * F) = {Multiply(z, F)}");
+            Console.WriteLine("*****************************************************");
+            // Third Overload: Three ints
+            Console.Write("Please enter a value for A: ");
+            int A = int.Parse(Console.ReadLine());
+            Console.Write("please enter value for B: ");
+            int B = int.Parse(Console.ReadLine());
+            Console.Write("please enter value for C: ");
+            int C = int.Parse(Console.ReadLine());
+            Console.WriteLine($"Three integers (A * B * C) = {Multiply(A, B, C)}");
+
 
         }
 
