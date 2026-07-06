@@ -136,8 +136,31 @@ namespace C__fundamentals_Task_4
 
         //problem 10:
 
-        public static double CalculateArea(double A){  return A*A; }
-        public static double CalculateArea(double A, double B) {  return A*B; }
+
+        //public static double CalculateArea(double A){  return A*A; }
+        //public static double CalculateArea(double A, double B) {  return A*B; }
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //problem 11:
+
+        public static double AddNumbers(double a, double b) { return a + b; }
+
+        public static double subNumbers(double a, double b) { return a - b; }
+
+        public static double MultiplyNumbers(double a, double b) { return a * b; }
+
+        public static double DivideNumbers(double a, double b) { if (b == 0) { return 0; } else { return a / b; } }
+
+        public static void DisplayResult(string name, double result)
+        {
+            Console.WriteLine("-----------------------------------------");
+            Console.WriteLine($"The result of the {name} operation is: {result}");
+            Console.WriteLine("-----------------------------------------");
+        }
+
         static void Main(string[] args)
         {
 
@@ -255,27 +278,95 @@ namespace C__fundamentals_Task_4
 
 
             //problem 10:
-            Console.WriteLine("What shape do you want to calculate the area of? \n1)Square\n2)rectangle");
-            int option = int.Parse(Console.ReadLine());
-            switch (option)
-            {
-                case 1:
-                    Console.Write("please enter the square length: ");
-                    double square = double.Parse(Console.ReadLine());
-                    Console.WriteLine($"The area of the square is {CalculateArea(square)}");
-                    break;
+            //Console.WriteLine("What shape do you want to calculate the area of? \n1)Square\n2)rectangle");
+            //int option = int.Parse(Console.ReadLine());
+            //switch (option)
+            //{
+            //    case 1:
+            //        Console.Write("please enter the square length: ");
+            //        double square = double.Parse(Console.ReadLine());
+            //        Console.WriteLine($"The area of the square is {CalculateArea(square)}");
+            //        break;
 
-                case 2:
-                    Console.Write("please enter the rectangle length: ");
-                    double length = double.Parse(Console.ReadLine());
-                    Console.Write("please enter the rectangle width: ");
-                    double width = double.Parse(Console.ReadLine());
-                    Console.WriteLine($"The area of the rectangle is {CalculateArea(length, width)}");
-                        break;
+            //    case 2:
+            //        Console.Write("please enter the rectangle length: ");
+            //        double length = double.Parse(Console.ReadLine());
+            //        Console.Write("please enter the rectangle width: ");
+            //        double width = double.Parse(Console.ReadLine());
+            //        Console.WriteLine($"The area of the rectangle is {CalculateArea(length, width)}");
+            //            break;
+            //}
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            //problem 11:
+
+            bool is_running = true;
+            while (is_running)
+            {
+                try
+                {
+                    Console.Write("1)Add\n2)subtract\n3)multiply\n4)Divide\n5)Exit\nplease Select the operation: ");
+                    int option = int.Parse(Console.ReadLine());
+                    switch (option)
+                    {
+                        case 1:
+                            Console.WriteLine("-----------------------------------------");
+                            Console.Write("Please enter the first number: ");
+                            double num1 = double.Parse(Console.ReadLine());
+                            Console.Write("please enter the second number: ");
+                            double num2 = double.Parse(Console.ReadLine());
+                            double result = AddNumbers(num1, num2);
+                            DisplayResult("Addition", result);
+                            break;
+
+                        case 2:
+                            Console.WriteLine("-----------------------------------------");
+                            Console.Write("Please enter the first number: ");
+                            double num3 = double.Parse(Console.ReadLine());
+                            Console.Write("please enter the second number: ");
+                            double num4 = double.Parse(Console.ReadLine());
+                            double result2 = subNumbers(num3, num4);
+                            DisplayResult("Subtraction", result2);
+                            break;
+
+                        case 3:
+                            Console.WriteLine("-----------------------------------------");
+                            Console.Write("Please enter the first number: ");
+                            double num5 = double.Parse(Console.ReadLine());
+                            Console.Write("please enter the second number: ");
+                            double num6 = double.Parse(Console.ReadLine());
+                            double result3 = MultiplyNumbers (num5, num6);
+                            DisplayResult("Multiply", result3);
+                            break;
+
+                        case 4:
+                            Console.WriteLine("-----------------------------------------");
+                            Console.Write("Please enter the first number: ");
+                            double num7 = double.Parse(Console.ReadLine());
+                            Console.Write("please enter the second number: ");
+                            double num8 = double.Parse(Console.ReadLine());
+                            double result4 = MultiplyNumbers(num7, num8);
+                            DisplayResult("Division ", result4);
+                            break;
+
+                        case 5:
+                            is_running = false;
+                            break;
+                    }
+                    
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                }
             }
 
+        }
     }
 }
-}
+
+
 
 
