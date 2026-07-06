@@ -60,14 +60,47 @@ namespace C__fundamentals_Task_4
 
         //problem 6:
 
-        public static double CalculateArea(double length, double width)
-        { 
-            double result = length * width;
-            return result;
-        }
-        public static double CalculatePerimeter(double length, double width)
+        //public static double CalculateArea(double length, double width)
+        //{ 
+        //    double result = length * width;
+        //    return result;
+        //}
+        //public static double CalculatePerimeter(double length, double width)
+        //{
+        //    double result = 2 * (length + width);
+        //    return result;
+        //}
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //problem 7:
+        public static string GetGradeLetter(int score)
         {
-            double result = 2 * (length + width);
+            string result;
+            if (score >= 90)
+            {
+                result = "A";
+
+            }
+            else if (score >= 80)
+            {
+                result = "B";
+            }
+            else if (score >= 70)
+            {
+                result = "C";
+            }
+            else if (score >= 60)
+            {
+                result = "D";
+            }
+            else
+            {
+                result = "F";
+
+
+            }
             return result;
         }
 
@@ -128,12 +161,22 @@ namespace C__fundamentals_Task_4
 
             //problem 6:
 
-            Console.Write("Please enter the length of the rectangle: ");
-            double length = double.Parse(Console.ReadLine());
-            Console.Write("Please enter the width of the rectangle: ");
-            double width = double.Parse(Console.ReadLine());
-            Console.WriteLine($"Area of the rectangle is: {CalculateArea(length, width)}");
-            Console.WriteLine($"Perimeter of the rectangle is: {CalculatePerimeter(length, width)}");
+            //Console.Write("Please enter the length of the rectangle: ");
+            //double length = double.Parse(Console.ReadLine());
+            //Console.Write("Please enter the width of the rectangle: ");
+            //double width = double.Parse(Console.ReadLine());
+            //Console.WriteLine($"Area of the rectangle is: {CalculateArea(length, width)}");
+            //Console.WriteLine($"Perimeter of the rectangle is: {CalculatePerimeter(length, width)}");
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            //problem 7:
+
+            Console.WriteLine("Please enter your score: ");
+            int score = int.Parse(Console.ReadLine());
+            Console.WriteLine($"Your Grade is {GetGradeLetter(score)}");
+
         }
 
     }
