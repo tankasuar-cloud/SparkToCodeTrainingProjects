@@ -73,18 +73,56 @@
             //////////////////////////////////////////////////////////////////////////////////////////////////////
             // problem 4:
 
-            Queue<string>line = new Queue<string>();
-            for (int i = 0; i < 3; i++)
-            {
-                Console.Write($"Enter name for customer {i + 1}: ");
-                string name = Console.ReadLine();
-                line.Enqueue(name);
-            }
-            Console.WriteLine("\n--- Serving Customers ---");
-            string customer = line.Dequeue();
-            Console.WriteLine($"Now serving customer {customer}");
+            //Queue<string>line = new Queue<string>();
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    Console.Write($"Enter name for customer {i + 1}: ");
+            //    string name = Console.ReadLine();
+            //    line.Enqueue(name);
+            //}
+            //Console.WriteLine("\n--- Serving Customers ---");
+            //string customer = line.Dequeue();
+            //Console.WriteLine($"Now serving customer {customer}");
 
-    }
-    }
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            // problem 5:
+
+
+            
+            bool is_running = true;
+            while (is_running)
+            {
+                try
+                {
+                    int[] grades = new int[5];
+                    for (int i = 0; i < grades.Length; i++)
+                    {
+                        Console.Write($"Please enter grade for {i + 1}: ");
+                        int grad = int.Parse(Console.ReadLine());
+                        grades[i] = grad;
+                    }
+                    int sum = 0;
+                    foreach (int grade in grades)
+                    {
+                        sum += grade;
+                    }
+                    Array.Sort(grades);
+                    double total = (double)sum / grades.Length;
+                    Console.WriteLine("\n--- Lowest/highest numbers ---");
+                    Console.WriteLine($"the lowest number is the array is: {grades[0]}");
+                    int max = grades.Length - 1;
+                    Console.WriteLine($"the highest number in the array is: {grades[max]}");
+                    Console.WriteLine("\n--- Average ---");
+                    Console.WriteLine($"the average grade is: {total}");
+                    is_running = false;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                }
+            }
+        }
+}
 }
 
