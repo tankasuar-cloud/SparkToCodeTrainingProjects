@@ -35,28 +35,43 @@
             // problem 2:
 
 
-            List<string> todo = new List<string>();
-            
-                
-            for (int i = 0; i < 5; i++)
-            { 
-                Console.WriteLine("Add a task to to-do list: ");
-                string task = Console.ReadLine();
-                todo.Add(task);
-            }
-            int taskNumber = 1;
-            Console.WriteLine("\n--- Your To-Do List ---");
-            foreach (string task in todo)
+            //List<string> todo = new List<string>();
+
+
+            //for (int i = 0; i < 5; i++)
+            //{ 
+            //    Console.WriteLine("Add a task to to-do list: ");
+            //    string task = Console.ReadLine();
+            //    todo.Add(task);
+            //}
+            //int taskNumber = 1;
+            //Console.WriteLine("\n--- Your To-Do List ---");
+            //foreach (string task in todo)
+            //{
+            //    Console.WriteLine($"{taskNumber}. {task}");
+            //    taskNumber++;
+            //}
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            // problem 3:
+
+            Stack<string> PageHistor= new Stack<string>();
+            for (int i = 0; i < 3; i++) 
             {
-                Console.WriteLine($"{taskNumber}. {task}");
-                taskNumber++;
+                Console.Write($"Enter website URL {i + 1}: ");
+                PageHistor.Push(Console.ReadLine());
             }
-                    
-                
-                
+            Console.WriteLine("\n--- pressing Back Button ---");
+            string removedPage = PageHistor.Pop();
             
+            var topItem = PageHistor.Peek();
+            Console.WriteLine($"Now landing on: {topItem}");
 
 
         }
+
     }
-}
+    }
+
