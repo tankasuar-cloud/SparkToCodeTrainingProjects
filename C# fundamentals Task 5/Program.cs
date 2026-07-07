@@ -202,33 +202,70 @@
             //////////////////////////////////////////////////////////////////////////////////////////////////////
             // problem 7:
 
-            List<int> scores = new List<int>();
+            //List<int> scores = new List<int>();
 
-            for (int i = 0; i < 5; i++)
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    try
+            //    {
+            //        Console.Write($"Enter score for game {i + 1}: ");
+            //        int score = int.Parse(Console.ReadLine());
+            //        scores.Add(score);
+            //    }
+            //    catch (FormatException)
+            //    {
+            //        Console.WriteLine("Invalid input. Please enter a valid number.");
+            //        i--; 
+            //    }
+            //}
+
+            //scores.Sort();
+            //scores.Reverse();
+
+            //Console.WriteLine("\n--- Podium Standings ---");
+            //Console.WriteLine($"1st place: {scores[0]}");
+            //Console.WriteLine($"2nd place: {scores[1]}");
+            //Console.WriteLine($"3rd place: {scores[2]}");
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            // problem 8:
+            Stack<string> actions = new Stack<string>();
+            bool is_running = true;
+            while (is_running)
             {
-                try
+                Console.Write("please enter an action (to exit type 'stop') : ");
+                string action = Console.ReadLine();
+                if (action.ToLower() == "stop")
                 {
-                    Console.Write($"Enter score for game {i + 1}: ");
-                    int score = int.Parse(Console.ReadLine());
-                    scores.Add(score);
+                    is_running = false;
                 }
-                catch (FormatException)
+                else
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
-                    i--; 
+                    actions.Push(action);
                 }
             }
-
-            scores.Sort();
-            scores.Reverse();
-
-            Console.WriteLine("\n--- Podium Standings ---");
-            Console.WriteLine($"1st place: {scores[0]}");
-            Console.WriteLine($"2nd place: {scores[1]}");
-            Console.WriteLine($"3rd place: {scores[2]}");
-
+           
+            if (actions.Count >= 2)
+            {
+                string poppedAction1 = actions.Pop();
+                string poppedAction2 = actions.Pop();
+                Console.WriteLine("\n--- Removing ---");
+                Console.WriteLine($"The first undo removed: {poppedAction1}");
+                Console.WriteLine($"The second undo removed: {poppedAction2}");
+            }
+            else
+            {
+                Console.WriteLine("Not enough actions in history to perform two undos.");
+            }
+            Console.WriteLine("\n--- Remaining Actions on Stack ---");
+            foreach (string action in actions)
+            {
+                Console.WriteLine(action);
+            }
         }
     }
 }
+
 
 
