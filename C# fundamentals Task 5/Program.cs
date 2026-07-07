@@ -230,39 +230,99 @@
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////
             // problem 8:
-            Stack<string> actions = new Stack<string>();
+
+            //Stack<string> actions = new Stack<string>();
+            //bool is_running = true;
+            //while (is_running)
+            //{
+            //    Console.Write("please enter an action (to exit type 'stop') : ");
+            //    string action = Console.ReadLine();
+            //    if (action.ToLower() == "stop")
+            //    {
+            //        is_running = false;
+            //    }
+            //    else
+            //    {
+            //        actions.Push(action);
+            //    }
+            //}
+
+            //if (actions.Count >= 2)
+            //{
+            //    string poppedAction1 = actions.Pop();
+            //    string poppedAction2 = actions.Pop();
+            //    Console.WriteLine("\n--- Removing ---");
+            //    Console.WriteLine($"The first undo removed: {poppedAction1}");
+            //    Console.WriteLine($"The second undo removed: {poppedAction2}");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Not enough actions in history to perform two undos.");
+            //}
+            //Console.WriteLine("\n--- Remaining Actions on Stack ---");
+            //foreach (string action in actions)
+            //{
+            //    Console.WriteLine(action);
+            //}
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            // problem 9:
+
             bool is_running = true;
             while (is_running)
             {
-                Console.Write("please enter an action (to exit type 'stop') : ");
-                string action = Console.ReadLine();
-                if (action.ToLower() == "stop")
+                try
                 {
+                    Console.Write("how many grades you want to enter? ");
+                    int x = int.Parse(Console.ReadLine());
+                    List<int> grades = new List<int>();
+                    for (int i = 0; i < x; i++)
+                    {
+                        Console.WriteLine("\n-----------------------");
+                        Console.WriteLine($"Please enter a grade for {i + 1}");
+                        int grade = int.Parse(Console.ReadLine());
+                        grades.Add(grade);
+                    }
+                    double avg = CalculateAverage(grades);
+                    Console.WriteLine("\n-----------------------");
+                    Console.WriteLine($"The average grade is: {avg}");
+                    int failingGrade = FindFirstFailing(grades);
+                    if (failingGrade == 0)
+                    {
+                        Console.WriteLine("\n-----------------------");
+                        Console.WriteLine("No failing grades found.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\n-----------------------");
+                        Console.WriteLine($"The first failing grade is: {failingGrade}");
+                    }
+
                     is_running = false;
                 }
-                else
+                catch (FormatException)
                 {
-                    actions.Push(action);
+                    Console.WriteLine("\n-----------------------");
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    Console.WriteLine("-----------------------");
                 }
             }
-           
-            if (actions.Count >= 2)
+            
+
+        }
+        public static double CalculateAverage(List<int> gradeList)
+        {
+            int sum = 0;
+            foreach (int grade in gradeList)
             {
-                string poppedAction1 = actions.Pop();
-                string poppedAction2 = actions.Pop();
-                Console.WriteLine("\n--- Removing ---");
-                Console.WriteLine($"The first undo removed: {poppedAction1}");
-                Console.WriteLine($"The second undo removed: {poppedAction2}");
+                sum += grade;
             }
-            else
-            {
-                Console.WriteLine("Not enough actions in history to perform two undos.");
-            }
-            Console.WriteLine("\n--- Remaining Actions on Stack ---");
-            foreach (string action in actions)
-            {
-                Console.WriteLine(action);
-            }
+            return (double)sum / gradeList.Count;
+        }
+        public static int FindFirstFailing(List<int> gradeList)
+        {
+            int foundNumber = gradeList.Find(x => x < 60);
+            return foundNumber;
         }
     }
 }
