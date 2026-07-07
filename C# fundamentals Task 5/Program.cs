@@ -127,83 +127,108 @@
             //////////////////////////////////////////////////////////////////////////////////////////////////////
             // problem 6:
 
-            List<string> Shopping = new List<string>();
-            bool is_running = true;
-            int i = 0;
-            while (is_running)
+            //List<string> Shopping = new List<string>();
+            //bool is_running = true;
+            //int i = 0;
+            //while (is_running)
+            //{
+            //    Console.Write($"Please enter item {i} to the shopping list (or type 'done'): ");
+            //    string item = Console.ReadLine();
+            //    if (item.ToLower() == "done")
+            //    {
+            //        is_running = false;
+            //    }
+            //    else
+            //    {
+            //        Shopping.Add(item);
+            //        i++;
+            //    }
+            //}
+            //is_running = true;
+            //while (is_running)
+            //{
+            //    int option = 0;
+            //    try
+            //    {
+            //        Console.WriteLine("1) Remove an item for the list\n2) Exit");
+            //        option = int.Parse(Console.ReadLine());
+
+            //    }
+            //    catch (FormatException)
+            //    {
+            //        Console.WriteLine("Invalid input. Please enter a valid number.");
+            //        continue;
+            //    }
+            //    switch (option)
+            //    {
+            //        case 1:
+            //            Console.WriteLine("\n---- Shopping list ----");
+            //            foreach (string item in Shopping)
+            //            {
+            //                Console.WriteLine(item);
+            //            }
+            //            Console.WriteLine("----------------------- ");
+            //            Console.WriteLine("Enter Item name to remove it from the list");
+            //            string name = Console.ReadLine();
+            //            if (Shopping.Contains(name))
+            //            {
+            //                Shopping.Remove(name);
+            //                Console.WriteLine($"{name} has been removed.");
+            //            }
+            //            else
+            //            {
+            //                Console.WriteLine("Item not found.");
+            //            }
+            //            Console.WriteLine("\n---- Updated Shopping list ----");
+            //            foreach (string item in Shopping)
+            //            {
+            //                Console.WriteLine(item);
+            //            }
+            //            Console.WriteLine("-----------------------");
+            //            break;
+
+            //        case 2:
+            //            is_running=false;
+            //            break;
+
+            //        default:
+            //            Console.WriteLine("Please choose either 1 or 2.");
+            //            break;
+
+            //    }
+
+            //}
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            // problem 7:
+
+            List<int> scores = new List<int>();
+
+            for (int i = 0; i < 5; i++)
             {
-                Console.Write($"Please enter item {i} to the shopping list (or type 'done'): ");
-                string item = Console.ReadLine();
-                if (item.ToLower() == "done")
-                {
-                    is_running = false;
-                }
-                else
-                {
-                    Shopping.Add(item);
-                    i++;
-                }
-            }
-            is_running = true;
-            while (is_running)
-            {
-                int option = 0;
                 try
                 {
-                    Console.WriteLine("1) Remove an item for the list\n2) Exit");
-                    option = int.Parse(Console.ReadLine());
-
+                    Console.Write($"Enter score for game {i + 1}: ");
+                    int score = int.Parse(Console.ReadLine());
+                    scores.Add(score);
                 }
                 catch (FormatException)
                 {
                     Console.WriteLine("Invalid input. Please enter a valid number.");
-                    continue;
+                    i--; 
                 }
-                switch (option)
-                {
-                    case 1:
-                        Console.WriteLine("\n---- Shopping list ----");
-                        foreach (string item in Shopping)
-                        {
-                            Console.WriteLine(item);
-                        }
-                        Console.WriteLine("----------------------- ");
-                        Console.WriteLine("Enter Item name to remove it from the list");
-                        string name = Console.ReadLine();
-                        if (Shopping.Contains(name))
-                        {
-                            Shopping.Remove(name);
-                            Console.WriteLine($"{name} has been removed.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Item not found.");
-                        }
-                        Console.WriteLine("\n---- Updated Shopping list ----");
-                        foreach (string item in Shopping)
-                        {
-                            Console.WriteLine(item);
-                        }
-                        Console.WriteLine("-----------------------");
-                        break;
-
-                    case 2:
-                        is_running=false;
-                        break;
-
-                    default:
-                        Console.WriteLine("Please choose either 1 or 2.");
-                        break;
-
-
-
-                }
-
-                
             }
 
+            scores.Sort();
+            scores.Reverse();
+
+            Console.WriteLine("\n--- Podium Standings ---");
+            Console.WriteLine($"1st place: {scores[0]}");
+            Console.WriteLine($"2nd place: {scores[1]}");
+            Console.WriteLine($"3rd place: {scores[2]}");
+
         }
-}
+    }
 }
 
 
