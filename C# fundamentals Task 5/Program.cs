@@ -57,21 +57,34 @@
             //////////////////////////////////////////////////////////////////////////////////////////////////////
             // problem 3:
 
-            Stack<string> PageHistor= new Stack<string>();
-            for (int i = 0; i < 3; i++) 
+            //Stack<string> PageHistor= new Stack<string>();
+            //for (int i = 0; i < 3; i++) 
+            //{
+            //    Console.Write($"Enter website URL {i + 1}: ");
+            //    PageHistor.Push(Console.ReadLine());
+            //}
+            //Console.WriteLine("\n--- pressing Back Button ---");
+            //string removedPage = PageHistor.Pop();
+
+            //var topItem = PageHistor.Peek();
+            //Console.WriteLine($"Now landing on: {topItem}");
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            // problem 4:
+
+            Queue<string>line = new Queue<string>();
+            for (int i = 0; i < 3; i++)
             {
-                Console.Write($"Enter website URL {i + 1}: ");
-                PageHistor.Push(Console.ReadLine());
+                Console.Write($"Enter name for customer {i + 1}: ");
+                string name = Console.ReadLine();
+                line.Enqueue(name);
             }
-            Console.WriteLine("\n--- pressing Back Button ---");
-            string removedPage = PageHistor.Pop();
-            
-            var topItem = PageHistor.Peek();
-            Console.WriteLine($"Now landing on: {topItem}");
-
-
-        }
+            Console.WriteLine("\n--- Serving Customers ---");
+            string customer = line.Dequeue();
+            Console.WriteLine($"Now serving customer {customer}");
 
     }
     }
+}
 
