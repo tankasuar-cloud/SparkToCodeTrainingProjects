@@ -1,4 +1,6 @@
-﻿namespace C__fundamentals_Task_5
+﻿using System.Collections;
+
+namespace C__fundamentals_Task_5
 {
     internal class Program
     {
@@ -268,64 +270,134 @@
             //////////////////////////////////////////////////////////////////////////////////////////////////////
             // problem 9:
 
+            //bool is_running = true;
+            //while (is_running)
+            //{
+            //    try
+            //    {
+            //        Console.Write("how many grades you want to enter? ");
+            //        int x = int.Parse(Console.ReadLine());
+            //        List<int> grades = new List<int>();
+            //        for (int i = 0; i < x; i++)
+            //        {
+            //            Console.WriteLine("\n-----------------------");
+            //            Console.WriteLine($"Please enter a grade for {i + 1}");
+            //            int grade = int.Parse(Console.ReadLine());
+            //            grades.Add(grade);
+            //        }
+            //        double avg = CalculateAverage(grades);
+            //        Console.WriteLine("\n-----------------------");
+            //        Console.WriteLine($"The average grade is: {avg}");
+            //        int failingGrade = FindFirstFailing(grades);
+            //        if (failingGrade == 0)
+            //        {
+            //            Console.WriteLine("\n-----------------------");
+            //            Console.WriteLine("No failing grades found.");
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine("\n-----------------------");
+            //            Console.WriteLine($"The first failing grade is: {failingGrade}");
+            //        }
+
+            //        is_running = false;
+            //    }
+            //    catch (FormatException)
+            //    {
+            //        Console.WriteLine("\n-----------------------");
+            //        Console.WriteLine("Invalid input. Please enter a valid number.");
+            //        Console.WriteLine("-----------------------");
+            //    }
+            //}
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            // problem 10:
+
+            Queue<string> jobs = new Queue<string>();
             bool is_running = true;
+
             while (is_running)
             {
-                try
-                {
-                    Console.Write("how many grades you want to enter? ");
-                    int x = int.Parse(Console.ReadLine());
-                    List<int> grades = new List<int>();
-                    for (int i = 0; i < x; i++)
-                    {
-                        Console.WriteLine("\n-----------------------");
-                        Console.WriteLine($"Please enter a grade for {i + 1}");
-                        int grade = int.Parse(Console.ReadLine());
-                        grades.Add(grade);
-                    }
-                    double avg = CalculateAverage(grades);
-                    Console.WriteLine("\n-----------------------");
-                    Console.WriteLine($"The average grade is: {avg}");
-                    int failingGrade = FindFirstFailing(grades);
-                    if (failingGrade == 0)
-                    {
-                        Console.WriteLine("\n-----------------------");
-                        Console.WriteLine("No failing grades found.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("\n-----------------------");
-                        Console.WriteLine($"The first failing grade is: {failingGrade}");
-                    }
+                Console.Write("Enter a print job name (or type 'done'): ");
+                string input = Console.ReadLine();
 
+                if (input.ToLower() == "done")
+                {
                     is_running = false;
                 }
-                catch (FormatException)
+                else
                 {
-                    Console.WriteLine("\n-----------------------");
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
-                    Console.WriteLine("-----------------------");
+                    jobs.Enqueue(input);
                 }
             }
-            
+
+            Console.WriteLine("\n---- Current Print Queue ----");
+            foreach (string job in jobs)
+            {
+                Console.WriteLine(job);
+            }
+            Console.WriteLine("-----------------------------");
+
+
+            Console.Write("\nEnter the name of the job to cancel: ");
+            string jobToCancel = Console.ReadLine();
+
+            jobs = RemoveJob(jobs, jobToCancel);
+
+
+            Console.WriteLine("\n---- Updated Print Queue ----");
+            foreach (string job in jobs)
+            {
+                Console.WriteLine(job);
+            }
+            Console.WriteLine("-----------------------------");
+
+
 
         }
-        public static double CalculateAverage(List<int> gradeList)
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+        // problem 9:
+
+        //public static double CalculateAverage(List<int> gradeList)
+        //{
+        //    int sum = 0;
+        //    foreach (int grade in gradeList)
+        //    {
+        //        sum += grade;
+        //    }
+        //    return (double)sum / gradeList.Count;
+        //}
+        //public static int FindFirstFailing(List<int> gradeList)
+        //{
+        //    int foundNumber = gradeList.Find(x => x < 60);
+        //    return foundNumber;
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+        // problem 10:
+
+        public static Queue<string> RemoveJob(Queue<string> queue, string removejob)
         {
-            int sum = 0;
-            foreach (int grade in gradeList)
+            Queue<string> updatedQueue = new Queue<string>();
+
+
+            while (queue.Count > 0)
             {
-                sum += grade;
+                string currentJob = queue.Dequeue();
+                if (currentJob.ToLower() != removejob.ToLower())
+                {
+                    updatedQueue.Enqueue(currentJob);
+                }
             }
-            return (double)sum / gradeList.Count;
+
+            return updatedQueue;
         }
-        public static int FindFirstFailing(List<int> gradeList)
-        {
-            int foundNumber = gradeList.Find(x => x < 60);
-            return foundNumber;
-        }
+
     }
 }
+
 
 
 
