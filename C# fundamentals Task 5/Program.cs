@@ -89,40 +89,121 @@
             // problem 5:
 
 
-            
+
+            //bool is_running = true;
+            //while (is_running)
+            //{
+            //    try
+            //    {
+            //        int[] grades = new int[5];
+            //        for (int i = 0; i < grades.Length; i++)
+            //        {
+            //            Console.Write($"Please enter grade for {i + 1}: ");
+            //            int grad = int.Parse(Console.ReadLine());
+            //            grades[i] = grad;
+            //        }
+            //        int sum = 0;
+            //        foreach (int grade in grades)
+            //        {
+            //            sum += grade;
+            //        }
+            //        Array.Sort(grades);
+            //        double total = (double)sum / grades.Length;
+            //        Console.WriteLine("\n--- Lowest/highest numbers ---");
+            //        Console.WriteLine($"the lowest number is the array is: {grades[0]}");
+            //        int max = grades.Length - 1;
+            //        Console.WriteLine($"the highest number in the array is: {grades[max]}");
+            //        Console.WriteLine("\n--- Average ---");
+            //        Console.WriteLine($"the average grade is: {total}");
+            //        is_running = false;
+            //    }
+            //    catch (FormatException)
+            //    {
+            //        Console.WriteLine("Invalid input. Please enter a valid number.");
+            //    }
+            //}
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            // problem 6:
+
+            List<string> Shopping = new List<string>();
             bool is_running = true;
+            int i = 0;
             while (is_running)
             {
+                Console.Write($"Please enter item {i} to the shopping list (or type 'done'): ");
+                string item = Console.ReadLine();
+                if (item.ToLower() == "done")
+                {
+                    is_running = false;
+                }
+                else
+                {
+                    Shopping.Add(item);
+                    i++;
+                }
+            }
+            is_running = true;
+            while (is_running)
+            {
+                int option = 0;
                 try
                 {
-                    int[] grades = new int[5];
-                    for (int i = 0; i < grades.Length; i++)
-                    {
-                        Console.Write($"Please enter grade for {i + 1}: ");
-                        int grad = int.Parse(Console.ReadLine());
-                        grades[i] = grad;
-                    }
-                    int sum = 0;
-                    foreach (int grade in grades)
-                    {
-                        sum += grade;
-                    }
-                    Array.Sort(grades);
-                    double total = (double)sum / grades.Length;
-                    Console.WriteLine("\n--- Lowest/highest numbers ---");
-                    Console.WriteLine($"the lowest number is the array is: {grades[0]}");
-                    int max = grades.Length - 1;
-                    Console.WriteLine($"the highest number in the array is: {grades[max]}");
-                    Console.WriteLine("\n--- Average ---");
-                    Console.WriteLine($"the average grade is: {total}");
-                    is_running = false;
+                    Console.WriteLine("1) Remove an item for the list\n2) Exit");
+                    option = int.Parse(Console.ReadLine());
+
                 }
                 catch (FormatException)
                 {
                     Console.WriteLine("Invalid input. Please enter a valid number.");
+                    continue;
                 }
+                switch (option)
+                {
+                    case 1:
+                        Console.WriteLine("\n---- Shopping list ----");
+                        foreach (string item in Shopping)
+                        {
+                            Console.WriteLine(item);
+                        }
+                        Console.WriteLine("----------------------- ");
+                        Console.WriteLine("Enter Item name to remove it from the list");
+                        string name = Console.ReadLine();
+                        if (Shopping.Contains(name))
+                        {
+                            Shopping.Remove(name);
+                            Console.WriteLine($"{name} has been removed.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Item not found.");
+                        }
+                        Console.WriteLine("\n---- Updated Shopping list ----");
+                        foreach (string item in Shopping)
+                        {
+                            Console.WriteLine(item);
+                        }
+                        Console.WriteLine("-----------------------");
+                        break;
+
+                    case 2:
+                        is_running=false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Please choose either 1 or 2.");
+                        break;
+
+
+
+                }
+
+                
             }
+
         }
 }
 }
+
 
