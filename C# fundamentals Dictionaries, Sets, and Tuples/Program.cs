@@ -40,6 +40,10 @@ namespace C__fundamentals_Dictionaries__Sets__and_Tuples
             //}
 
 
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
             //Task 2 - Unique Guest List
             //Create a HashSet<string> to manage a guest list for a party.
             //Use a loop to ask the user to enter 5 guest names.Print the final count of unique guests and then list out all the names.
@@ -60,6 +64,10 @@ namespace C__fundamentals_Dictionaries__Sets__and_Tuples
             //{
             //    Console.WriteLine($"- {guest}");
             //}
+
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -130,6 +138,8 @@ namespace C__fundamentals_Dictionaries__Sets__and_Tuples
             //}
 
 
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
             //Task 4 - Min-Max Tuple Generator
             //Write a program that asks the user to enter 5 integers into an array.
             //Pass this array to a separate function that finds both the lowest and the highest numbers,
@@ -137,23 +147,87 @@ namespace C__fundamentals_Dictionaries__Sets__and_Tuples
             //Requirements:
             //The function must accept an int[] and return a (int Min, int Max) tuple.
             //Call the function from your Main method and print the results clearly.
-            int[] numbers = new int[5];
-            for (int i = 0; i < numbers.Length; i++)
+            //int[] numbers = new int[5];
+            //for (int i = 0; i < numbers.Length; i++)
+            //{
+            //    Console.Write($"Please enter a number {i + 1}) ");
+            //    int num = int.Parse(Console.ReadLine());
+            //    numbers[i] = num;
+            //}
+            //var result = minmax(numbers);
+            //Console.WriteLine($"Lowest Number: {result.Min}");
+            //Console.WriteLine($"Highest Number: {result.Max}");
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //Task 5 - Shared Interests Checker
+            //Create two separate HashSet<string> collections representing the favorite hobbies of two different friends.
+            //Ask the user to enter 3 hobbies for Friend A, and 3 hobbies for Friend B.
+            //Write a function that takes both sets and returns a tuple containing two things:
+            //a new set of hobbies they share in common,
+            //and a boolean indicating if they have any common interests at all.
+            //Requirements:
+            //Use a loop to gather input for each friend.
+            //Use a loop or a set operation to find common elements.
+            //Return a (HashSet<string> Common, bool HasCommon) tuple from the function and display the common list to the console.
+
+            HashSet<string> friend1 = new HashSet<string>();
+            HashSet<string> friend2 = new HashSet<string>();
+            Console.WriteLine("Friend A");
+            for (int i = 0; i < 3; i++)
             {
-                Console.Write($"Please enter a number {i + 1}) ");
-                int num = int.Parse(Console.ReadLine());
-                numbers[i] = num;
+                Console.Write($"Please enter hobby {i + 1}");
+                friend1.Add(Console.ReadLine().ToLower().Trim());
             }
-            var result = minmax(numbers);
-            Console.WriteLine($"Lowest Number: {result.Min}");
-            Console.WriteLine($"Highest Number: {result.Max}");
+            Console.WriteLine("Friend B");
+            for (int i = 0; i < 3; i++)
+            {
+                Console.Write($"Please enter hobby {i + 1}");
+                friend2.Add(Console.ReadLine().ToLower().Trim());
+            }
+            var result = FindSharedInterests(friend1, friend2);
+
+            if (result.HasCommon)
+            {
+                Console.WriteLine("\nThey share these common hobbies:");
+                foreach (string hobby in result.Common)
+                {
+                    Console.WriteLine($"- {hobby}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("\nThey have no hobbies in common.");
+            }
+
         }
-        public static (int Min, int Max) minmax(int[] nums)
+
+
+
+        //public static (int Min, int Max) minmax(int[] nums)
+        //{
+        //    Array.Sort(nums);
+        //    int min = nums[0];
+        //    int max = nums[nums.Length-1];
+        //    return (min , max);
+        //}
+
+        public static (HashSet<string> Common, bool HasCommon) FindSharedInterests(HashSet<string> setA, HashSet<string> setB)
         {
-            Array.Sort(nums);
-            int min = nums[0];
-            int max = nums[nums.Length-1];
-            return (min , max);
+            HashSet<string> shared = new HashSet<string>();
+            foreach (string hobby in setA)
+            {
+                if (setB.Contains(hobby))
+                {
+                    shared.Add(hobby);
+                }
+            }
+            bool evaluation = shared.Count > 0;
+            return (shared, evaluation);
+
         }
+
+
     }
 }
