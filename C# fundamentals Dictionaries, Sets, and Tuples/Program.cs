@@ -72,62 +72,88 @@ namespace C__fundamentals_Dictionaries__Sets__and_Tuples
             //Print the full inventory list with names and prices before asking the user to search.
 
 
-            Dictionary<string, double> inventory = new Dictionary<string, double>();
-            bool is_running = true;
-            while (is_running)
+            //Dictionary<string, double> inventory = new Dictionary<string, double>();
+            //bool is_running = true;
+            //while (is_running)
+            //{
+
+            //        Console.Write("Please enter item name (or type 'exit' to finish): ");
+            //        string name = Console.ReadLine();
+            //        if (name.ToLower() == "exit")
+            //        {
+            //            is_running = false;
+            //            continue;
+            //        }
+            //    try
+            //    {
+            //        Console.Write($"Please enter a price for {name}: ");
+            //        double price = double.Parse(Console.ReadLine());
+            //        if (!inventory.ContainsKey(name))
+            //        {
+            //            inventory.Add(name, price);
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine("Item already exists in inventory.");
+            //        }
+            //    }
+            //    catch (FormatException)
+            //    {
+            //        Console.WriteLine("Enter a valid Price");
+            //    }
+            //    }
+            //is_running = true;
+            //Console.WriteLine("\n--- Current Inventory ---");
+            //foreach (var item in inventory)
+            //{
+            //    Console.WriteLine(item.Key);
+            //}
+            //Console.WriteLine("------------------------");
+            //while (is_running)
+            //{
+            //    Console.Write("Enter an item name to check its price (or type 'exit' to quit): ");
+            //    string searchName = Console.ReadLine();
+            //    if (searchName.ToLower() == "exit")
+            //    {
+            //        is_running = false;
+            //    }
+            //    else if (inventory.ContainsKey(searchName))
+            //    {
+            //        Console.WriteLine($"Price: {inventory[searchName]}");
+            //        Console.WriteLine("------------------------");
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("Item not found in inventory.\n");
+            //        Console.WriteLine("------------------------");
+            //    }
+            //}
+
+
+            //Task 4 - Min-Max Tuple Generator
+            //Write a program that asks the user to enter 5 integers into an array.
+            //Pass this array to a separate function that finds both the lowest and the highest numbers,
+            //and returns them together as a named tuple.
+            //Requirements:
+            //The function must accept an int[] and return a (int Min, int Max) tuple.
+            //Call the function from your Main method and print the results clearly.
+            int[] numbers = new int[5];
+            for (int i = 0; i < numbers.Length; i++)
             {
-                
-                    Console.Write("Please enter item name (or type 'exit' to finish): ");
-                    string name = Console.ReadLine();
-                    if (name.ToLower() == "exit")
-                    {
-                        is_running = false;
-                        continue;
-                    }
-                try
-                {
-                    Console.Write($"Please enter a price for {name}: ");
-                    double price = double.Parse(Console.ReadLine());
-                    if (!inventory.ContainsKey(name))
-                    {
-                        inventory.Add(name, price);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Item already exists in inventory.");
-                    }
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("Enter a valid Price");
-                }
-                }
-            is_running = true;
-            Console.WriteLine("\n--- Current Inventory ---");
-            foreach (var item in inventory)
-            {
-                Console.WriteLine(item.Key);
+                Console.Write($"Please enter a number {i + 1}) ");
+                int num = int.Parse(Console.ReadLine());
+                numbers[i] = num;
             }
-            Console.WriteLine("------------------------");
-            while (is_running)
-            {
-                Console.Write("Enter an item name to check its price (or type 'exit' to quit): ");
-                string searchName = Console.ReadLine();
-                if (searchName.ToLower() == "exit")
-                {
-                    is_running = false;
-                }
-                else if (inventory.ContainsKey(searchName))
-                {
-                    Console.WriteLine($"Price: {inventory[searchName]}");
-                    Console.WriteLine("------------------------");
-                }
-                else
-                {
-                    Console.WriteLine("Item not found in inventory.\n");
-                    Console.WriteLine("------------------------");
-                }
-            }
+            var result = minmax(numbers);
+            Console.WriteLine($"Lowest Number: {result.Min}");
+            Console.WriteLine($"Highest Number: {result.Max}");
+        }
+        public static (int Min, int Max) minmax(int[] nums)
+        {
+            Array.Sort(nums);
+            int min = nums[0];
+            int max = nums[nums.Length-1];
+            return (min , max);
         }
     }
 }
