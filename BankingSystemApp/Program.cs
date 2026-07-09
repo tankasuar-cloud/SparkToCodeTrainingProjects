@@ -21,7 +21,7 @@ namespace BankingSystemApp
                 Console.WriteLine("3. Withdraw Money");
                 Console.WriteLine("4. Show Balance");
                 Console.WriteLine("5. Transfer Amount");
-                Console.WriteLine("6. <your 1st custom service - choose a name>");
+                Console.WriteLine("6. Show All Accounts);
                 Console.WriteLine("7. <your 2nd custom service - choose a name>");
                 Console.WriteLine("8. Exit");
                 Console.Write("Choose an option: ");
@@ -54,6 +54,7 @@ namespace BankingSystemApp
                         break;
                     case 6:
                         // TODO: call your first custom service function here
+                        AllAccounts();
                         break;
                     case 7:
                         // TODO: call your second custom service function here
@@ -298,6 +299,24 @@ namespace BankingSystemApp
             Console.WriteLine($"Sender ({accountNumberr}) updated balance: {balances[index1]}");
             Console.WriteLine($"Receiver ({accountNumberr2}) updated balance: {balances[index2]}");
             Console.WriteLine("-------------------------------------");
+
+        }
+        static void AllAccounts()
+        {
+            Console.WriteLine("\n-------------------------------------");
+            if (accountNumbers.Count == 0)
+            {
+                Console.WriteLine("No accounts found in the system.");
+                return;
+            }
+            for (int i = 0; i < accountNumbers.Count; i++)
+            {
+                Console.WriteLine("\n---- Account Details ----");
+                Console.WriteLine(customerNames[i]);
+                Console.WriteLine(accountNumbers[i]);
+                Console.WriteLine(balances[i]);
+                Console.WriteLine("\n-------------------------");
+            }
 
         }
 
