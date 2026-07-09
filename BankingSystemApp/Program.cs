@@ -236,7 +236,71 @@ namespace BankingSystemApp
         static void TransferAmount()
         {
             // TODO: implement this service (see Section 3 requirements)
+            int index1 = 0;
+            int index2 = 0;
+            Console.WriteLine("-------------------------------------");
+            Console.Write("Please enter the Sender Account number: ");
+            string accountNumberr = Console.ReadLine();
+            if (accountNumbers.Contains(accountNumberr))
+            {
+                index1 = accountNumbers.IndexOf(accountNumberr);
+            }
+            else
+            {
+                Console.WriteLine($"Account number {accountNumberr} does not exist.");
+                return;
+            }
+
+            Console.WriteLine("-------------------------------------");
+            Console.Write("Please enter the receiver Account number: ");
+            string accountNumberr2 = Console.ReadLine();
+            if (accountNumbers.Contains(accountNumberr2))
+            {
+                index2 = accountNumbers.IndexOf(accountNumberr2);
+            }
+            else
+            {
+                Console.WriteLine($"Account number {accountNumberr2} does not exist.");
+                return;
+            }
+            Console.WriteLine("-------------------------------------");
+            Console.Write("Please enter the transfer amount: ");
+            double transfer = 0;
+            try
+            {
+
+
+                transfer = double.Parse(Console.ReadLine());
+                if (transfer <= 0)
+                {
+                    Console.WriteLine("\n-------------------------------------");
+                    Console.WriteLine("Invalid transfer amount (must be more than 0)");
+                    return;
+                }
+                if (transfer > balances[index1])
+                {
+                    Console.WriteLine("\n-------------------------------------");
+                    Console.WriteLine("Insufficient funds");
+                    return;
+
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Please enter a valid transfer amount number");
+                return;
+            }
+
+            balances[index1] -= transfer;
+            balances[index2] += transfer;
+            Console.WriteLine("\n-------------------------------------");
+            Console.WriteLine("Transfer successful!");
+            Console.WriteLine($"Sender ({accountNumberr}) updated balance: {balances[index1]}");
+            Console.WriteLine($"Receiver ({accountNumberr2}) updated balance: {balances[index2]}");
+            Console.WriteLine("-------------------------------------");
+
         }
+
         // TODO: write two more void, no-parameter functions here for
         // your own custom services (option 6 and option 7)
     }
