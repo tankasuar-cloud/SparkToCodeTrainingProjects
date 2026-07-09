@@ -265,6 +265,11 @@ namespace BankingSystemApp
                 Console.WriteLine($"Account number {accountNumberr2} does not exist.");
                 return;
             }
+            if (index1 == index2)
+            {
+                Console.WriteLine("Sender and receiver accounts cannot be the same.");
+                return;
+            }
             Console.WriteLine("-------------------------------------");
             Console.Write("Please enter the transfer amount: ");
             double transfer = 0;
