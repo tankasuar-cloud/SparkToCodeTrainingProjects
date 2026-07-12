@@ -126,6 +126,7 @@
                     Console.WriteLine("\n===== Welcome to App =====");
                     Console.WriteLine("1. Case 1 - View Account Details");
                     Console.WriteLine("2. Case 2 - Update Student Address");
+                    Console.WriteLine("3. Case 3 - Make a Deposit");
 
                     Console.WriteLine("99. Exit");
                     Console.Write("Choose an option: ");
@@ -166,15 +167,15 @@
                             Console.WriteLine("Invalid selection. Please choose 1 or 2.");
                         }
                         break;
-
+                        ////////////////////
                         case 2:
                         Console.WriteLine("Select a student to edit the address for");
                         Console.Write("Enter 1 for Ali or 2 for Ahmed: ");
-                        int choice3;
+                        
                         try
 
                         {
-                            choice3 = int.Parse(Console.ReadLine());
+                            choice2 = int.Parse(Console.ReadLine());
                         }
                         catch (Exception)
                         {
@@ -183,12 +184,12 @@
                         }
                         Console.Write("Please enter the new address: ");
                         string addr = Console.ReadLine();
-                        if (choice3 == 1)
+                        if (choice2 == 1)
                         {
                             student1.Address = addr;
                             Console.WriteLine($"Address updated successfully! New address: {student1.Address}");
                         }
-                        else if (choice3 == 2)
+                        else if (choice2 == 2)
                         {
                             student2.Address = addr;
                             Console.WriteLine($"Address updated successfully! New address: {student2.Address}");
@@ -198,8 +199,71 @@
                             Console.WriteLine("Invalid selection. Please choose 1 or 2.");
                         }
                         break;
+                        //////////////////
+                    case 3:
+                        Console.Write("Enter 1 for Karim's account or 2 for Ali's account: ");
+                        
+                        try
 
+                        {
+                            choice2 = int.Parse(Console.ReadLine());
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
+                            continue;
+                        }
+                        double amount;
+                        if (choice2 == 1)
+                        {
+                            Console.WriteLine($"Account Balance: {account1.Balance}");
+                            Console.Write("Enter the amount: ");
+                            
+                            try
 
+                            {
+                                amount = double.Parse(Console.ReadLine());
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("Invalid input. Please enter a Valid number");
+                                continue;
+                            }
+                            account1.Deposit(amount);
+                            Console.WriteLine("\n=========================");
+                            Console.WriteLine($"Account name: {account1.HolderName}");
+                            Console.WriteLine($"Account new Balance: {account1.Balance}");
+                        }
+                        else if (choice2 == 2)
+                        {
+                            Console.WriteLine($"Account Balance: {account2.Balance}");
+                            Console.Write("Enter the amount: ");
+                            try
+
+                            {
+                                amount = double.Parse(Console.ReadLine());
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("Invalid input. Please enter a Valid number");
+                                continue;
+                            }
+                            account2.Deposit(amount);
+                            Console.WriteLine("\n=========================");
+                            Console.WriteLine($"Account name: {account2.HolderName}");
+                            Console.WriteLine($"Account new Balance: {account2.Balance}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid selection. Please choose 1 or 2.");
+                        }
+                        break;
+                    ///////////////////
+
+                    case 4:
+
+                        break;
+                        ////////////////////
                         
                     }
                 }
