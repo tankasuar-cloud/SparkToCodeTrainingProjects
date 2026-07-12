@@ -137,6 +137,7 @@ namespace OOP_Part_1_Tasks
                 Console.WriteLine("6. Case 6 - Register a Student");
                 Console.WriteLine("7. Case 7 - Compare Two Account Balances");
                 Console.WriteLine("8. Case 8 - Restock Product & Stock Level Check");
+                Console.WriteLine("9. Case 9 - Transfer Between Accounts");
                 Console.WriteLine("20. Exit");
                 Console.Write("Choose an option: ");
                 int choice;
@@ -501,7 +502,92 @@ namespace OOP_Part_1_Tasks
                     //////////////////////////////
                     ///
 
+                    case 9:
+                        Console.WriteLine("==============================");
+                        Console.Write("Enter source account (1 for Karim, 2 for Ali): ");
+                        int sourceChoice;
+                        try
+                        {
+                            sourceChoice = int.Parse(Console.ReadLine() ?? "");
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input. Please enter 1 or 2.");
+                            continue;
+                        }
+                        Console.WriteLine("==============================");
+                        Console.Write("Enter destination account (1 for Karim, 2 for Ali): ");
+                        int destChoice;
+                        try
+                        {
+                            destChoice = int.Parse(Console.ReadLine() ?? "");
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input. Please enter 1 or 2.");
+                            continue;
+                        }
 
+                        if (sourceChoice == destChoice)
+                        {
+                            Console.WriteLine("==============================");
+                            Console.WriteLine("Source and destination accounts cannot be the same.");
+                            break;
+                        }
+                        Console.WriteLine("==============================");
+                        Console.Write("Enter the transfer amount: ");
+                        double transferAmount;
+                        try
+                        {
+                            transferAmount = double.Parse(Console.ReadLine() ?? "");
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid number.");
+                            continue;
+                        }
+
+                        BankAccount sourceAccount;
+                        if (sourceChoice == 1)
+                        {
+                            sourceAccount = account1;
+                        }
+                        else
+                        {
+                            sourceAccount = account2;
+                        }
+
+                        BankAccount destAccount;
+                        if (destChoice == 1)
+                        {
+                            destAccount = account1;
+                        }
+                        else
+                        {
+                            destAccount = account2;
+                        }
+
+                        if (transferAmount > sourceAccount.Balance)
+                        {
+                            Console.WriteLine("==============================");
+                            Console.WriteLine("Transfer failed: Insufficient funds in source account.");
+                        }
+                        else if (transferAmount < 0)
+                        {
+                            Console.WriteLine("==============================");
+                            Console.WriteLine("Transfer failed: Invalid amount.");
+                        }
+                        else
+                        {
+                            sourceAccount.Withdraw(transferAmount);
+                            destAccount.Deposit(transferAmount);
+                            Console.WriteLine("==============================");
+                            Console.WriteLine("Transfer successful!");
+                            Console.WriteLine($"{sourceAccount.HolderName}'s new balance: {sourceAccount.Balance}");
+                            Console.WriteLine($"{destAccount.HolderName}'s new balance: {destAccount.Balance}");
+                            Console.WriteLine("==============================");
+                        }
+                        break;
 
                     case 20:
                         is_running = false;
