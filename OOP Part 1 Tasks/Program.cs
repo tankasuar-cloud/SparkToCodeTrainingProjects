@@ -155,7 +155,7 @@ namespace OOP_Part_1_Tasks
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Invalid input. Please enter a number from 1 to 8.");
+                    Console.WriteLine("Invalid input. Please enter a number from 1 to 20.");
                     continue;
                 }
                 switch (choice)
@@ -172,7 +172,7 @@ namespace OOP_Part_1_Tasks
                     case 10: UpdateStudentGrade(); break;
                     case 11: StudentReportCard(); break;
                     case 12: AccountHealthStatus(); break;
-
+                    case 13: BulkSale(); break;
                     case 20: is_running = false; break;
 
                 }
@@ -541,12 +541,61 @@ namespace OOP_Part_1_Tasks
                 string status = (selected.Balance < 50) ? "Low Balance"
                               : (selected.Balance <= 1000) ? "Healthy"
                               : "Premium";
+                Console.WriteLine($"Account Status: {status}");
             } else 
             {
                 Console.WriteLine("Invalid selection");
             }
         }
+        static void BulkSale()
+        {
+            Product selected = ChooseProduct();
 
+            if (selected != null)
+            {
+                Console.WriteLine("==============================");
+                Console.WriteLine($"In Stock: {selected.StockQuantity}\n" +
+                    $"Price: {selected.Price}");
+                Console.WriteLine("==============================");
+                Console.Write("enter a quantity to sell: ");
+                int quantity;
+                try
+                {
+                    quantity = int.Parse(Console.ReadLine());
+                        
+                }catch (FormatException)
+                {
+                    Console.WriteLine("Invalid amount, Please enter a valid number.");
+                    return;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Invalid amount, Please enter a valid number."); return;
+                }
+                if (quantity <=0)
+                {
+                    Console.WriteLine("Invalid amount, cannot sell less than 1"); return;
+                }
+                bool enough = (selected.StockQuantity < quantity)? false: true;
+                if (enough == false)
+                {
+                    Console.WriteLine("==============================");
+                    int needed = quantity - selected.StockQuantity;
+                    Console.WriteLine($"you need: {needed} to fulfill the order.");
+                }
+                else
+                {
+                    selected.Sell(quantity);
+                    double revenue = quantity * selected.Price;
+                    Console.WriteLine("==============================");
+                    Console.WriteLine($"Revenue: {revenue}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid Selection");
+            }
+        }
     }
 }
     
