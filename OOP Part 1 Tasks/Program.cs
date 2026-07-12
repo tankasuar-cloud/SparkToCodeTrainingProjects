@@ -1,5 +1,6 @@
 ﻿
 
+using System.ComponentModel;
 using System.Xml;
 
 namespace OOP_Part_1_Tasks
@@ -143,6 +144,8 @@ namespace OOP_Part_1_Tasks
                 Console.WriteLine("9. Case 9 - Transfer Between Accounts");
                 Console.WriteLine("10. Case 10 - Update Student Grade");
                 Console.WriteLine("11. Case 11 - Student Report Card");
+                Console.WriteLine("12. Case 12 - Account Health Status");
+                Console.WriteLine("13. Case 13 - Bulk Sale With Revenue Calculation");
                 Console.WriteLine("20. Exit");
                 Console.Write("Choose an option: ");
                 int choice;
@@ -168,6 +171,7 @@ namespace OOP_Part_1_Tasks
                     case 9: TransferBetweenAccounts(); break;
                     case 10: UpdateStudentGrade(); break;
                     case 11: StudentReportCard(); break;
+                    case 12: AccountHealthStatus(); break;
 
                     case 20: is_running = false; break;
 
@@ -529,6 +533,20 @@ namespace OOP_Part_1_Tasks
                 Console.WriteLine("Invalid selection");
             }
         }
+        static void AccountHealthStatus()
+        {
+            BankAccount selected = ChooseAccount();
+            if (selected != null) 
+            {
+                string status = (selected.Balance < 50) ? "Low Balance"
+                              : (selected.Balance <= 1000) ? "Healthy"
+                              : "Premium";
+            } else 
+            {
+                Console.WriteLine("Invalid selection");
+            }
+        }
+
     }
 }
     
