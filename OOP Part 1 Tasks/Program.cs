@@ -1,5 +1,7 @@
 ﻿
 
+using System.Xml;
+
 namespace OOP_Part_1_Tasks
 {
     class BankAccount
@@ -114,14 +116,14 @@ namespace OOP_Part_1_Tasks
     }
     internal class Program
     {
-       static BankAccount account1 = new BankAccount { AccountNumber = 1163, HolderName = "karim", Balance = 120 };
-       static BankAccount account2 = new BankAccount { AccountNumber = 15203, HolderName = "Ali", Balance = 63 };
+        static BankAccount account1 = new BankAccount { AccountNumber = 1163, HolderName = "karim", Balance = 120 };
+        static BankAccount account2 = new BankAccount { AccountNumber = 15203, HolderName = "Ali", Balance = 63 };
 
-       static Student student1 = new Student { Name = "Ali", Address = "Muscat", Grade = 65 };
-       static Student student2 = new Student { Name = "Ahmed", Address = "Muscat", Grade = 70 };
+        static Student student1 = new Student { Name = "Ali", Address = "Muscat", Grade = 65 };
+        static Student student2 = new Student { Name = "Ahmed", Address = "Muscat", Grade = 70 };
 
-       static Product product1 = new Product { ProductName = "Wireless Mouse", Price = 5.500, StockQuantity = 50 };
-       static Product product2 = new Product { ProductName = "Mechanical Keyboard", Price = 15.750, StockQuantity = 20 };
+        static Product product1 = new Product { ProductName = "Wireless Mouse", Price = 5.500, StockQuantity = 50 };
+        static Product product2 = new Product { ProductName = "Mechanical Keyboard", Price = 15.750, StockQuantity = 20 };
         static void Main(string[] args)
         {
 
@@ -139,6 +141,8 @@ namespace OOP_Part_1_Tasks
                 Console.WriteLine("7. Case 7 - Compare Two Account Balances");
                 Console.WriteLine("8. Case 8 - Restock Product & Stock Level Check");
                 Console.WriteLine("9. Case 9 - Transfer Between Accounts");
+                Console.WriteLine("10. Case 10 - Update Student Grade");
+                Console.WriteLine("11. Case 11 - Student Report Card");
                 Console.WriteLine("20. Exit");
                 Console.Write("Choose an option: ");
                 int choice;
@@ -158,11 +162,12 @@ namespace OOP_Part_1_Tasks
                     case 3: MakeDeposit(); break;
                     case 4: MakeWithdrawal(); break;
                     case 5: ViewProductDetails(); break;
-                    case 6:RegisterStudent(); break;
-                    case 7:CompareAccountBalance(); break;
+                    case 6: RegisterStudent(); break;
+                    case 7: CompareAccountBalance(); break;
                     case 8: RestockProduct(); break;
                     case 9: TransferBetweenAccounts(); break;
                     case 10: UpdateStudentGrade(); break;
+                    case 11: StudentReportCard(); break;
 
                     case 20: is_running = false; break;
 
@@ -483,7 +488,7 @@ namespace OOP_Part_1_Tasks
             }
 
             Console.WriteLine("==============================");
-            Console.Write("Please enter the new grade (0-100): "); 
+            Console.Write("Please enter the new grade (0-100): ");
             int grade;
             try
             {
@@ -508,9 +513,22 @@ namespace OOP_Part_1_Tasks
             selected.Grade = grade;
             Console.WriteLine($"Successfully updated grade to {selected.Grade} for {selected.Name}!");
         }
-
-
-
+        static void StudentReportCard()
+        {
+            Student selected = ChooseStudent();
+            if (selected != null)
+            {
+                Console.WriteLine($"Student Name: {selected.Name}\n" +
+                    $"Student Grade: {selected.Grade}\n" +
+                    $"Student Address: {selected.Address}");
+                string pass = (selected.Grade >= 60) ? "Pass" : "Fail";
+                Console.WriteLine(pass);
+            }
+            else
+            {
+                Console.WriteLine("Invalid selection");
+            }
+        }
     }
 }
     
