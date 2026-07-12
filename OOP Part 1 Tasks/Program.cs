@@ -51,8 +51,8 @@
             public int Grade {  get; set; }
             public string Name { get; set; }
             public string Address { get; set; }
-            private string email { get; set; }
-            int age { get; set; }
+            private string email;
+            int age;
             public void Register(string Email)
             {
                 email = Email;
@@ -81,9 +81,10 @@
                 else
                 {
                     StockQuantity -= quantity;
-                    LogTransaction();
+                    
                 }
-            }
+            LogTransaction();
+        }
             public void Restock(int quantity)
             {
                 if (quantity < 0)
@@ -132,6 +133,7 @@
                     Console.WriteLine("3. Case 3 - Make a Deposit");
                     Console.WriteLine("4. Case 4 - Make a Withdrawal");
                     Console.WriteLine("5. Case 5 - View Product Details");
+                    Console.WriteLine("6. Case 6 - Register a Student");
                     Console.WriteLine("99. Exit");
                     Console.Write("Choose an option: ");
                     int choice;
@@ -360,6 +362,49 @@
                         break;
 
                     //////////////////////////////
+                    case 6:
+                    
+                        Console.WriteLine("==============================");
+                        Console.WriteLine("Select a student to register an email for.");
+                        Console.Write("Enter 1 for Ali or 2 for Ahmed: ");
+
+                        try
+
+                        {
+                            choice2 = int.Parse(Console.ReadLine() ?? "");
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
+                            continue;
+                        }
+                        Console.WriteLine("Please enter an email: ");
+                        string mail = Console.ReadLine() ?? "";
+                        if (choice2 == 1)
+                        {
+                            
+                            Console.WriteLine("==============================");
+
+                            student1.Register(mail);
+                            Console.WriteLine("Email updated successfully");
+
+                        }
+                        else if (choice2 == 2)
+                        {
+                            Console.WriteLine("==============================");
+
+                            student2.Register(mail);
+                            Console.WriteLine("Email updated successfully");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid selection. Please choose 1 or 2.");
+                        }
+                        break;
+
+
+                    //////////////////////////////
+
 
                     case 99:
                         is_running = false;
