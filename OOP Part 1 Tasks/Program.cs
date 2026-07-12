@@ -114,16 +114,17 @@ namespace OOP_Part_1_Tasks
     }
     internal class Program
     {
+       static BankAccount account1 = new BankAccount { AccountNumber = 1163, HolderName = "karim", Balance = 120 };
+       static BankAccount account2 = new BankAccount { AccountNumber = 15203, HolderName = "Ali", Balance = 63 };
+
+       static Student student1 = new Student { Name = "Ali", Address = "Muscat", Grade = 65 };
+       static Student student2 = new Student { Name = "Ahmed", Address = "Muscat", Grade = 70 };
+
+       static Product product1 = new Product { ProductName = "Wireless Mouse", Price = 5.500, StockQuantity = 50 };
+       static Product product2 = new Product { ProductName = "Mechanical Keyboard", Price = 15.750, StockQuantity = 20 };
         static void Main(string[] args)
         {
-            BankAccount account1 = new BankAccount { AccountNumber = 1163, HolderName = "karim", Balance = 120 };
-            BankAccount account2 = new BankAccount { AccountNumber = 15203, HolderName = "Ali", Balance = 63 };
 
-            Student student1 = new Student { Name = "Ali", Address = "Muscat", Grade = 65 };
-            Student student2 = new Student { Name = "Ahmed", Address = "Muscat", Grade = 70 };
-
-            Product product1 = new Product { ProductName = "Wireless Mouse", Price = 5.500, StockQuantity = 50 };
-            Product product2 = new Product { ProductName = "Mechanical Keyboard", Price = 15.750, StockQuantity = 20 };
 
             bool is_running = true;
             while (is_running)
@@ -152,504 +153,364 @@ namespace OOP_Part_1_Tasks
                 }
                 switch (choice)
                 {
-                    case 1:
-                        Console.WriteLine("==============================");
-                        Console.Write("Enter 1 for Karim's account or 2 for Ali's account: ");
-                        int choice2;
-                        try
+                    case 1: ViewAccountDetails(); break;
+                    case 2: UpdateStudentAddress(); break;
+                    case 3: MakeDeposit(); break;
+                    case 4: MakeWithdrawal(); break;
+                    case 5: ViewProductDetails(); break;
+                    case 6:RegisterStudent(); break;
+                    case 7:CompareAccountBalance(); break;
+                    case 8: RestockProduct(); break;
+                    case 9: TransferBetweenAccounts(); break;
+                    case 10: UpdateStudentGrade(); break;
 
-                        {
-                            choice2 = int.Parse(Console.ReadLine() ?? "");
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
-                            continue;
-                        }
-                        if (choice2 == 1)
-                        {
-                            account1.CheckBalance();
-                        }
-                        else if (choice2 == 2)
-                        {
-                            account2.CheckBalance();
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid selection. Please choose 1 or 2.");
-                        }
-                        break;
-                    ////////////////////
-                    case 2:
-                        Console.WriteLine("==============================");
-                        Console.WriteLine("Select a student to edit the address for");
-                        Console.Write("Enter 1 for Ali or 2 for Ahmed: ");
-
-                        try
-
-                        {
-                            choice2 = int.Parse(Console.ReadLine() ?? "");
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
-                            continue;
-                        }
-                        Console.Write("Please enter the new address: ");
-                        string addr = Console.ReadLine() ?? "";
-                        if (choice2 == 1)
-                        {
-                            student1.Address = addr;
-                            Console.WriteLine($"Address updated successfully! New address: {student1.Address}");
-                        }
-                        else if (choice2 == 2)
-                        {
-                            student2.Address = addr;
-                            Console.WriteLine($"Address updated successfully! New address: {student2.Address}");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid selection. Please choose 1 or 2.");
-                        }
-                        break;
-                    //////////////////
-                    case 3:
-                        Console.WriteLine("==============================");
-                        Console.Write("Enter 1 for Karim's account or 2 for Ali's account: ");
-
-                        try
-
-                        {
-                            choice2 = int.Parse(Console.ReadLine() ?? "");
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
-                            continue;
-                        }
-                        double amount;
-                        if (choice2 == 1)
-                        {
-                            Console.WriteLine($"Account Balance: {account1.Balance}");
-                            Console.Write("Enter the amount: ");
-
-                            try
-
-                            {
-                                amount = double.Parse(Console.ReadLine() ?? "");
-                            }
-                            catch (Exception)
-                            {
-                                Console.WriteLine("Invalid input. Please enter a Valid number");
-                                continue;
-                            }
-                            account1.Deposit(amount);
-                            Console.WriteLine("\n=========================");
-                            Console.WriteLine($"Account name: {account1.HolderName}");
-                            Console.WriteLine($"Account new Balance: {account1.Balance}");
-                        }
-                        else if (choice2 == 2)
-                        {
-                            Console.WriteLine($"Account Balance: {account2.Balance}");
-                            Console.Write("Enter the amount: ");
-                            try
-
-                            {
-                                amount = double.Parse(Console.ReadLine() ?? "");
-                            }
-                            catch (Exception)
-                            {
-                                Console.WriteLine("Invalid input. Please enter a Valid number");
-                                continue;
-                            }
-                            account2.Deposit(amount);
-                            Console.WriteLine("\n=========================");
-                            Console.WriteLine($"Account name: {account2.HolderName}");
-                            Console.WriteLine($"Account new Balance: {account2.Balance}");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid selection. Please choose 1 or 2.");
-                        }
-                        break;
-                    ///////////////////
-
-                    case 4:
-                        Console.WriteLine("==============================");
-                        Console.Write("Enter 1 for Karim's account or 2 for Ali's account: ");
-
-                        try
-
-                        {
-                            choice2 = int.Parse(Console.ReadLine() ?? "");
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
-                            continue;
-                        }
-                        if (choice2 == 1)
-                        {
-                            Console.WriteLine($"Account Balance: {account1.Balance}");
-                            Console.Write("Enter the amount to Withdraw: ");
-
-                            try
-
-                            {
-                                amount = double.Parse(Console.ReadLine() ?? "");
-                            }
-                            catch (Exception)
-                            {
-                                Console.WriteLine("Invalid input. Please enter a Valid number");
-                                continue;
-                            }
-                            account1.Withdraw(amount);
-                            Console.WriteLine("\n=========================");
-                            Console.WriteLine($"Account name: {account1.HolderName}");
-                            Console.WriteLine($"Account new Balance: {account1.Balance}");
-                        }
-                        else if (choice2 == 2)
-                        {
-                            Console.WriteLine($"Account Balance: {account2.Balance}");
-                            Console.Write("Enter the amount to Withdraw: ");
-                            try
-
-                            {
-                                amount = double.Parse(Console.ReadLine() ?? "");
-                            }
-                            catch (Exception)
-                            {
-                                Console.WriteLine("Invalid input. Please enter a Valid number");
-                                continue;
-                            }
-                            account2.Withdraw(amount);
-                            Console.WriteLine("\n=========================");
-                            Console.WriteLine($"Account name: {account2.HolderName}");
-                            Console.WriteLine($"Account new Balance: {account2.Balance}");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid selection. Please choose 1 or 2.");
-                        }
-                        break;
-
-                    ////////////////////
-
-                    case 5:
-                        Console.WriteLine("==============================");
-                        Console.Write("Enter 1 for (Wireless Mouse) or 2 for (Mechanical Keyboard): ");
-
-                        try
-
-                        {
-                            choice2 = int.Parse(Console.ReadLine() ?? "");
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
-                            continue;
-                        }
-                        if (choice2 == 1)
-                        {
-                            Console.WriteLine($"Inventory Value: {product1.GetInventoryValue()}");
-                            Console.WriteLine("==============================");
-
-                        }
-                        else if (choice2 == 2)
-                        {
-                            Console.WriteLine($"Inventory Value: {product2.GetInventoryValue()}");
-                            Console.WriteLine("==============================");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid selection. Please choose 1 or 2.");
-                        }
-                        break;
-
-                    //////////////////////////////
-                    case 6:
-
-                        Console.WriteLine("==============================");
-                        Console.WriteLine("Select a student to register an email for.");
-                        Console.Write("Enter 1 for Ali or 2 for Ahmed: ");
-
-                        try
-
-                        {
-                            choice2 = int.Parse(Console.ReadLine() ?? "");
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
-                            continue;
-                        }
-                        Console.WriteLine("Please enter an email: ");
-                        string mail = Console.ReadLine() ?? "";
-                        if (choice2 == 1)
-                        {
-
-                            Console.WriteLine("==============================");
-
-                            student1.Register(mail);
-                            Console.WriteLine("Email updated successfully");
-
-                        }
-                        else if (choice2 == 2)
-                        {
-                            Console.WriteLine("==============================");
-
-                            student2.Register(mail);
-                            Console.WriteLine("Email updated successfully");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid selection. Please choose 1 or 2.");
-                        }
-                        break;
-                    //////////////////////////////
-                    ///
-
-                    case 7:
-                        if (account1.Balance > account2.Balance)
-                        {
-                            Console.WriteLine("==============================");
-                            Console.WriteLine($"{account1.HolderName}'s account has more balance than {account2.HolderName}.");
-                        }
-                        else if (account2.Balance > account1.Balance)
-                        {
-                            Console.WriteLine("==============================");
-                            Console.WriteLine($"{account2.HolderName}'s account has more balance than {account1.HolderName}.");
-                        }
-                        else if (account1.Balance == account2.Balance)
-                        {
-                            Console.WriteLine("==============================");
-                            Console.WriteLine("Both accounts have the same balance.");
-                        }
-
-                        break;
-
-
-                    //////////////////////////////
-                    ///
-                    case 8:
-                        Console.WriteLine("==============================");
-                        Console.Write("Enter 1 for (Wireless Mouse) or 2 for (Mechanical Keyboard): ");
-                        try
-                        {
-                            choice2 = int.Parse(Console.ReadLine() ?? "");
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
-                            continue;
-                        }
-
-                        Console.WriteLine("==============================");
-                        Console.WriteLine("Please enter the amount to restock: ");
-                        int restock;
-                        try
-                        {
-                            restock = int.Parse(Console.ReadLine() ?? "");
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Invalid input. Please enter a Valid number");
-                            continue;
-                        }
-
-                        if (choice2 == 1)
-                        {
-                            product1.Restock(restock);
-                            Console.WriteLine("==============================");
-                            if (product1.StockQuantity < 10)
-                            {
-                                Console.WriteLine("Low Stock level");
-                            }
-                            else if (product1.StockQuantity >= 10 && product1.StockQuantity <= 49)
-                            {
-                                Console.WriteLine("Moderate Stock level");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Well Stocked");
-                            }
-                        }
-                        else if (choice2 == 2)
-                        {
-                            product2.Restock(restock);
-                            Console.WriteLine("==============================");
-                            if (product2.StockQuantity < 10)
-                            {
-                                Console.WriteLine("Low Stock level");
-                            }
-                            else if (product2.StockQuantity >= 10 && product2.StockQuantity <= 49)
-                            {
-                                Console.WriteLine("Moderate Stock level");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Well Stocked");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid selection. Please choose 1 or 2.");
-                        }
-                        break;
-
-
-
-                    //////////////////////////////
-                    ///
-
-                    case 9:
-                        Console.WriteLine("==============================");
-                        Console.Write("Enter source account (1 for Karim, 2 for Ali): ");
-                        int sourceChoice;
-                        try
-                        {
-                            sourceChoice = int.Parse(Console.ReadLine() ?? "");
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Invalid input. Please enter 1 or 2.");
-                            continue;
-                        }
-                        Console.WriteLine("==============================");
-                        Console.Write("Enter destination account (1 for Karim, 2 for Ali): ");
-                        int destChoice;
-                        try
-                        {
-                            destChoice = int.Parse(Console.ReadLine() ?? "");
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Invalid input. Please enter 1 or 2.");
-                            continue;
-                        }
-
-                        if (sourceChoice == destChoice)
-                        {
-                            Console.WriteLine("==============================");
-                            Console.WriteLine("Source and destination accounts cannot be the same.");
-                            break;
-                        }
-                        Console.WriteLine("==============================");
-                        Console.Write("Enter the transfer amount: ");
-                        double transferAmount;
-                        try
-                        {
-                            transferAmount = double.Parse(Console.ReadLine() ?? "");
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Invalid input. Please enter a valid number.");
-                            continue;
-                        }
-
-                        BankAccount sourceAccount;
-                        if (sourceChoice == 1)
-                        {
-                            sourceAccount = account1;
-                        }
-                        else
-                        {
-                            sourceAccount = account2;
-                        }
-
-                        BankAccount destAccount;
-                        if (destChoice == 1)
-                        {
-                            destAccount = account1;
-                        }
-                        else
-                        {
-                            destAccount = account2;
-                        }
-
-                        if (transferAmount > sourceAccount.Balance)
-                        {
-                            Console.WriteLine("==============================");
-                            Console.WriteLine("Transfer failed: Insufficient funds in source account.");
-                        }
-                        else if (transferAmount < 0)
-                        {
-                            Console.WriteLine("==============================");
-                            Console.WriteLine("Transfer failed: Invalid amount.");
-                        }
-                        else
-                        {
-                            sourceAccount.Withdraw(transferAmount);
-                            destAccount.Deposit(transferAmount);
-                            Console.WriteLine("==============================");
-                            Console.WriteLine("Transfer successful!");
-                            Console.WriteLine($"{sourceAccount.HolderName}'s new balance: {sourceAccount.Balance}");
-                            Console.WriteLine($"{destAccount.HolderName}'s new balance: {destAccount.Balance}");
-                            Console.WriteLine("==============================");
-                        }
-                        break;
-                    //////////////////////////////////////
-                    ///
-                    case 10:
-                        Console.WriteLine("==============================");
-                        Console.WriteLine("Select a student to edit the grade for");
-                        Console.Write("Enter 1 for Ali or 2 for Ahmed: ");
-                        try
-
-                        {
-                            choice2 = int.Parse(Console.ReadLine() ?? "");
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
-                            continue;
-                        }
-                        Console.WriteLine("==============================");
-                        Console.WriteLine("Please enter the new grade (0-100)");
-                        int grade;
-                        try
-
-                        {
-                            grade = int.Parse(Console.ReadLine() ?? "");
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Invalid input. Please enter a valid number for the grade.");
-                            continue;
-                        }
-                        if (grade < 0)
-                        {
-                            Console.WriteLine("Invalid input, grade cannot be less than 0");
-                            break;
-                        }
-                        else if(grade > 100)
-                        {
-                            Console.WriteLine("Invalid input, grade cannot be more than 100");
-                            break;
-                        }
-                        if (choice2 == 1)
-                        {
-                            student1.Grade = grade;
-                        }else if(choice2 == 2)
-                        {
-                            student2.Grade = grade;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid selection, Please select 1 or 2.");
-                        }
-
-                        break;
-
-                    case 20:
-                        is_running = false;
-                        break;
-
-
+                    case 20: is_running = false; break;
 
                 }
+                Console.WriteLine("press any key.");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
+        static BankAccount ChooseAccount()
+        {
+            Console.WriteLine("==============================");
+            Console.Write("Enter 1 for Karim's account or 2 for Ali's account: ");
+            int choice;
+            try
+            {
+                choice = int.Parse(Console.ReadLine() ?? "");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
+                return null;
+            }
+            return (choice == 1) ? account1 : (choice == 2) ? account2 : null;
+        }
+
+        static Student ChooseStudent()
+        {
+            Console.WriteLine("==============================");
+            Console.WriteLine("Select a student:");
+            Console.Write("Enter 1 for Ali or 2 for Ahmed: ");
+            int choice;
+            try
+            {
+                choice = int.Parse(Console.ReadLine() ?? "");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
+                return null;
+            }
+            return (choice == 1) ? student1 : (choice == 2) ? student2 : null;
+        }
+
+        static Product ChooseProduct()
+        {
+            Console.WriteLine("==============================");
+            Console.Write("Enter 1 for (Wireless Mouse) or 2 for (Mechanical Keyboard): ");
+            int choice;
+            try
+            {
+                choice = int.Parse(Console.ReadLine() ?? "");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
+                return null;
+            }
+            return (choice == 1) ? product1 : (choice == 2) ? product2 : null;
+        }
+        //////////////////////////////////////////////////////////////////////////////
+
+        static void ViewAccountDetails()
+        {
+            BankAccount selectedA = ChooseAccount();
+            if (selectedA != null)
+            {
+                selectedA.CheckBalance();
+            }
+            else
+            {
+                Console.WriteLine("Invalid selection.");
+            }
+        }
+
+        static void UpdateStudentAddress()
+        {
+            Student selected = ChooseStudent();
+            if (selected != null)
+            {
+                Console.Write("Please enter the new address: ");
+                string addr = Console.ReadLine() ?? "";
+                selected.Address = addr;
+                Console.WriteLine("Address updated successfully!");
+            }
+            else
+            {
+                Console.WriteLine("Invalid selection.");
+            }
+        }
+
+        static void MakeDeposit()
+        {
+            BankAccount selected = ChooseAccount();
+            if (selected == null)
+            {
+                Console.WriteLine("Invalid selection.");
+                return;
+            }
+
+            Console.WriteLine($"Account Balance: {selected.Balance}");
+            Console.Write("Enter the amount: ");
+
+            double amount;
+            try
+            {
+                amount = double.Parse(Console.ReadLine() ?? "");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid input. Please enter a Valid number");
+                return;
+            }
+
+            selected.Deposit(amount);
+            Console.WriteLine("\n=========================");
+            Console.WriteLine($"Account name: {selected.HolderName}");
+            Console.WriteLine($"Account new Balance: {selected.Balance}");
+        }
+
+        static void MakeWithdrawal()
+        {
+            BankAccount selected = ChooseAccount();
+            if (selected == null)
+            {
+                Console.WriteLine("Invalid selection.");
+                return;
+            }
+
+            Console.WriteLine($"Account Balance: {selected.Balance}");
+            Console.Write("Enter the amount: ");
+
+            double amount;
+            try
+            {
+                amount = double.Parse(Console.ReadLine() ?? "");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid input. Please enter a Valid number");
+                return;
+            }
+
+            selected.Withdraw(amount);
+            Console.WriteLine("\n=========================");
+            Console.WriteLine($"Account name: {selected.HolderName}");
+            Console.WriteLine($"Account new Balance: {selected.Balance}");
+        }
+
+        static void ViewProductDetails()
+        {
+            Product selected = ChooseProduct();
+            if (selected != null)
+            {
+                Console.WriteLine($"Inventory Value: {selected.GetInventoryValue()}");
+                Console.WriteLine("==============================");
+            }
+            else
+            {
+                Console.WriteLine("Invalid selection.");
+            }
+        }
+        //////////////////////////////////////////////////////////////////////////////
+
+        static void RegisterStudent()
+        {
+            Student selected = ChooseStudent();
+            if (selected != null)
+            {
+                Console.WriteLine("Please enter an email: ");
+                string mail = Console.ReadLine() ?? "";
+                selected.Register(mail);
+                Console.WriteLine($"Email successfully registered!");
+            }
+            else
+            {
+                Console.WriteLine("Invalid selection.");
+            }
+        }
+        static void CompareAccountBalance()
+        {
+            Console.WriteLine("--- Select the First Account ---");
+            BankAccount Selected1 = ChooseAccount();
+
+            Console.WriteLine("--- Select the Second Account ---");
+            BankAccount Selected2 = ChooseAccount();
+
+            if (Selected1 == null || Selected2 == null)
+            {
+                Console.WriteLine("Invalid selection made. Comparison cancelled.");
+                return;
+            }
+
+            if (Selected1.Balance > Selected2.Balance)
+            {
+                Console.WriteLine("==============================");
+                Console.WriteLine($"{Selected1.HolderName}'s account has more balance than {Selected2.HolderName}.");
+            }
+            else if (Selected2.Balance > Selected1.Balance)
+            {
+                Console.WriteLine("==============================");
+                Console.WriteLine($"{Selected2.HolderName}'s account has more balance than {Selected1.HolderName}.");
+            }
+            else
+            {
+                Console.WriteLine("==============================");
+                Console.WriteLine("Both accounts have the same balance.");
+            }
+        }
+        static void RestockProduct()
+        {
+            Product selected = ChooseProduct();
+            if (selected != null)
+            {
+                Console.WriteLine("==============================");
+                Console.WriteLine("Please enter the amount to restock: ");
+                int restock;
+                try
+                {
+                    restock = int.Parse(Console.ReadLine() ?? "");
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Invalid input. Please enter a Valid number");
+                    return;
+                }
+                if (restock <= 0)
+                {
+                    Console.WriteLine("Error: Restock amount must be greater than zero.");
+                    return;
+                }
+                selected.Restock(restock);
+                Console.WriteLine("==============================");
+                if (selected.StockQuantity < 10)
+                {
+                    Console.WriteLine("Low Stock level");
+                }
+                else if (selected.StockQuantity >= 10 && selected.StockQuantity <= 49)
+                {
+                    Console.WriteLine("Moderate Stock level");
+                }
+                else
+                {
+                    Console.WriteLine("Well Stocked");
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Invalid selection.");
+            }
+        }
+        //////////////////////////////////////////////////////////////////////////////
+        static void TransferBetweenAccounts()
+        {
+            Console.WriteLine("--- Select Source Account ---");
+            BankAccount selected1 = ChooseAccount();
+
+            Console.WriteLine("--- Select Destination Account ---");
+            BankAccount selected2 = ChooseAccount();
+
+            if (selected1 == null || selected2 == null)
+            {
+                Console.WriteLine("==============================");
+                Console.WriteLine("Transfer failed: One or both accounts do not exist.");
+                return;
+            }
+
+            if (selected1 == selected2)
+            {
+                Console.WriteLine("==============================");
+                Console.WriteLine("Source and destination accounts cannot be the same.");
+                return;
+            }
+
+            Console.WriteLine("==============================");
+            Console.Write("Enter the transfer amount: ");
+            double transferAmount;
+            try
+            {
+                transferAmount = double.Parse(Console.ReadLine() ?? "");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+                return;
+            }
+
+            if (transferAmount <= 0)
+            {
+                Console.WriteLine("Error: Transfer amount must be greater than zero.");
+                return;
+            }
+
+            if (transferAmount > selected1.Balance)
+            {
+                Console.WriteLine("==============================");
+                Console.WriteLine("Transfer failed: Insufficient funds in source account.");
+            }
+            else
+            {
+                selected1.Withdraw(transferAmount);
+                selected2.Deposit(transferAmount);
+                Console.WriteLine("==============================");
+                Console.WriteLine("Transfer successful!");
+                Console.WriteLine($"{selected1.HolderName}'s new balance: {selected1.Balance}");
+                Console.WriteLine($"{selected2.HolderName}'s new balance: {selected2.Balance}");
+                Console.WriteLine("==============================");
+            }
+        }
+        static void UpdateStudentGrade()
+        {
+            Student selected = ChooseStudent();
+            if (selected == null)
+            {
+                Console.WriteLine("Invalid selection.");
+                return;
+            }
+
+            Console.WriteLine("==============================");
+            Console.Write("Please enter the new grade (0-100): "); 
+            int grade;
+            try
+            {
+                grade = int.Parse(Console.ReadLine() ?? "");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number for the grade.");
+                return;
+            }
+
+            if (grade < 0)
+            {
+                Console.WriteLine("Invalid input, grade cannot be less than 0");
+                return;
+            }
+            else if (grade > 100)
+            {
+                Console.WriteLine("Invalid input, grade cannot be more than 100");
+                return;
+            }
+            selected.Grade = grade;
+            Console.WriteLine($"Successfully updated grade to {selected.Grade} for {selected.Name}!");
+        }
+
+
+
     }
 }
     
