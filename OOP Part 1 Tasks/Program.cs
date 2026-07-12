@@ -125,6 +125,8 @@
                 {
                     Console.WriteLine("\n===== Welcome to App =====");
                     Console.WriteLine("1. Case 1 - View Account Details");
+                    Console.WriteLine("2. Case 2 - Update Student Address");
+
                     Console.WriteLine("99. Exit");
                     Console.Write("Choose an option: ");
                     int choice;
@@ -166,10 +168,39 @@
                         break;
 
                         case 2:
+                        Console.WriteLine("Select a student to edit the address for");
+                        Console.Write("Enter 1 for Ali or 2 for Ahmed: ");
+                        int choice3;
+                        try
 
-
-
+                        {
+                            choice3 = int.Parse(Console.ReadLine());
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
+                            continue;
+                        }
+                        Console.Write("Please enter the new address: ");
+                        string addr = Console.ReadLine();
+                        if (choice3 == 1)
+                        {
+                            student1.Address = addr;
+                            Console.WriteLine($"Address updated successfully! New address: {student1.Address}");
+                        }
+                        else if (choice3 == 2)
+                        {
+                            student2.Address = addr;
+                            Console.WriteLine($"Address updated successfully! New address: {student2.Address}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid selection. Please choose 1 or 2.");
+                        }
                         break;
+
+
+                        
                     }
                 }
             }
