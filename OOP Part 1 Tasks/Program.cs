@@ -134,6 +134,7 @@
                     Console.WriteLine("4. Case 4 - Make a Withdrawal");
                     Console.WriteLine("5. Case 5 - View Product Details");
                     Console.WriteLine("6. Case 6 - Register a Student");
+                    Console.WriteLine("7. Case 7 - Compare Two Account Balances");
                     Console.WriteLine("99. Exit");
                     Console.Write("Choose an option: ");
                     int choice;
@@ -401,9 +402,32 @@
                             Console.WriteLine("Invalid selection. Please choose 1 or 2.");
                         }
                         break;
+                    //////////////////////////////
+                    ///
+
+                    case 7:
+                        if(account1.Balance > account2.Balance)
+                        {
+                            Console.WriteLine("==============================");
+                            Console.WriteLine($"{account1.HolderName}'s account has more balance than {account2.HolderName}.");
+                        }
+                        else if(account2.Balance > account1.Balance)
+                        {
+                            Console.WriteLine("==============================");
+                            Console.WriteLine($"{account2.HolderName}'s account has more balance than {account1.HolderName}.");
+                        }
+                        else if( account1.Balance == account2.Balance)
+                        {
+                            Console.WriteLine("==============================");
+                            Console.WriteLine("Both accounts have the same balance.");
+                        }
+
+                        break;
 
 
                     //////////////////////////////
+                    ///
+
 
 
                     case 99:
