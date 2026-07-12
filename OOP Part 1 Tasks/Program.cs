@@ -588,6 +588,58 @@ namespace OOP_Part_1_Tasks
                             Console.WriteLine("==============================");
                         }
                         break;
+                    //////////////////////////////////////
+                    ///
+                    case 10:
+                        Console.WriteLine("==============================");
+                        Console.WriteLine("Select a student to edit the grade for");
+                        Console.Write("Enter 1 for Ali or 2 for Ahmed: ");
+                        try
+
+                        {
+                            choice2 = int.Parse(Console.ReadLine() ?? "");
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
+                            continue;
+                        }
+                        Console.WriteLine("==============================");
+                        Console.WriteLine("Please enter the new grade (0-100)");
+                        int grade;
+                        try
+
+                        {
+                            grade = int.Parse(Console.ReadLine() ?? "");
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid number for the grade.");
+                            continue;
+                        }
+                        if (grade < 0)
+                        {
+                            Console.WriteLine("Invalid input, grade cannot be less than 0");
+                            break;
+                        }
+                        else if(grade > 100)
+                        {
+                            Console.WriteLine("Invalid input, grade cannot be more than 100");
+                            break;
+                        }
+                        if (choice2 == 1)
+                        {
+                            student1.Grade = grade;
+                        }else if(choice2 == 2)
+                        {
+                            student2.Grade = grade;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid selection, Please select 1 or 2.");
+                        }
+
+                        break;
 
                     case 20:
                         is_running = false;
