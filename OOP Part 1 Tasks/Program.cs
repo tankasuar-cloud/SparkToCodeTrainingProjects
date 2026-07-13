@@ -146,6 +146,7 @@ namespace OOP_Part_1_Tasks
                 Console.WriteLine("11. Case 11 - Student Report Card");
                 Console.WriteLine("12. Case 12 - Account Health Status");
                 Console.WriteLine("13. Case 13 - Bulk Sale With Revenue Calculation");
+                Console.WriteLine("14. Case 14 - Scholarship Eligibility Check");
                 Console.WriteLine("20. Exit");
                 Console.Write("Choose an option: ");
                 int choice;
@@ -173,6 +174,7 @@ namespace OOP_Part_1_Tasks
                     case 11: StudentReportCard(); break;
                     case 12: AccountHealthStatus(); break;
                     case 13: BulkSale(); break;
+                    case 14: Scholarship(); break;
                     case 20: is_running = false; break;
 
                 }
@@ -596,6 +598,22 @@ namespace OOP_Part_1_Tasks
                 Console.WriteLine("Invalid Selection");
             }
         }
+        /////////////////////////////////////////////////////////////////////////////
+        static void Scholarship()
+        {
+            BankAccount selected = ChooseAccount();
+            Student selected2 = ChooseStudent();
+            if (selected == null || selected2 == null)
+            {
+                Console.WriteLine("Invalid selection. Process cancelled.");
+                return;
+            }
+            string status = (selected.Balance >= 100 && selected2.Grade >= 80) ? "Eligible"
+              : (selected2.Grade < 80) ? "Low grades" : "Low balance";
+            Console.WriteLine("==============================");
+            Console.WriteLine($"Scholarship Status: {status}");
+        
+    }
     }
 }
     
