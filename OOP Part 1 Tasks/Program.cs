@@ -147,6 +147,7 @@ namespace OOP_Part_1_Tasks
                 Console.WriteLine("12. Case 12 - Account Health Status");
                 Console.WriteLine("13. Case 13 - Bulk Sale With Revenue Calculation");
                 Console.WriteLine("14. Case 14 - Scholarship Eligibility Check");
+                Console.WriteLine("15. Case 15 - Full Balance Top-Up Flow");
                 Console.WriteLine("20. Exit");
                 Console.Write("Choose an option: ");
                 int choice;
@@ -175,6 +176,7 @@ namespace OOP_Part_1_Tasks
                     case 12: AccountHealthStatus(); break;
                     case 13: BulkSale(); break;
                     case 14: Scholarship(); break;
+                    case 15: BalanceTopUp(); break;
                     case 20: is_running = false; break;
 
                 }
@@ -538,13 +540,14 @@ namespace OOP_Part_1_Tasks
         static void AccountHealthStatus()
         {
             BankAccount selected = ChooseAccount();
-            if (selected != null) 
+            if (selected != null)
             {
                 string status = (selected.Balance < 50) ? "Low Balance"
                               : (selected.Balance <= 1000) ? "Healthy"
                               : "Premium";
                 Console.WriteLine($"Account Status: {status}");
-            } else 
+            }
+            else
             {
                 Console.WriteLine("Invalid selection");
             }
@@ -564,8 +567,9 @@ namespace OOP_Part_1_Tasks
                 try
                 {
                     quantity = int.Parse(Console.ReadLine());
-                        
-                }catch (FormatException)
+
+                }
+                catch (FormatException)
                 {
                     Console.WriteLine("Invalid amount, Please enter a valid number.");
                     return;
@@ -574,11 +578,11 @@ namespace OOP_Part_1_Tasks
                 {
                     Console.WriteLine("Invalid amount, Please enter a valid number."); return;
                 }
-                if (quantity <=0)
+                if (quantity <= 0)
                 {
                     Console.WriteLine("Invalid amount, cannot sell less than 1"); return;
                 }
-                bool enough = (selected.StockQuantity < quantity)? false: true;
+                bool enough = (selected.StockQuantity < quantity) ? false : true;
                 if (enough == false)
                 {
                     Console.WriteLine("==============================");
@@ -612,8 +616,28 @@ namespace OOP_Part_1_Tasks
               : (selected2.Grade < 80) ? "Low grades" : "Low balance";
             Console.WriteLine("==============================");
             Console.WriteLine($"Scholarship Status: {status}");
-        
-    }
+
+        }
+        static void BalanceTopUp()
+        {
+            BankAccount selected = ChooseAccount();
+            if (selected == null)
+            {
+                Console.WriteLine("Invalid Selection"); return;
+            }
+            double remaining;
+            if (selected.Balance < 50)
+            {
+                remaining = 100 - selected.Balance;
+                Console.WriteLine($"Balance before top-up: {selected.Balance}");
+                selected.Deposit(remaining);
+                Console.WriteLine($"Balance after top-up: {selected.Balance}");
+            }
+            else
+            {
+                Console.WriteLine("no top-up is needed");
+            }
+        }
     }
 }
     
