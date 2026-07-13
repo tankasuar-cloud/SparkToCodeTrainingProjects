@@ -10,6 +10,12 @@ namespace OOP_Part_1_Tasks
         public int AccountNumber { get; set; }
         public string HolderName { get; set; }
         public double Balance { get; set; }
+        public BankAccount(int accountNumber, string name, double balance) 
+        {
+           AccountNumber = accountNumber ;
+           HolderName = name  ;
+           Balance = balance ;
+        }
         private void SendEmail()
         {
             Console.WriteLine("Email sent.");
@@ -117,8 +123,11 @@ namespace OOP_Part_1_Tasks
     }
     internal class Program
     {
-        static BankAccount account1 = new BankAccount { AccountNumber = 1163, HolderName = "karim", Balance = 120 };
-        static BankAccount account2 = new BankAccount { AccountNumber = 15203, HolderName = "Ali", Balance = 63 };
+        static List<BankAccount> allAccounts = new List<BankAccount>()
+        {
+            new BankAccount(1163, "karim", 120),
+            new BankAccount(15203, "Ali", 63)
+        };
 
         static Student student1 = new Student { Name = "Ali", Address = "Muscat", Grade = 65 };
         static Student student2 = new Student { Name = "Ahmed", Address = "Muscat", Grade = 70 };
@@ -148,6 +157,7 @@ namespace OOP_Part_1_Tasks
                 Console.WriteLine("13. Case 13 - Bulk Sale With Revenue Calculation");
                 Console.WriteLine("14. Case 14 - Scholarship Eligibility Check");
                 Console.WriteLine("15. Case 15 - Full Balance Top-Up Flow");
+                Console.WriteLine("16. Case 16 - Quick Account Opening [Parameterized Constructor]");
                 Console.WriteLine("20. Exit");
                 Console.Write("Choose an option: ");
                 int choice;
@@ -177,6 +187,7 @@ namespace OOP_Part_1_Tasks
                     case 13: BulkSale(); break;
                     case 14: Scholarship(); break;
                     case 15: BalanceTopUp(); break;
+                    case 16: QuickAccountOpening(); break;
                     case 20: is_running = false; break;
 
                 }
@@ -188,7 +199,12 @@ namespace OOP_Part_1_Tasks
         static BankAccount ChooseAccount()
         {
             Console.WriteLine("==============================");
-            Console.Write("Enter 1 for Karim's account or 2 for Ali's account: ");
+            Console.WriteLine("Select an account:");
+            for (int i = 0; i < allAccounts.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {allAccounts[i].HolderName}'s account");
+            }
+            Console.Write("Enter your choice: ");
             int choice;
             try
             {
@@ -199,7 +215,13 @@ namespace OOP_Part_1_Tasks
                 Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
                 return null;
             }
-            return (choice == 1) ? account1 : (choice == 2) ? account2 : null;
+            if (choice > 0 && choice <= allAccounts.Count)
+            {
+                return allAccounts[choice - 1];
+            }
+
+            Console.WriteLine("Invalid selection.");
+            return null;
         }
 
         static Student ChooseStudent()
@@ -638,7 +660,39 @@ namespace OOP_Part_1_Tasks
                 Console.WriteLine("no top-up is needed");
             }
         }
+        static void QuickAccountOpening()
+        {
+            Console.Write("Please enter the account name: ");
+            string name = Console.ReadLine() ?? "";
+            Console.Write("Please enter the account number: ");
+            int number;
+            try
+            {
+                number = int.Parse(Console.ReadLine() ?? "");
+            }catch (Exception)
+            {
+                Console.WriteLine("Invalid number");
+                return;
+            }
+            Console.Write("Please enter the account balance: ");
+            double balance;
+            try
+            {
+                balance = double.Parse(Console.ReadLine() ?? "");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid number");
+                return;
+            }
+            BankAccount account = new BankAccount(number,name, balance);
+            allAccounts.Add(account);
+            account.CheckBalance();
+
+        }
+
     }
 }
+
     
 
