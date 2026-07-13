@@ -10,6 +10,15 @@ namespace OOP_Part_1_Tasks
         public int AccountNumber { get; set; }
         public string HolderName { get; set; }
         public double Balance { get; set; }
+        public BankAccount(int accountNumber, string name, double balance) 
+        {
+           AccountNumber = accountNumber ;
+           HolderName = name  ;
+           Balance = balance ;
+        }
+
+        public bool IsOverdrawn { get { return Balance < 0; } }
+
         private void SendEmail()
         {
             Console.WriteLine("Email sent.");
@@ -57,6 +66,35 @@ namespace OOP_Part_1_Tasks
         public string Address { get; set; }
         private string email;
         int age;
+        private int pin;
+        public int SecurityPin 
+        {
+            set
+            {
+                if(value >= 1000 && value <= 9999)
+                {
+                    pin = value;
+                }
+                else
+                {
+                    Console.WriteLine("Error: PIN must be exactly 4 digits.");
+                }
+            }
+        }
+
+
+        public static int count;
+        public Student(int grade, string name, string addr)
+        {
+            Grade = grade ;
+            Name = name ;
+            Address = addr ;
+            count++;
+        }
+        public static int studentNumbers()
+        {
+            return Student.count;
+        }
         public void Register(string Email)
         {
             email = Email;
@@ -117,18 +155,22 @@ namespace OOP_Part_1_Tasks
     }
     internal class Program
     {
-        static BankAccount account1 = new BankAccount { AccountNumber = 1163, HolderName = "karim", Balance = 120 };
-        static BankAccount account2 = new BankAccount { AccountNumber = 15203, HolderName = "Ali", Balance = 63 };
+        static List<BankAccount> allAccounts = new List<BankAccount>()
+        {
+            new BankAccount(1163, "karim", 120),
+            new BankAccount(15203, "Ali", 63)
+        };
 
-        static Student student1 = new Student { Name = "Ali", Address = "Muscat", Grade = 65 };
-        static Student student2 = new Student { Name = "Ahmed", Address = "Muscat", Grade = 70 };
+        static Student student1;
+        static Student student2;
+        
 
         static Product product1 = new Product { ProductName = "Wireless Mouse", Price = 5.500, StockQuantity = 50 };
         static Product product2 = new Product { ProductName = "Mechanical Keyboard", Price = 15.750, StockQuantity = 20 };
         static void Main(string[] args)
         {
-
-
+            student1 = new Student(65, "Ali", "Muscat");
+            student2 = new Student(70, "Ahmed", "Muscat");
             bool is_running = true;
             while (is_running)
             {
@@ -146,6 +188,12 @@ namespace OOP_Part_1_Tasks
                 Console.WriteLine("11. Case 11 - Student Report Card");
                 Console.WriteLine("12. Case 12 - Account Health Status");
                 Console.WriteLine("13. Case 13 - Bulk Sale With Revenue Calculation");
+                Console.WriteLine("14. Case 14 - Scholarship Eligibility Check");
+                Console.WriteLine("15. Case 15 - Full Balance Top-Up Flow");
+                Console.WriteLine("16. Case 16 - Quick Account Opening [Parameterized Constructor]");
+                Console.WriteLine("17. Case 17 - Total Students Counter [Static Fields & Methods]");
+                Console.WriteLine("18. Case 18 - Overdrawn Account Check [Read-Only Property]");
+                Console.WriteLine("19. Case 19 - Set Student Security PIN [Write-Only Property]");
                 Console.WriteLine("20. Exit");
                 Console.Write("Choose an option: ");
                 int choice;
@@ -173,6 +221,12 @@ namespace OOP_Part_1_Tasks
                     case 11: StudentReportCard(); break;
                     case 12: AccountHealthStatus(); break;
                     case 13: BulkSale(); break;
+                    case 14: Scholarship(); break;
+                    case 15: BalanceTopUp(); break;
+                    case 16: QuickAccountOpening(); break;
+                    case 17: DisplayTotalStudents(); break;
+                    case 18: CheckOverdraftStatus(); break;
+                    case 19: SetStudentPin(); break;
                     case 20: is_running = false; break;
 
                 }
@@ -184,7 +238,12 @@ namespace OOP_Part_1_Tasks
         static BankAccount ChooseAccount()
         {
             Console.WriteLine("==============================");
-            Console.Write("Enter 1 for Karim's account or 2 for Ali's account: ");
+            Console.WriteLine("Select an account:");
+            for (int i = 0; i < allAccounts.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {allAccounts[i].HolderName}'s account");
+            }
+            Console.Write("Enter your choice: ");
             int choice;
             try
             {
@@ -195,7 +254,13 @@ namespace OOP_Part_1_Tasks
                 Console.WriteLine("Invalid input. Please enter a number 1 or 2.");
                 return null;
             }
-            return (choice == 1) ? account1 : (choice == 2) ? account2 : null;
+            if (choice > 0 && choice <= allAccounts.Count)
+            {
+                return allAccounts[choice - 1];
+            }
+
+            Console.WriteLine("Invalid selection.");
+            return null;
         }
 
         static Student ChooseStudent()
@@ -536,13 +601,14 @@ namespace OOP_Part_1_Tasks
         static void AccountHealthStatus()
         {
             BankAccount selected = ChooseAccount();
-            if (selected != null) 
+            if (selected != null)
             {
                 string status = (selected.Balance < 50) ? "Low Balance"
                               : (selected.Balance <= 1000) ? "Healthy"
                               : "Premium";
                 Console.WriteLine($"Account Status: {status}");
-            } else 
+            }
+            else
             {
                 Console.WriteLine("Invalid selection");
             }
@@ -562,8 +628,9 @@ namespace OOP_Part_1_Tasks
                 try
                 {
                     quantity = int.Parse(Console.ReadLine());
-                        
-                }catch (FormatException)
+
+                }
+                catch (FormatException)
                 {
                     Console.WriteLine("Invalid amount, Please enter a valid number.");
                     return;
@@ -572,11 +639,11 @@ namespace OOP_Part_1_Tasks
                 {
                     Console.WriteLine("Invalid amount, Please enter a valid number."); return;
                 }
-                if (quantity <=0)
+                if (quantity <= 0)
                 {
                     Console.WriteLine("Invalid amount, cannot sell less than 1"); return;
                 }
-                bool enough = (selected.StockQuantity < quantity)? false: true;
+                bool enough = (selected.StockQuantity < quantity) ? false : true;
                 if (enough == false)
                 {
                     Console.WriteLine("==============================");
@@ -596,7 +663,125 @@ namespace OOP_Part_1_Tasks
                 Console.WriteLine("Invalid Selection");
             }
         }
+        /////////////////////////////////////////////////////////////////////////////
+        static void Scholarship()
+        {
+            BankAccount selected = ChooseAccount();
+            Student selected2 = ChooseStudent();
+            if (selected == null || selected2 == null)
+            {
+                Console.WriteLine("Invalid selection. Process cancelled.");
+                return;
+            }
+            string status = (selected.Balance >= 100 && selected2.Grade >= 80) ? "Eligible"
+              : (selected2.Grade < 80) ? "Low grades" : "Low balance";
+            Console.WriteLine("==============================");
+            Console.WriteLine($"Scholarship Status: {status}");
+
+        }
+        static void BalanceTopUp()
+        {
+            BankAccount selected = ChooseAccount();
+            if (selected == null)
+            {
+                Console.WriteLine("Invalid Selection"); return;
+            }
+            double remaining;
+            if (selected.Balance < 50)
+            {
+                remaining = 100 - selected.Balance;
+                Console.WriteLine($"Balance before top-up: {selected.Balance}");
+                selected.Deposit(remaining);
+                Console.WriteLine($"Balance after top-up: {selected.Balance}");
+            }
+            else
+            {
+                Console.WriteLine("no top-up is needed");
+            }
+        }
+        static void QuickAccountOpening()
+        {
+            Console.Write("Please enter the account name: ");
+            string name = Console.ReadLine() ?? "";
+            Console.Write("Please enter the account number: ");
+            int number;
+            try
+            {
+                number = int.Parse(Console.ReadLine() ?? "");
+            }catch (Exception)
+            {
+                Console.WriteLine("Invalid number");
+                return;
+            }
+            Console.Write("Please enter the account balance: ");
+            double balance;
+            try
+            {
+                balance = double.Parse(Console.ReadLine() ?? "");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid number");
+                return;
+            }
+            BankAccount account = new BankAccount(number,name, balance);
+            allAccounts.Add(account);
+            account.CheckBalance();
+
+        }
+        static void DisplayTotalStudents()
+        {
+            Console.WriteLine($"Number of students: {Student.studentNumbers()}");
+        }
+        static void CheckOverdraftStatus()
+        {
+            BankAccount selected = ChooseAccount();
+            if (selected == null)
+            {
+                Console.WriteLine("Invalid selection.");
+                return;
+            }
+            Console.WriteLine("==============================");
+            Console.WriteLine($"Account Holder: {selected.HolderName}");
+            Console.WriteLine($"Current Balance: {selected.Balance}");
+            if (selected.IsOverdrawn)
+            {
+                Console.WriteLine("Status: Warning! This account is OVERDRAWN.");
+            }
+            else
+            {
+                Console.WriteLine("Status: Account is in good standing.");
+            }
+            Console.WriteLine("==============================");
+        }
+        static void SetStudentPin()
+        {
+            Student selected = ChooseStudent();
+            if (selected == null)
+            {
+                Console.WriteLine("Invalid selection.");
+                return;
+            }
+            Console.WriteLine("==============================");
+            Console.Write($"Enter a new 4-digit security PIN for {selected.Name}: ");
+            int inputPin;
+            try
+            {
+                inputPin = int.Parse(Console.ReadLine() ?? "");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+                return;
+            }
+            selected.SecurityPin = inputPin;
+            Console.WriteLine("==============================");
+            Console.WriteLine("Security PIN updated successfully");
+            Console.WriteLine("==============================");
+        }
+
     }
 }
+
     
 
