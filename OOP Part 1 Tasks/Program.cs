@@ -66,8 +66,23 @@ namespace OOP_Part_1_Tasks
         public string Address { get; set; }
         private string email;
         int age;
+        private int pin;
+        public int SecurityPin 
+        {
+            set
+            {
+                if(value >= 1000 && value <= 9999)
+                {
+                    pin = value;
+                }
+                else
+                {
+                    Console.WriteLine("Error: PIN must be exactly 4 digits.");
+                }
+            }
+        }
 
-        
+
         public static int count;
         public Student(int grade, string name, string addr)
         {
@@ -178,6 +193,7 @@ namespace OOP_Part_1_Tasks
                 Console.WriteLine("16. Case 16 - Quick Account Opening [Parameterized Constructor]");
                 Console.WriteLine("17. Case 17 - Total Students Counter [Static Fields & Methods]");
                 Console.WriteLine("18. Case 18 - Overdrawn Account Check [Read-Only Property]");
+                Console.WriteLine("19. Case 19 - Set Student Security PIN [Write-Only Property]");
                 Console.WriteLine("20. Exit");
                 Console.Write("Choose an option: ");
                 int choice;
@@ -210,6 +226,7 @@ namespace OOP_Part_1_Tasks
                     case 16: QuickAccountOpening(); break;
                     case 17: DisplayTotalStudents(); break;
                     case 18: CheckOverdraftStatus(); break;
+                    case 19: SetStudentPin(); break;
                     case 20: is_running = false; break;
 
                 }
@@ -735,6 +752,31 @@ namespace OOP_Part_1_Tasks
             {
                 Console.WriteLine("Status: Account is in good standing.");
             }
+            Console.WriteLine("==============================");
+        }
+        static void SetStudentPin()
+        {
+            Student selected = ChooseStudent();
+            if (selected == null)
+            {
+                Console.WriteLine("Invalid selection.");
+                return;
+            }
+            Console.WriteLine("==============================");
+            Console.Write($"Enter a new 4-digit security PIN for {selected.Name}: ");
+            int inputPin;
+            try
+            {
+                inputPin = int.Parse(Console.ReadLine() ?? "");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+                return;
+            }
+            selected.SecurityPin = inputPin;
+            Console.WriteLine("==============================");
+            Console.WriteLine("Security PIN updated successfully");
             Console.WriteLine("==============================");
         }
 
