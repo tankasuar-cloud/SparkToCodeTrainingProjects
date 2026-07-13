@@ -16,6 +16,9 @@ namespace OOP_Part_1_Tasks
            HolderName = name  ;
            Balance = balance ;
         }
+
+        public bool IsOverdrawn { get { return Balance < 0; } }
+
         private void SendEmail()
         {
             Console.WriteLine("Email sent.");
@@ -63,6 +66,20 @@ namespace OOP_Part_1_Tasks
         public string Address { get; set; }
         private string email;
         int age;
+
+        
+        public static int count;
+        public Student(int grade, string name, string addr)
+        {
+            Grade = grade ;
+            Name = name ;
+            Address = addr ;
+            count++;
+        }
+        public static int studentNumbers()
+        {
+            return Student.count;
+        }
         public void Register(string Email)
         {
             email = Email;
@@ -129,15 +146,16 @@ namespace OOP_Part_1_Tasks
             new BankAccount(15203, "Ali", 63)
         };
 
-        static Student student1 = new Student { Name = "Ali", Address = "Muscat", Grade = 65 };
-        static Student student2 = new Student { Name = "Ahmed", Address = "Muscat", Grade = 70 };
+        static Student student1;
+        static Student student2;
+        
 
         static Product product1 = new Product { ProductName = "Wireless Mouse", Price = 5.500, StockQuantity = 50 };
         static Product product2 = new Product { ProductName = "Mechanical Keyboard", Price = 15.750, StockQuantity = 20 };
         static void Main(string[] args)
         {
-
-
+            student1 = new Student(65, "Ali", "Muscat");
+            student2 = new Student(70, "Ahmed", "Muscat");
             bool is_running = true;
             while (is_running)
             {
@@ -158,6 +176,8 @@ namespace OOP_Part_1_Tasks
                 Console.WriteLine("14. Case 14 - Scholarship Eligibility Check");
                 Console.WriteLine("15. Case 15 - Full Balance Top-Up Flow");
                 Console.WriteLine("16. Case 16 - Quick Account Opening [Parameterized Constructor]");
+                Console.WriteLine("17. Case 17 - Total Students Counter [Static Fields & Methods]");
+                Console.WriteLine("18. Case 18 - Overdrawn Account Check [Read-Only Property]");
                 Console.WriteLine("20. Exit");
                 Console.Write("Choose an option: ");
                 int choice;
@@ -188,6 +208,8 @@ namespace OOP_Part_1_Tasks
                     case 14: Scholarship(); break;
                     case 15: BalanceTopUp(); break;
                     case 16: QuickAccountOpening(); break;
+                    case 17: DisplayTotalStudents(); break;
+                    case 18: CheckOverdraftStatus(); break;
                     case 20: is_running = false; break;
 
                 }
@@ -689,6 +711,31 @@ namespace OOP_Part_1_Tasks
             allAccounts.Add(account);
             account.CheckBalance();
 
+        }
+        static void DisplayTotalStudents()
+        {
+            Console.WriteLine($"Number of students: {Student.studentNumbers()}");
+        }
+        static void CheckOverdraftStatus()
+        {
+            BankAccount selected = ChooseAccount();
+            if (selected == null)
+            {
+                Console.WriteLine("Invalid selection.");
+                return;
+            }
+            Console.WriteLine("==============================");
+            Console.WriteLine($"Account Holder: {selected.HolderName}");
+            Console.WriteLine($"Current Balance: {selected.Balance}");
+            if (selected.IsOverdrawn)
+            {
+                Console.WriteLine("Status: Warning! This account is OVERDRAWN.");
+            }
+            else
+            {
+                Console.WriteLine("Status: Account is in good standing.");
+            }
+            Console.WriteLine("==============================");
         }
 
     }
