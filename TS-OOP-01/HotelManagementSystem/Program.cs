@@ -1,4 +1,6 @@
-﻿namespace HotelManagementSystem
+﻿using System.Numerics;
+
+namespace HotelManagementSystem
 {
     internal class Program
     {
@@ -33,8 +35,8 @@
                 Console.WriteLine("================================================");
                 Console.Write("\nEnter your choice: ");
                 int option;
-                try { option = int.Parse(Console.ReadLine()??"");}
-                catch (FormatException) { Console.WriteLine("Invalid option.");continue; }
+                try { option = int.Parse(Console.ReadLine() ?? ""); }
+                catch (FormatException) { Console.WriteLine("Invalid option."); continue; }
                 switch (option)
                 {
                     case 0: is_running = false; break;
@@ -43,13 +45,14 @@
                     case 3: BookRoom(); break;
                     case 4: ViewAllRooms(); break;
                     case 5: ViewAllGuests(); break;
+                    case 6: SearchRoom(); break;
 
 
                 }
                 Console.WriteLine("press any key.");
                 Console.ReadKey();
                 Console.Clear();
-                
+
 
             }
         }
@@ -67,14 +70,14 @@
             Console.WriteLine("================================================");
             Console.Write("Please enter Room number: ");
             int num;
-            try { num = int.Parse(Console.ReadLine()??""); }
+            try { num = int.Parse(Console.ReadLine() ?? ""); }
             catch (FormatException) { Console.WriteLine("Invalid number."); return; }
-            if (rooms.Any(r => r.RoomNumber == num)) {Console.WriteLine("Room already exists.");return;}
+            if (rooms.Any(r => r.RoomNumber == num)) { Console.WriteLine("Room already exists."); return; }
             Console.WriteLine("================================================");
             Console.Write("Please enter room type (Single / Double / Suite): ");
             string roomType = Console.ReadLine() ?? "";
             if (roomType != "Single" && roomType != "Double" && roomType != "Suite")
-            { Console.WriteLine("Wrong Room Type.");return; }
+            { Console.WriteLine("Wrong Room Type."); return; }
 
             Console.WriteLine("================================================");
             Console.Write("Please enter Room Price per night: ");
@@ -96,12 +99,12 @@
             Console.Write("Please enter guest name: ");
             string name = Console.ReadLine() ?? "";
             Console.Write("Please enter guest check-in date (14/07/2026): ");
-            string date = Console.ReadLine() ??"";
+            string date = Console.ReadLine() ?? "";
             Console.Write("Enter how many nights the guest will be staying at: ");
             int nights;
             try { nights = int.Parse(Console.ReadLine() ?? ""); }
             catch (FormatException) { Console.WriteLine("Invalid number."); return; }
-            if (nights < 0) { Console.WriteLine("Number of nights must be positive integer ");return; }
+            if (nights < 0) { Console.WriteLine("Number of nights must be positive integer "); return; }
             string guestID = "G" + guestCounter.ToString("D3");
             guestCounter++;
             guests.Add(new Guest(guestID, name, date, nights));
@@ -143,7 +146,7 @@
             {
                 if (foundRoom.IsAvailable)
                 {
-                    Console.WriteLine("Room is found and available!"); 
+                    Console.WriteLine("Room is found and available!");
                 }
                 else
                 {
@@ -197,8 +200,109 @@
                 Console.WriteLine("------------------------------------------------");
             }
         }
+        static void SearchRoom()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("\n=================== SEARCH ROOMS ===================");
+                Console.WriteLine("(1) Show all available rooms");
+                Console.WriteLine("(2) Filter by room type");
+                Console.WriteLine("(3) Filter by max price");
+                Console.WriteLine("(4) Room price statistics");
+                Console.WriteLine("(0) Back");
+                Console.WriteLine("====================================================");
+                Console.Write("Enter your choice: ");
+
+                int option;
+                try { option = int.Parse(Console.ReadLine() ?? ""); }
+                catch (FormatException) { Console.WriteLine("Invalid option."); Console.ReadKey(); continue; }
+
+                switch (option)
+                {
+                    case 0: return;
+                    case 1:
+                        var found = rooms.Where(r => r.IsAvailable).OrderBy(r => r.PricePerNight).ToList();
+                        Console.WriteLine("\n================================================");
+                        Console.WriteLine($"Available Rooms Count: {found.Count}");
+                        Console.WriteLine("================================================");
+
+                        if (found.Count == 0)
+                        {
+                            Console.WriteLine("No rooms found for the selected criteria.");
+                        }
+                        foreach (var room in found)
+                        {
+                            room.DisplayRoom();
+                            Console.WriteLine("------------------------------------------------");
+                        }
+
+                        break;
+                    case 2:
+                        Console.Write("Please enter room type(Single / Double / Suite): ");
+                        string type = Console.ReadLine()??"";
+                        if (type != "Single" && type != "Double" && type != "Suite")
+                        { Console.WriteLine("Wrong Room Type."); break; }
+                        
+                        var found2 = rooms.Where(r => r.RoomType == type).ToList();
+                        Console.WriteLine("\n================================================");
+                        Console.WriteLine($"Available Rooms Count: {found2.Count}");
+                        Console.WriteLine("================================================");
+
+                        if (found2.Count == 0)
+                        {
+                            Console.WriteLine("No rooms found for the selected criteria.");
+                        }
+                        foreach (var room2 in found2)
+                        {
+                            room2.DisplayRoom();
+                            Console.WriteLine("------------------------------------------------");
+                        }
+                        break;
+                    case 3:
+                        Console.Write("Please enter max price: ");
+                        double price;
+                        try { price = double.Parse(Console.ReadLine() ?? ""); } catch (Exception) {Console.WriteLine("Wrong number"); break; }
+                        var found3 = rooms.Where(r => r.PricePerNight <= price ).OrderBy(r => r.PricePerNight).ToList();
+                        Console.WriteLine("\n================================================");
+                        Console.WriteLine($"Available Rooms Count: {found3.Count}");
+                        Console.WriteLine("================================================");
+
+                        if (found3.Count == 0)
+                        {
+                            Console.WriteLine("No rooms found for the selected criteria.");
+                        }
+                        foreach (var room3 in found3)
+                        {
+                            room3.DisplayRoom();
+                            Console.WriteLine("------------------------------------------------");
+                        }
+                        break;
+                    case 4:
+                        int totalRooms = rooms.Count();
+                        int availableRooms = rooms.Count(r => r.IsAvailable);
+                        if (totalRooms == 0) {Console.WriteLine("No rooms in the system to calculate statistics."); break;}
+                        double averagePrice = rooms.Average(r => r.PricePerNight);
+                        double minPrice = rooms.Min(r => r.PricePerNight);
+                        double maxPrice = rooms.Max(r => r.PricePerNight);
+
+                        Console.WriteLine("\n================ ROOM STATISTICS ================");
+                        Console.WriteLine($"Total Rooms:       {totalRooms}");
+                        Console.WriteLine($"Available Rooms:   {availableRooms}");
+                        Console.WriteLine($"Average Price:     {averagePrice:F2} OMR");
+                        Console.WriteLine($"Cheapest Price:    {minPrice:F2} OMR");
+                        Console.WriteLine($"Most Expensive:    {maxPrice:F2} OMR");
+                        Console.WriteLine("================================================");
+                        break;
+
+                    default: Console.WriteLine("Invalid option. Please try again."); break;
+                }
+                Console.WriteLine("press any key.");
+                Console.ReadKey();
+                Console.Clear();
+            }
 
 
-
+        }
     }
 }
