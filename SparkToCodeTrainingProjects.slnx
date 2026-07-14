@@ -7,5 +7,6 @@
   <Project Path="C# Fundamentals Tasks 3/C# Fundamentals Tasks 3.csproj" Id="ee241b7c-24a5-49ff-95c6-a131c7473bbe" />
   <Project Path="C# Fundamentals Tasks/C# Fundamentals Tasks.csproj" Id="ac490879-d436-4a97-a464-f731ef498934" />
   <Project Path="FirstC#Project/FirstC#Project.csproj" />
+  <Project Path="HotelManagementSystem/HotelManagementSystem.csproj" Id="393ee5b7-9365-44fa-a2a1-b138d8c5769c" />
   <Project Path="OOP Part 1 Tasks/OOP Part 1 Tasks.csproj" Id="9465d315-db07-4914-917a-864625659073" />
 </Solution>
