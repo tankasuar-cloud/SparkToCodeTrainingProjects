@@ -47,6 +47,8 @@ namespace HotelManagementSystem
                     case 5: ViewAllGuests(); break;
                     case 6: SearchRoom(); break;
                     case 7: GuestBookingStatistics(); break;
+                    case 8: UpdateRoomPrice(); break;
+                    case 9: GuestLookup(); break;
 
 
                 }
@@ -388,6 +390,48 @@ namespace HotelManagementSystem
                 }
             }
             Console.WriteLine("=========================================================");
+
+        }
+        static void UpdateRoomPrice()
+        {
+            Console.Write("Enter Room Number: ");
+            int num; try { num = int.Parse(Console.ReadLine() ?? ""); } catch (FormatException) { Console.WriteLine("Wrong Input.");return; }
+            var roomm = rooms.FirstOrDefault(r => r.RoomNumber == num);
+            if (roomm == null) { Console.WriteLine("Room not Found.");return; }
+            double oldPrice = roomm.PricePerNight;
+            Console.WriteLine("Enter new Room/Night price: ");
+            double newPrice; try { newPrice = double.Parse(Console.ReadLine() ?? ""); } catch (FormatException) { Console.WriteLine("Wrong Input."); return; }
+            if (newPrice <= 0) { Console.WriteLine("Room Price Must be positive number.");return; }
+            roomm.PricePerNight = newPrice;
+            Console.WriteLine("\n================ PRICE UPDATE SUCCESS ================");
+            Console.WriteLine($"Room Number: {roomm.RoomNumber}");
+            Console.WriteLine($"Old Price/Night: OMR {oldPrice:F2}");
+            Console.WriteLine($"New Price/Night: OMR {newPrice:F2}");
+            Console.WriteLine("======================================================");
+        }
+        static void GuestLookup()
+        {
+            Console.Write("Enter guest name or partial name to search: ");
+            string name = Console.ReadLine()??"";
+            var lookup = guests.Where(g => g.GuestName.ToLower().Contains(name.ToLower())).ToList();
+            if (lookup.Count == 0)
+            {
+                Console.WriteLine("No guests matched that search.");
+            }
+            else
+            {
+                Console.WriteLine("\n==================================================");
+                Console.WriteLine($"Matches Found: {lookup.Count}");
+                
+
+                foreach (var guest in lookup)
+                {
+                    Console.WriteLine($"ID: {guest.GuestId}");
+                    Console.WriteLine($"Name: {guest.GuestName}");
+                    Console.WriteLine($"Room Number: {guest.RoomNumber}");
+                    Console.WriteLine("==================================================");
+                }
+            }
 
         }
     }
