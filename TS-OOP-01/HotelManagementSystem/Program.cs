@@ -4,6 +4,7 @@
     {
         static List<Room> rooms = new List<Room>();
         static List<Guest> guests = new List<Guest>();
+        static int guestCounter = 1;
         static void Main(string[] args)
         {
             PreloadRooms();
@@ -38,6 +39,7 @@
                 {
                     case 0: is_running = false; break;
                     case 1: AddNewRoom(); break;
+                    case 2: RegisterNewGuest(); break;
 
 
                 }
@@ -85,6 +87,33 @@
             Console.WriteLine($"Total Rooms: {rooms.Count}");
             Console.WriteLine("================================================");
         }
+        static void RegisterNewGuest()
+        {
+            Console.WriteLine("================================================");
+            Console.Write("Please enter guest name: ");
+            string name = Console.ReadLine() ?? "";
+            Console.Write("Please enter guest check-in date (14/07/2026): ");
+            string date = Console.ReadLine() ??"";
+            Console.Write("Enter how many nights the guest will be staying at: ");
+            int nights;
+            try { nights = int.Parse(Console.ReadLine() ?? ""); }
+            catch (FormatException) { Console.WriteLine("Invalid number."); return; }
+            if (nights < 0) { Console.WriteLine("Number of nights must be positive integer ");return; }
+            string guestID = "G" + guestCounter.ToString("D3");
+            guestCounter++;
+            guests.Add(new Guest(guestID, name, date, nights));
+            Console.WriteLine("================================================");
+            Console.WriteLine("\n--- Guest Registered Successfully! ---");
+            Console.WriteLine($"Guest ID:       {guestID}");
+            Console.WriteLine($"Name:           {name}");
+            Console.WriteLine($"Check-in Date:  {date}");
+            Console.WriteLine($"Nights:         {nights}");
+            Console.WriteLine($"Room Assigned:  Not Assigned");
+            Console.WriteLine($"Total Guests:   {guests.Count}");
+            Console.WriteLine("================================================");
+
+        }
+
 
 
     }
