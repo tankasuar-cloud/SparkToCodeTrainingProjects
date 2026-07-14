@@ -49,6 +49,7 @@ namespace HotelManagementSystem
                     case 7: GuestBookingStatistics(); break;
                     case 8: UpdateRoomPrice(); break;
                     case 9: GuestLookup(); break;
+                    case 10: RoomTypeReport(); break;
 
 
                 }
@@ -432,6 +433,39 @@ namespace HotelManagementSystem
                     Console.WriteLine("==================================================");
                 }
             }
+
+        }
+        static void RoomTypeReport()
+        {
+            var single = rooms.Where(r=>r.RoomType == "Single");
+            var singleCount = single.Count();
+            var Doubleroom = rooms.Where(r => r.RoomType == "Double");
+            var doubleCount = Doubleroom.Count();
+            var Suite = rooms.Where(r => r.RoomType == "Suite");
+            var SuiteCount = Suite.Count();
+            string singleAvg = singleCount > 0
+                ? $"OMR {single.Average(r => r.PricePerNight):F2}"
+                : "N/A";
+
+            string doubleAvg = doubleCount > 0
+                ? $"OMR {Doubleroom.Average(r => r.PricePerNight):F2}"
+                : "N/A";
+
+            string suiteAvg = SuiteCount > 0
+                ? $"OMR {Suite.Average(r => r.PricePerNight):F2}"
+                : "N/A";
+            double overallAverage = rooms.Any() ? rooms.Average(r => r.PricePerNight) : 0;
+
+            Console.WriteLine("\n================ ROOM TYPE BREAKDOWN REPORT ================");
+            Console.WriteLine($"Room Type | Count  | Average Price/Night");
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine($"Single    | {singleCount,-6} | {singleAvg}");
+            Console.WriteLine($"Double    | {doubleCount,-6} | {doubleAvg}");
+            Console.WriteLine($"Suite     | {SuiteCount,-6} | {suiteAvg}");
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine($"Overall Average Room Price: OMR {overallAverage:F2}");
+            Console.WriteLine("============================================================");
+
 
         }
     }
