@@ -40,6 +40,7 @@
                     case 0: is_running = false; break;
                     case 1: AddNewRoom(); break;
                     case 2: RegisterNewGuest(); break;
+                    case 3: BookRoom(); break;
 
 
                 }
@@ -112,6 +113,59 @@
             Console.WriteLine($"Total Guests:   {guests.Count}");
             Console.WriteLine("================================================");
 
+        }
+        static void BookRoom()
+        {
+            Console.WriteLine("================================================");
+            Console.Write("Please enter guest ID: ");
+            string guestid = (Console.ReadLine() ?? "").ToUpper();
+
+            var foundGuest = guests.FirstOrDefault(g => g.GuestId == guestid);
+            if (foundGuest != null)
+            {
+                Console.WriteLine(foundGuest.GuestId);
+            }
+            else
+            {
+                Console.WriteLine("guest not found.");
+                return;
+            }
+            Console.WriteLine("================================================");
+            Console.Write("Please enter Room ID: ");
+            int roomNum;
+            try { roomNum = int.Parse(Console.ReadLine() ?? ""); }
+            catch (FormatException) { Console.WriteLine("Invalid number."); return; }
+
+            var foundRoom = rooms.FirstOrDefault(r => r.RoomNumber == roomNum);
+            if (foundRoom != null)
+            {
+                if (foundRoom.IsAvailable)
+                {
+                    Console.WriteLine("Room is found and available!"); 
+                }
+                else
+                {
+                    Console.WriteLine("Room is already booked.");
+                    return;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Room not found.");
+                return;
+            }
+            foundGuest.RoomNumber = foundRoom.RoomNumber.ToString();
+            foundRoom.IsAvailable = false;
+            double totalCost = foundGuest.CalculateTotalCost(foundRoom.PricePerNight);
+            Console.WriteLine("================================================");
+            Console.WriteLine("\n--- Booking Confirmed Successfully! ---");
+            Console.WriteLine($"Guest Name:     {foundGuest.GuestName}");
+            Console.WriteLine($"Room Number:    {foundRoom.RoomNumber}");
+            Console.WriteLine($"Room Type:      {foundRoom.RoomType}");
+            Console.WriteLine($"Price Per Night: {foundRoom.PricePerNight} OMR");
+            Console.WriteLine($"Total Nights:   {foundGuest.TotalNights}");
+            Console.WriteLine($"Total Cost:     {totalCost} OMR");
+            Console.WriteLine("================================================");
         }
 
 
