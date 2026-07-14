@@ -42,6 +42,7 @@
                     case 2: RegisterNewGuest(); break;
                     case 3: BookRoom(); break;
                     case 4: ViewAllRooms(); break;
+                    case 5: ViewAllGuests(); break;
 
 
                 }
@@ -171,12 +172,28 @@
         static void ViewAllRooms()
         {
             int count = rooms.Count;
+            Console.WriteLine("\n================================================");
             Console.WriteLine($"Room count: {count}");
+            Console.WriteLine("================================================\n");
             if (count <= 0) { Console.WriteLine("no rooms has been added yet"); }
             var sortedrooms = rooms.OrderBy(g => g.RoomNumber).ToList();
             foreach (var room in sortedrooms)
             {
                 room.DisplayRoom();
+                Console.WriteLine("------------------------------------------------");
+            }
+        }
+        static void ViewAllGuests()
+        {
+            int count = guests.Count;
+            Console.WriteLine("\n================================================");
+            Console.WriteLine($"guests count: {count}");
+            Console.WriteLine("================================================\n");
+            if (count <= 0) { Console.WriteLine("No guests have been registered yet."); }
+            var sortedguests = guests.OrderBy(g => g.RoomNumber).ToList();
+            foreach (var guest in sortedguests)
+            {
+                guest.DisplayGuest();
                 Console.WriteLine("------------------------------------------------");
             }
         }
