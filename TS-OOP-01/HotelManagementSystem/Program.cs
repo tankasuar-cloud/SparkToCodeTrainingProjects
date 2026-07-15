@@ -52,6 +52,7 @@ namespace HotelManagementSystem
                     case 10: RoomTypeReport(); break;
                     case 11: CheckOut(); break;
                     case 12: RemoveUnavailableRooms(); break;
+                    case 13: ExtendGuestStay(); break;
 
 
                 }
@@ -574,6 +575,48 @@ namespace HotelManagementSystem
             {
                 Console.WriteLine("Cancelled. No rooms were removed.");
             }
+
+        }
+        static void ExtendGuestStay()
+        {
+            Console.Write("Please enter guest ID: ");
+            string guestid = Console.ReadLine()??"";
+            var guestt = guests.FirstOrDefault(g => g.GuestId == guestid);
+            if (guestt == null)
+            {
+                Console.WriteLine("No guest were found");
+                return;
+            }
+            if(guestt.RoomNumber == "Not Assigned")
+            {
+                Console.WriteLine("This guest has no active booking to extend.");
+                return;
+            }
+
+
+            var roomnum = rooms.FirstOrDefault(r => r.RoomNumber.ToString() == guestt.RoomNumber);
+            if (roomnum == null)
+            {
+                Console.WriteLine("Error: Assigned room details could not be found.");
+                return;
+            }
+            Console.Write("Please enter the number of Nights to Extend: ");
+            int num;
+            try { num = int.Parse(Console.ReadLine() ?? ""); } catch (FormatException) { Console.WriteLine("Invalid Number"); return; }
+            if (num <= 0) { Console.WriteLine("Number of Nights Must be positive integer (And more than 0"); return; }
+            int oldNights = guestt.TotalNights;
+            guestt.TotalNights += num;
+            double newTotalCost = guestt.CalculateTotalCost(roomnum.PricePerNight);
+            Console.WriteLine("\n================ UPDATE STAY SUMMARY ================");
+            Console.WriteLine($"Guest Name: {guestt.GuestName}");
+            Console.WriteLine($"Room Number: {guestt.RoomNumber} ({roomnum.RoomType})");
+            Console.WriteLine($"Price Per Night: OMR {roomnum.PricePerNight:F2}");
+            Console.WriteLine($"Previous Nights: {oldNights}");
+            Console.WriteLine($"Added Nights: +{num}");
+            Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine($"New Total Nights: {guestt.TotalNights}");
+            Console.WriteLine($"New Total Cost Due: OMR {newTotalCost:F2}");
+            Console.WriteLine("=====================================================");
 
         }
     }
