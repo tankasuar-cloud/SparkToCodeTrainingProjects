@@ -51,6 +51,7 @@ namespace HotelManagementSystem
                     case 9: GuestLookup(); break;
                     case 10: RoomTypeReport(); break;
                     case 11: CheckOut(); break;
+                    case 12: RemoveUnavailableRooms(); break;
 
 
                 }
@@ -530,7 +531,51 @@ namespace HotelManagementSystem
                 Console.WriteLine("\nCheckout cancelled.");
             }
         }
+        static void RemoveUnavailableRooms()
+        {
+            Console.WriteLine("\n================ REMOVE UNAVAILABLE ROOMS ================");
+            var unavailableRooms = rooms
+            .Where(r => !r.IsAvailable && !guests.Any(g => g.RoomNumber == r.RoomNumber.ToString()))
+            .ToList();
+            if (unavailableRooms.Count == 0)
+            {
+                Console.WriteLine("All unavailable rooms are currently occupied. No rooms can be decommissioned. ");
+                return;
+            }
+            Console.WriteLine($"Found {unavailableRooms.Count} removable room(s):");
+            Console.WriteLine("================================================");
 
+            var OrederedRooms = unavailableRooms.OrderBy(r => r.RoomNumber);
+            foreach (var room in OrederedRooms)
+            {
+                Console.WriteLine($"- Room {room.RoomNumber} ({room.RoomType}), Price: {room.PricePerNight}");
+                Console.WriteLine("---------------------------------------------");
+
+            }
+            Console.Write("\nConfirm removal? (Y/N): ");
+            string confirm = Console.ReadLine() ?? "";
+            if (confirm.ToUpper() == "Y")
+            {
+                rooms.RemoveAll(r => !r.IsAvailable && !guests.Any(g => g.RoomNumber == r.RoomNumber.ToString()));
+
+                Console.WriteLine("================================================");
+                Console.WriteLine("Selected rooms have been removed.");
+                Console.WriteLine($"Total Rooms remaining: {rooms.Count}");
+                Console.WriteLine("\n==================== REMAINING ROOMS ====================");
+                var remainingRooms = rooms.Select(r => new { r.RoomNumber, r.RoomType }).ToList();
+
+                foreach (var room in remainingRooms)
+                {
+                    Console.WriteLine($"Room: {room.RoomNumber,-5} | Type: {room.RoomType}");
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Cancelled. No rooms were removed.");
+            }
+
+        }
     }
 }
     
