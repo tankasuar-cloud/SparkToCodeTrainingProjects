@@ -54,6 +54,7 @@ namespace HotelManagementSystem
                     case 12: RemoveUnavailableRooms(); break;
                     case 13: ExtendGuestStay(); break;
                     case 14: HighestRevenueBooking(); break;
+                    case 15: GuestPaginationViewer(); break;
 
 
                 }
@@ -647,7 +648,40 @@ namespace HotelManagementSystem
 
 
         }
+        static void GuestPaginationViewer()
+        {
+            int pagesize = 3;
+            int totalguests = guests.Count();
+            if (totalguests == 0)
+            {
+                Console.WriteLine("No guests registered in the system.");
+                return;
+            }
+            int NumberPages = totalguests / pagesize;
+            int num;
+            Console.Write($"Enter page number (1 to {NumberPages}): ");
+            try { num = int.Parse(Console.ReadLine() ?? ""); } catch (FormatException) { Console.WriteLine("Invalid Number"); return; }
+            if (num <= 0 || num > NumberPages)
+            {
+                Console.WriteLine("That page does not exist.");
+                return;
+            }
+            int skipCount = (num - 1) * pagesize;
+            var paginatedGuests = guests
+                .Skip(skipCount)
+                .Take(pagesize)
+                .ToList();
+            Console.WriteLine($"\n==================== PAGE {num} OF {NumberPages} ====================");
+            foreach (var guest in paginatedGuests)
+            {
+                guest.DisplayGuest();
+                Console.WriteLine("------------------------------------------------------------");
+            }
+            Console.WriteLine($"Showing guests {skipCount + 1} - {Math.Min(skipCount + pagesize, totalguests)} of {totalguests}");
+            Console.WriteLine("============================================================");
+        }
     }
-}
+    }
+
     
 
