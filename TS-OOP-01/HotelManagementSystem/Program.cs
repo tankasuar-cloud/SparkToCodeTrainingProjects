@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+﻿
 
 namespace HotelManagementSystem
 {
@@ -53,6 +53,7 @@ namespace HotelManagementSystem
                     case 11: CheckOut(); break;
                     case 12: RemoveUnavailableRooms(); break;
                     case 13: ExtendGuestStay(); break;
+                    case 14: HighestRevenueBooking(); break;
 
 
                 }
@@ -617,6 +618,33 @@ namespace HotelManagementSystem
             Console.WriteLine($"New Total Nights: {guestt.TotalNights}");
             Console.WriteLine($"New Total Cost Due: OMR {newTotalCost:F2}");
             Console.WriteLine("=====================================================");
+
+        }
+        static void HighestRevenueBooking()
+        {
+            var guestt = guests.Where
+            (g => g.RoomNumber != "Not Assigned").Select(g =>
+            { var room = rooms.FirstOrDefault(r => r.RoomNumber.ToString() == g.RoomNumber);
+                double price = room != null ? room.PricePerNight : 0;
+                return new
+                {
+                    guestName = g.GuestName,
+                    roomNumber = g.RoomNumber,
+                    TotalCost = g.CalculateTotalCost(price)
+                };
+
+            }).OrderByDescending(b => b.TotalCost).Take(1).ToList();
+            if (guestt.Count == 0) 
+            {
+                Console.WriteLine("No active bookings recorded.");
+                return;
+            }
+            var top = guestt[0];
+            Console.WriteLine($"Top Earner Guest: {top.guestName}");
+            Console.WriteLine($"Room Number:      {top.roomNumber}");
+            Console.WriteLine($"Total Revenue:    OMR {top.TotalCost:F2}");
+            Console.WriteLine("=======================================================");
+
 
         }
     }
