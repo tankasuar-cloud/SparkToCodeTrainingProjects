@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Solution Items/">
     <File Path="DataBase Tasks/Task 1/Airline Information System.drawio.png" />
+    <File Path="DataBase Tasks/Task 1/College Management System.drawio.png" />
   </Folder>
   <Project Path="BankingSystemApp/BankingSystemApp.csproj" Id="d6827e96-ab59-4e54-9e05-bbb64b08851e" />
   <Project Path="C# fundamentals Dictionaries, Sets, and Tuples/C# fundamentals Dictionaries, Sets, and Tuples.csproj" Id="ef13d892-f20a-44ef-bbd7-feb3f26afa9a" />
