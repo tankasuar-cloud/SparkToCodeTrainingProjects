@@ -211,12 +211,13 @@ namespace EFcoreProject
         }
         static void ViewAllGuests()
         {
-            int count = guests.Count;
+            using var context = new AppDbContext();
+            int count = context.Guests.Count();
             Console.WriteLine("\n================================================");
             Console.WriteLine($"guests count: {count}");
             Console.WriteLine("================================================\n");
             if (count <= 0) { Console.WriteLine("No guests have been registered yet."); }
-            var sortedguests = guests.OrderBy(g => g.RoomNumber).ToList();
+            var sortedguests = context.Guests.OrderBy(g => g.RoomNumber).ToList();
             foreach (var guest in sortedguests)
             {
                 guest.DisplayGuest();
