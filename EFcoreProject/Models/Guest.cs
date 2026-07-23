@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace EFcoreProject.Models
 {
     public class Guest
     {
-        [Key] public string GuestId { get; set; }
+        [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)] public int GuestId { get; set; }
         public string GuestName { get; set; }
         public string RoomNumber { get; set; }
         public string CheckInDate { get; set; }
@@ -15,9 +16,9 @@ namespace EFcoreProject.Models
 
         public Guest() { } 
 
-        public Guest(string guestId, string guestName, string checkInDate, int totalNights)
+        public Guest(string guestName, string checkInDate, int totalNights)
         {
-            GuestId = guestId;
+            
             GuestName = guestName;
             RoomNumber = "Not Assigned";
             CheckInDate = checkInDate;

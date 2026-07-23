@@ -5,12 +5,10 @@ namespace EFcoreProject
 {
     internal class Program
     {
-        static List<Room> rooms = new List<Room>();
-        static List<Guest> guests = new List<Guest>();
-        static int guestCounter = 1;
+
         static void Main(string[] args)
         {
-            PreloadRooms();
+            
             bool is_running = true;
             while (is_running)
             {
@@ -77,12 +75,13 @@ namespace EFcoreProject
         }
         static void AddNewRoom()
         {
+            using var context = new AppDbContext();
             Console.WriteLine("================================================");
             Console.Write("Please enter Room number: ");
             int num;
             try { num = int.Parse(Console.ReadLine() ?? ""); }
             catch (FormatException) { Console.WriteLine("Invalid number."); return; }
-            if (rooms.Any(r => r.RoomNumber == num)) { Console.WriteLine("Room already exists."); return; }
+            if (context.Rooms.Any(r => r.RoomNumber == num)) { Console.WriteLine("Room already exists."); return; }
             Console.WriteLine("================================================");
             Console.Write("Please enter room type (Single / Double / Suite): ");
             string roomType = Console.ReadLine() ?? "";
@@ -94,48 +93,58 @@ namespace EFcoreProject
             double price;
             try { price = double.Parse(Console.ReadLine() ?? ""); }
             catch (FormatException) { Console.WriteLine("Invalid number."); return; }
-            rooms.Add(new Room(num, roomType, price));
+            context.Rooms.Add(new Room(num, roomType, price));
+            context.SaveChanges();
             Console.WriteLine("================================================");
             Console.WriteLine("\n--- Room Added Successfully! ---");
             Console.WriteLine($"Room Number: {num}");
             Console.WriteLine($"Room Type:   {roomType}");
             Console.WriteLine($"Price/Night:  {price} OMR");
-            Console.WriteLine($"Total Rooms: {rooms.Count}");
+            Console.WriteLine($"Total Rooms: {context.Rooms.Count()}");
             Console.WriteLine("================================================");
         }
         static void RegisterNewGuest()
         {
+            using var context = new AppDbContext();
+
             Console.WriteLine("================================================");
             Console.Write("Please enter guest name: ");
             string name = Console.ReadLine() ?? "";
+
             Console.Write("Please enter guest check-in date (14/07/2026): ");
             string date = Console.ReadLine() ?? "";
+
             Console.Write("Enter how many nights the guest will be staying at: ");
             int nights;
             try { nights = int.Parse(Console.ReadLine() ?? ""); }
             catch (FormatException) { Console.WriteLine("Invalid number."); return; }
-            if (nights < 0) { Console.WriteLine("Number of nights must be positive integer "); return; }
-            string guestID = "G" + guestCounter.ToString("D3");
-            guestCounter++;
-            guests.Add(new Guest(guestID, name, date, nights));
+            if (nights <= 0) { Console.WriteLine("Number of nights must be positive integer"); return; }
+
+            var newGuest = new Guest(name, date, nights);
+            context.Guests.Add(newGuest);
+
+            context.SaveChanges();
+
             Console.WriteLine("================================================");
             Console.WriteLine("\n--- Guest Registered Successfully! ---");
-            Console.WriteLine($"Guest ID:       {guestID}");
+            Console.WriteLine($"Guest ID:       {newGuest.GuestId}");
             Console.WriteLine($"Name:           {name}");
             Console.WriteLine($"Check-in Date:  {date}");
             Console.WriteLine($"Nights:         {nights}");
             Console.WriteLine($"Room Assigned:  Not Assigned");
-            Console.WriteLine($"Total Guests:   {guests.Count}");
+            Console.WriteLine($"Total Guests:   {context.Guests.Count()}");
             Console.WriteLine("================================================");
-
         }
         static void BookRoom()
         {
+            using var context = new AppDbContext();
             Console.WriteLine("================================================");
             Console.Write("Please enter guest ID: ");
-            string guestid = (Console.ReadLine() ?? "").ToUpper();
+            int guestid;
+            try { guestid = int.Parse(Console.ReadLine() ?? ""); }
+            catch (FormatException) { Console.WriteLine("Invalid ID."); return; }
 
-            var foundGuest = guests.FirstOrDefault(g => g.GuestId == guestid);
+            var foundGuest = context.Guests.FirstOrDefault(g => g.GuestId == guestid);
             if (foundGuest != null)
             {
                 Console.WriteLine(foundGuest.GuestId);
@@ -151,7 +160,7 @@ namespace EFcoreProject
             try { roomNum = int.Parse(Console.ReadLine() ?? ""); }
             catch (FormatException) { Console.WriteLine("Invalid number."); return; }
 
-            var foundRoom = rooms.FirstOrDefault(r => r.RoomNumber == roomNum);
+            var foundRoom = context.Rooms.FirstOrDefault(r => r.RoomNumber == roomNum);
             if (foundRoom != null)
             {
                 if (foundRoom.IsAvailable)
@@ -169,8 +178,11 @@ namespace EFcoreProject
                 Console.WriteLine("Room not found.");
                 return;
             }
+
             foundGuest.RoomNumber = foundRoom.RoomNumber.ToString();
             foundRoom.IsAvailable = false;
+            context.SaveChanges();
+
             double totalCost = foundGuest.CalculateTotalCost(foundRoom.PricePerNight);
             Console.WriteLine("================================================");
             Console.WriteLine("\n--- Booking Confirmed Successfully! ---");
