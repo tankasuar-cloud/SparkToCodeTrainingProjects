@@ -332,21 +332,22 @@ namespace EFcoreProject
         }
         static void GuestBookingStatistics()
         {
-            int countGuests = guests.Count();
-            int assignedGuests = guests.Count(g => g.RoomNumber != "Not Assigned");
+            using var context = new AppDbContext();
+            int countGuests = context.Guests.Count();
+            int assignedGuests = context.Guests.Count(g => g.RoomNumber != "Not Assigned");
             Console.WriteLine("\n================================================");
             Console.WriteLine($"Total Registered Guests:   {countGuests}");
             Console.WriteLine($"Guests with Rooms:         {assignedGuests}");
             Console.WriteLine("================================================");
-            int totalRooms = rooms.Count();
-            int bookedRooms = rooms.Count(r => !r.IsAvailable);
+            int totalRooms = context.Rooms.Count();
+            int bookedRooms = context.Rooms.Count(r => !r.IsAvailable);
 
             Console.WriteLine("\n================================================");
             Console.WriteLine($"Total Rooms:     {totalRooms}");
             Console.WriteLine($"Booked Rooms:    {bookedRooms}");
             Console.WriteLine("================================================");
 
-            var guestsWithBookings = guests.Where(g => g.RoomNumber != "Not Assigned");
+            var guestsWithBookings = context.Guests.Where(g => g.RoomNumber != "Not Assigned");
             if (guestsWithBookings.Any())
             {
                 double averageNights = guestsWithBookings.Average(g => g.TotalNights);
@@ -360,12 +361,13 @@ namespace EFcoreProject
                 Console.WriteLine("Average Nights: 0.0 nights (No active bookings)");
                 Console.WriteLine("====================================================");
             }
+            var allRooms = context.Rooms.ToList();
+            var activeGuests = context.Guests.Where(g => g.RoomNumber != "Not Assigned").ToList();
 
 
-
-            var topguests = guests.Where(g => g.RoomNumber != "Not Assigned").OrderByDescending(g =>
+            var topguests = activeGuests.Where(g => g.RoomNumber != "Not Assigned").OrderByDescending(g =>
             {
-                var room = rooms.FirstOrDefault(r => r.RoomNumber.ToString() == g.RoomNumber);
+                var room = allRooms.FirstOrDefault(r => r.RoomNumber.ToString() == g.RoomNumber);
                 double price = room != null ? room.PricePerNight : 0;
                 return g.CalculateTotalCost(price);
             }).Take(3).ToList();
@@ -380,7 +382,7 @@ namespace EFcoreProject
                 int rank = 1;
                 foreach (var guests in topguests)
                 {
-                    var room = rooms.FirstOrDefault(r => r.RoomNumber.ToString() == guests.RoomNumber);
+                    var room = context.Rooms.FirstOrDefault(r => r.RoomNumber.ToString() == guests.RoomNumber);
                     double price = room != null ? room.PricePerNight : 0;
                     double totalCost = guests.CalculateTotalCost(price);
                     Console.WriteLine($"{rank}. Guest:       {guests.GuestName}");
@@ -392,15 +394,14 @@ namespace EFcoreProject
             }
             Console.WriteLine("======================================================");
 
-            var guestsWithBookings2 = guests.Where(g => g.RoomNumber != "Not Assigned")
-                .Select(g =>
-                {
-                    var room = rooms.FirstOrDefault(r => r.RoomNumber.ToString() == g.RoomNumber);
-                    double price = room != null ? room.PricePerNight : 0;
-                    double totalCost = g.CalculateTotalCost(price);
+            var guestsWithBookings2 = activeGuests.Select(g =>
+            {
+                var room = allRooms.FirstOrDefault(r => r.RoomNumber.ToString() == g.RoomNumber);
+                double price = room != null ? room.PricePerNight : 0;
+                double totalCost = g.CalculateTotalCost(price);
 
-                    return $"{g.GuestName} — Room {g.RoomNumber} — {g.TotalNights} nights — OMR {totalCost:F2}";
-                }).ToList();
+                return $"{g.GuestName} — Room {g.RoomNumber} — {g.TotalNights} nights — OMR {totalCost:F2}";
+            }).ToList();
             Console.WriteLine("\n================ ACTIVE BOOKINGS SUMMARY ================");
             if (guestsWithBookings2.Count == 0)
             {
