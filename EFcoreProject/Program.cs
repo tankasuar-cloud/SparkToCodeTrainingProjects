@@ -610,9 +610,11 @@ namespace EFcoreProject
         }
         static void ExtendGuestStay()
         {
+            using var context = new AppDbContext();
             Console.Write("Please enter guest ID: ");
-            string guestid = Console.ReadLine() ?? "";
-            var guestt = guests.FirstOrDefault(g => g.GuestId == guestid);
+            int guestid;
+            try { guestid = int.Parse(Console.ReadLine() ?? ""); } catch (FormatException) { Console.WriteLine("Invalid number"); return; }
+            var guestt = context.Guests.FirstOrDefault(g => g.GuestId == guestid);
             if (guestt == null)
             {
                 Console.WriteLine("No guest were found");
@@ -625,7 +627,7 @@ namespace EFcoreProject
             }
 
 
-            var roomnum = rooms.FirstOrDefault(r => r.RoomNumber.ToString() == guestt.RoomNumber);
+            var roomnum = context.Rooms.FirstOrDefault(r => r.RoomNumber.ToString() == guestt.RoomNumber);
             if (roomnum == null)
             {
                 Console.WriteLine("Error: Assigned room details could not be found.");
@@ -637,6 +639,7 @@ namespace EFcoreProject
             if (num <= 0) { Console.WriteLine("Number of Nights Must be positive integer (And more than 0"); return; }
             int oldNights = guestt.TotalNights;
             guestt.TotalNights += num;
+            context.SaveChanges();
             double newTotalCost = guestt.CalculateTotalCost(roomnum.PricePerNight);
             Console.WriteLine("\n================ UPDATE STAY SUMMARY ================");
             Console.WriteLine($"Guest Name: {guestt.GuestName}");
