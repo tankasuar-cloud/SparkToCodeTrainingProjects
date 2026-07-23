@@ -64,51 +64,31 @@ namespace EFcoreProject
 
             }
         }
-        static void PreloadRooms()
-        {
-            using var context = new AppDbContext();
-            if (!context.Rooms.Any())
-            {
-                context.Rooms.AddRange(
-                    new Room(101, "Single", 25.00),
-                    new Room(102, "Single", 25.00),
-                    new Room(201, "Double", 40.00),
-                    new Room(202, "Double", 40.00),
-                    new Room(301, "Suite", 75.00),
-                    new Room(302, "Suite", 75.00)
-                );
-                context.SaveChanges();
-            }
-        }
+
         static void AddNewRoom()
         {
             using var context = new AppDbContext();
-            Console.WriteLine("================================================");
-            Console.Write("Please enter Room number: ");
-            int num;
-            try { num = int.Parse(Console.ReadLine() ?? ""); }
-            catch (FormatException) { Console.WriteLine("Invalid number."); return; }
-            if (context.Rooms.Any(r => r.RoomNumber == num)) { Console.WriteLine("Room already exists."); return; }
-            Console.WriteLine("================================================");
+
             Console.Write("Please enter room type (Single / Double / Suite): ");
             string roomType = Console.ReadLine() ?? "";
             if (roomType != "Single" && roomType != "Double" && roomType != "Suite")
-            { Console.WriteLine("Wrong Room Type."); return; }
+            {
+                Console.WriteLine("Wrong Room Type.");
+                return;
+            }
 
-            Console.WriteLine("================================================");
             Console.Write("Please enter Room Price per night: ");
             double price;
             try { price = double.Parse(Console.ReadLine() ?? ""); }
             catch (FormatException) { Console.WriteLine("Invalid number."); return; }
-            context.Rooms.Add(new Room(num, roomType, price));
+            var newRoom = new Room(roomType, price);
+            context.Rooms.Add(newRoom);
             context.SaveChanges();
-            Console.WriteLine("================================================");
+
             Console.WriteLine("\n--- Room Added Successfully! ---");
-            Console.WriteLine($"Room Number: {num}");
-            Console.WriteLine($"Room Type:   {roomType}");
-            Console.WriteLine($"Price/Night:  {price} OMR");
-            Console.WriteLine($"Total Rooms: {context.Rooms.Count()}");
-            Console.WriteLine("================================================");
+            Console.WriteLine($"Room Number: {newRoom.RoomNumber}"); 
+            Console.WriteLine($"Room Type:   {newRoom.RoomType}");
+            Console.WriteLine($"Price/Night: OMR {newRoom.PricePerNight:F2}");
         }
         static void RegisterNewGuest()
         {

@@ -12,11 +12,10 @@ namespace EFcoreProject.Models
         public double PricePerNight { get; set; }
         public bool IsAvailable { get; set; }
 
-        public Room() { } 
+        public Room() { }
 
-        public Room(int roomNumber, string roomType, double pricePerNight)
+        public Room(string roomType, double pricePerNight)
         {
-            RoomNumber = roomNumber;
             RoomType = roomType;
             PricePerNight = pricePerNight;
             IsAvailable = true;
