@@ -419,15 +419,17 @@ namespace EFcoreProject
         }
         static void UpdateRoomPrice()
         {
+            using var context = new AppDbContext();
             Console.Write("Enter Room Number: ");
             int num; try { num = int.Parse(Console.ReadLine() ?? ""); } catch (FormatException) { Console.WriteLine("Wrong Input."); return; }
-            var roomm = rooms.FirstOrDefault(r => r.RoomNumber == num);
+            var roomm = context.Rooms.FirstOrDefault(r => r.RoomNumber == num);
             if (roomm == null) { Console.WriteLine("Room not Found."); return; }
             double oldPrice = roomm.PricePerNight;
             Console.WriteLine("Enter new Room/Night price: ");
             double newPrice; try { newPrice = double.Parse(Console.ReadLine() ?? ""); } catch (FormatException) { Console.WriteLine("Wrong Input."); return; }
             if (newPrice <= 0) { Console.WriteLine("Room Price Must be positive number."); return; }
             roomm.PricePerNight = newPrice;
+            context.SaveChanges();
             Console.WriteLine("\n================ PRICE UPDATE SUCCESS ================");
             Console.WriteLine($"Room Number: {roomm.RoomNumber}");
             Console.WriteLine($"Old Price/Night: OMR {oldPrice:F2}");
@@ -436,9 +438,10 @@ namespace EFcoreProject
         }
         static void GuestLookup()
         {
+            using var context = new AppDbContext();
             Console.Write("Enter guest name or partial name to search: ");
             string name = Console.ReadLine() ?? "";
-            var lookup = guests.Where(g => g.GuestName.ToLower().Contains(name.ToLower())).ToList();
+            var lookup = context.Guests.Where(g => g.GuestName.ToLower().Contains(name.ToLower())).ToList();
             if (lookup.Count == 0)
             {
                 Console.WriteLine("No guests matched that search.");
