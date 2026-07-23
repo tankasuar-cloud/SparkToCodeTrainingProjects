@@ -66,12 +66,19 @@ namespace EFcoreProject
         }
         static void PreloadRooms()
         {
-            rooms.Add(new Room(101, "Single", 25.00));
-            rooms.Add(new Room(102, "Single", 25.00));
-            rooms.Add(new Room(201, "Double", 40.00));
-            rooms.Add(new Room(202, "Double", 40.00));
-            rooms.Add(new Room(301, "Suite", 75.00));
-            rooms.Add(new Room(302, "Suite", 75.00));
+            using var context = new AppDbContext();
+            if (!context.Rooms.Any())
+            {
+                context.Rooms.AddRange(
+                    new Room(101, "Single", 25.00),
+                    new Room(102, "Single", 25.00),
+                    new Room(201, "Double", 40.00),
+                    new Room(202, "Double", 40.00),
+                    new Room(301, "Suite", 75.00),
+                    new Room(302, "Suite", 75.00)
+                );
+                context.SaveChanges();
+            }
         }
         static void AddNewRoom()
         {
@@ -523,7 +530,7 @@ namespace EFcoreProject
             Console.WriteLine($"Guest Name: {guestt.GuestName}");
             Console.WriteLine($"Room Number: {guestt.RoomNumber}");
             Console.WriteLine($"Room Type: {roomType}");
-            Console.WriteLine($"Check-In Date: {guestt.CheckInDate:dd-MM-yyyy}");
+            Console.WriteLine($"Check-In Date: {guestt.CheckInDate}");
             Console.WriteLine($"Total Nights: {guestt.TotalNights}");
             Console.WriteLine($"Price Per Night: OMR {price:F2}");
             Console.WriteLine("------------------------------------------------------------");
@@ -655,10 +662,13 @@ namespace EFcoreProject
         }
         static void HighestRevenueBooking()
         {
-            var guestt = guests.Where
-            (g => g.RoomNumber != "Not Assigned").Select(g =>
+            using var context = new AppDbContext();
+            var activeGuests = context.Guests.Where(g => g.RoomNumber != "Not Assigned").ToList();
+            var allRooms = context.Rooms.ToList();
+
+            var guestt = activeGuests.Select(g =>
             {
-                var room = rooms.FirstOrDefault(r => r.RoomNumber.ToString() == g.RoomNumber);
+                var room = allRooms.FirstOrDefault(r => r.RoomNumber.ToString() == g.RoomNumber);
                 double price = room != null ? room.PricePerNight : 0;
                 return new
                 {
@@ -666,7 +676,6 @@ namespace EFcoreProject
                     roomNumber = g.RoomNumber,
                     TotalCost = g.CalculateTotalCost(price)
                 };
-
             }).OrderByDescending(b => b.TotalCost).Take(1).ToList();
             if (guestt.Count == 0)
             {
@@ -683,33 +692,42 @@ namespace EFcoreProject
         }
         static void GuestPaginationViewer()
         {
+            using var context = new AppDbContext();
             int pagesize = 3;
-            int totalguests = guests.Count();
+            int totalguests = context.Guests.Count();
+
             if (totalguests == 0)
             {
                 Console.WriteLine("No guests registered in the system.");
                 return;
             }
-            int NumberPages = totalguests / pagesize;
-            int num;
+            int NumberPages = (int)Math.Ceiling((double)totalguests / pagesize);
             Console.Write($"Enter page number (1 to {NumberPages}): ");
-            try { num = int.Parse(Console.ReadLine() ?? ""); } catch (FormatException) { Console.WriteLine("Invalid Number"); return; }
+            int num;
+            try { num = int.Parse(Console.ReadLine() ?? ""); }
+            catch (FormatException) { Console.WriteLine("Invalid Number"); return; }
+
             if (num <= 0 || num > NumberPages)
             {
                 Console.WriteLine("That page does not exist.");
                 return;
             }
+
             int skipCount = (num - 1) * pagesize;
-            var paginatedGuests = guests
+
+            var paginatedGuests = context.Guests
+                .OrderBy(g => g.GuestId)
                 .Skip(skipCount)
                 .Take(pagesize)
                 .ToList();
+
             Console.WriteLine($"\n==================== PAGE {num} OF {NumberPages} ====================");
             foreach (var guest in paginatedGuests)
             {
                 guest.DisplayGuest();
                 Console.WriteLine("------------------------------------------------------------");
             }
+
             Console.WriteLine($"Showing guests {skipCount + 1} - {Math.Min(skipCount + pagesize, totalguests)} of {totalguests}");
             Console.WriteLine("============================================================");
         }

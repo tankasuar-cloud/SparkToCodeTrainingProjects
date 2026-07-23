@@ -23,8 +23,11 @@ namespace EFcoreProject.Migrations
 
             modelBuilder.Entity("EFcoreProject.Models.Guest", b =>
                 {
-                    b.Property<string>("GuestId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("GuestId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GuestId"));
 
                     b.Property<string>("CheckInDate")
                         .IsRequired()

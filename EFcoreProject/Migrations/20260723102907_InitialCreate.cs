@@ -14,7 +14,8 @@ namespace EFcoreProject.Migrations
                 name: "Guests",
                 columns: table => new
                 {
-                    GuestId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    GuestId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     GuestName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RoomNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CheckInDate = table.Column<string>(type: "nvarchar(max)", nullable: false),

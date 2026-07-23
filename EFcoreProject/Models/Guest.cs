@@ -8,7 +8,7 @@ namespace EFcoreProject.Models
 {
     public class Guest
     {
-        [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)] public int GuestId { get; set; }
+        [Key] public int GuestId { get; set; }
         public string GuestName { get; set; }
         public string RoomNumber { get; set; }
         public string CheckInDate { get; set; }
