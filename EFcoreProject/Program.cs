@@ -498,9 +498,11 @@ namespace EFcoreProject
         }
         static void CheckOut()
         {
+            using var context = new AppDbContext();
             Console.WriteLine("Please enter guest ID: ");
-            string guestid = Console.ReadLine() ?? "";
-            var guestt = guests.FirstOrDefault(g => g.GuestId == guestid);
+            int guestid;
+            try { guestid = int.Parse(Console.ReadLine() ?? ""); }catch(FormatException) { Console.WriteLine("Invalid number");return; }
+            var guestt = context.Guests.FirstOrDefault(g => g.GuestId == guestid);
             if (guestt == null)
             {
                 Console.WriteLine("Guest not found");
@@ -512,7 +514,7 @@ namespace EFcoreProject
                 return;
             }
 
-            var roomnum = rooms.FirstOrDefault(r => r.RoomNumber.ToString() == guestt.RoomNumber);
+            var roomnum = context.Rooms.FirstOrDefault(r => r.RoomNumber.ToString() == guestt.RoomNumber);
             double price = roomnum != null ? roomnum.PricePerNight : 0;
             string roomType = roomnum != null ? roomnum.RoomType : "Unknown";
             double totalCost = guestt.CalculateTotalCost(price);
@@ -532,25 +534,26 @@ namespace EFcoreProject
             string confirm = Console.ReadLine() ?? "";
             if (confirm.ToUpper() == "Y")
             {
+                string guestName = guestt.GuestName;
+                string assignedRoom = guestt.RoomNumber;
                 if (roomnum != null)
                 {
                     roomnum.IsAvailable = true;
                 }
-                guests.Remove(guestt);
-                Console.WriteLine("Checkout confirmed. Room is now vacant, and guest has been removed.");
-                Console.WriteLine("\n=================== CHECKOUT SUMMARY ======================");
-                Console.WriteLine($"Checked out: {guestt.GuestName} from Room {roomnum.RoomNumber}");
+                context.Guests.Remove(guestt);
+                context.SaveChanges();
+                Console.WriteLine("\nCheckout confirmed. Room is now vacant, and guest has been removed.");
+                Console.WriteLine("=================== CHECKOUT SUMMARY ======================");
+                Console.WriteLine($"Checked out: {guestName} from Room {assignedRoom}");
 
-
-                bool isRoomNowAvailable = rooms.Any(r => r.RoomNumber.ToString() == guestt.RoomNumber && r.IsAvailable);
-                Console.WriteLine($"Room {roomnum.RoomNumber} Available:  {isRoomNowAvailable}");
+                bool isRoomNowAvailable = roomnum != null ? roomnum.IsAvailable : true;
+                Console.WriteLine($"Room {assignedRoom} Available:  {isRoomNowAvailable}");
 
                 Console.WriteLine("------------------------------------------------------------");
-                Console.WriteLine($"Total Registered Guests: {guests.Count}");
-                Console.WriteLine($"Total Registered Rooms:  {rooms.Count}");
+                Console.WriteLine($"Total Registered Guests: {context.Guests.Count()}");
+                Console.WriteLine($"Total Registered Rooms:  {context.Rooms.Count()}");
                 Console.WriteLine("============================================================");
             }
-
             else
             {
                 Console.WriteLine("\nCheckout cancelled.");
