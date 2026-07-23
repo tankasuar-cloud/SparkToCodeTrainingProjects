@@ -561,48 +561,52 @@ namespace EFcoreProject
         }
         static void RemoveUnavailableRooms()
         {
+            using var context = new AppDbContext();
             Console.WriteLine("\n================ REMOVE UNAVAILABLE ROOMS ================");
-            var unavailableRooms = rooms
-            .Where(r => !r.IsAvailable && !guests.Any(g => g.RoomNumber == r.RoomNumber.ToString()))
-            .ToList();
+
+            var unavailableRooms = context.Rooms
+                .Where(r => !r.IsAvailable && !context.Guests.Any(g => g.RoomNumber == r.RoomNumber.ToString()))
+                .ToList();
+
             if (unavailableRooms.Count == 0)
             {
-                Console.WriteLine("All unavailable rooms are currently occupied. No rooms can be decommissioned. ");
+                Console.WriteLine("All unavailable rooms are currently occupied. No rooms can be decommissioned.");
                 return;
             }
+
             Console.WriteLine($"Found {unavailableRooms.Count} removable room(s):");
             Console.WriteLine("================================================");
 
-            var OrederedRooms = unavailableRooms.OrderBy(r => r.RoomNumber);
-            foreach (var room in OrederedRooms)
+            var orderedRooms = unavailableRooms.OrderBy(r => r.RoomNumber);
+            foreach (var room in orderedRooms)
             {
                 Console.WriteLine($"- Room {room.RoomNumber} ({room.RoomType}), Price: {room.PricePerNight}");
                 Console.WriteLine("---------------------------------------------");
-
             }
+
             Console.Write("\nConfirm removal? (Y/N): ");
             string confirm = Console.ReadLine() ?? "";
             if (confirm.ToUpper() == "Y")
             {
-                rooms.RemoveAll(r => !r.IsAvailable && !guests.Any(g => g.RoomNumber == r.RoomNumber.ToString()));
+                context.Rooms.RemoveRange(unavailableRooms);
+                context.SaveChanges();
 
                 Console.WriteLine("================================================");
                 Console.WriteLine("Selected rooms have been removed.");
-                Console.WriteLine($"Total Rooms remaining: {rooms.Count}");
+                Console.WriteLine($"Total Rooms remaining: {context.Rooms.Count()}");
                 Console.WriteLine("\n==================== REMAINING ROOMS ====================");
-                var remainingRooms = rooms.Select(r => new { r.RoomNumber, r.RoomType }).ToList();
+
+                var remainingRooms = context.Rooms.Select(r => new { r.RoomNumber, r.RoomType }).ToList();
 
                 foreach (var room in remainingRooms)
                 {
                     Console.WriteLine($"Room: {room.RoomNumber,-5} | Type: {room.RoomType}");
                 }
-
             }
             else
             {
                 Console.WriteLine("Cancelled. No rooms were removed.");
             }
-
         }
         static void ExtendGuestStay()
         {
