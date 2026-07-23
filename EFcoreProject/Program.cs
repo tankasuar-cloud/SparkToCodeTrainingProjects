@@ -226,8 +226,10 @@ namespace EFcoreProject
         }
         static void SearchRoom()
         {
+            using var context = new AppDbContext();
             while (true)
             {
+                
                 Console.Clear();
                 Console.WriteLine("\n=================== SEARCH ROOMS ===================");
                 Console.WriteLine("(1) Show all available rooms");
@@ -246,7 +248,7 @@ namespace EFcoreProject
                 {
                     case 0: return;
                     case 1:
-                        var found = rooms.Where(r => r.IsAvailable).OrderBy(r => r.PricePerNight).ToList();
+                        var found = context.Rooms.Where(r => r.IsAvailable).OrderBy(r => r.PricePerNight).ToList();
                         Console.WriteLine("\n================================================");
                         Console.WriteLine($"Available Rooms Count: {found.Count}");
                         Console.WriteLine("================================================");
@@ -268,7 +270,7 @@ namespace EFcoreProject
                         if (type != "Single" && type != "Double" && type != "Suite")
                         { Console.WriteLine("Wrong Room Type."); break; }
 
-                        var found2 = rooms.Where(r => r.RoomType == type).ToList();
+                        var found2 = context.Rooms.Where(r => r.RoomType == type).ToList();
                         Console.WriteLine("\n================================================");
                         Console.WriteLine($"Available Rooms Count: {found2.Count}");
                         Console.WriteLine("================================================");
@@ -287,7 +289,7 @@ namespace EFcoreProject
                         Console.Write("Please enter max price: ");
                         double price;
                         try { price = double.Parse(Console.ReadLine() ?? ""); } catch (Exception) { Console.WriteLine("Wrong number"); break; }
-                        var found3 = rooms.Where(r => r.PricePerNight <= price).OrderBy(r => r.PricePerNight).ToList();
+                        var found3 = context.Rooms.Where(r => r.PricePerNight <= price).OrderBy(r => r.PricePerNight).ToList();
                         Console.WriteLine("\n================================================");
                         Console.WriteLine($"Available Rooms Count: {found3.Count}");
                         Console.WriteLine("================================================");
@@ -303,12 +305,12 @@ namespace EFcoreProject
                         }
                         break;
                     case 4:
-                        int totalRooms = rooms.Count();
-                        int availableRooms = rooms.Count(r => r.IsAvailable);
+                        int totalRooms = context.Rooms.Count();
+                        int availableRooms = context.Rooms.Count(r => r.IsAvailable);
                         if (totalRooms == 0) { Console.WriteLine("No rooms in the system to calculate statistics."); break; }
-                        double averagePrice = rooms.Average(r => r.PricePerNight);
-                        double minPrice = rooms.Min(r => r.PricePerNight);
-                        double maxPrice = rooms.Max(r => r.PricePerNight);
+                        double averagePrice = context.Rooms.Average(r => r.PricePerNight);
+                        double minPrice = context.Rooms.Min(r => r.PricePerNight);
+                        double maxPrice = context.Rooms.Max(r => r.PricePerNight);
 
                         Console.WriteLine("\n================ ROOM STATISTICS ================");
                         Console.WriteLine($"Total Rooms:       {totalRooms}");
