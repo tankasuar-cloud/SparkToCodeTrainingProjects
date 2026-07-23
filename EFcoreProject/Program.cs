@@ -464,11 +464,12 @@ namespace EFcoreProject
         }
         static void RoomTypeReport()
         {
-            var single = rooms.Where(r => r.RoomType == "Single");
+            using var context = new AppDbContext();
+            var single = context.Rooms.Where(r => r.RoomType == "Single");
             var singleCount = single.Count();
-            var Doubleroom = rooms.Where(r => r.RoomType == "Double");
+            var Doubleroom = context.Rooms.Where(r => r.RoomType == "Double");
             var doubleCount = Doubleroom.Count();
-            var Suite = rooms.Where(r => r.RoomType == "Suite");
+            var Suite = context.Rooms.Where(r => r.RoomType == "Suite");
             var SuiteCount = Suite.Count();
             string singleAvg = singleCount > 0
                 ? $"OMR {single.Average(r => r.PricePerNight):F2}"
@@ -481,7 +482,7 @@ namespace EFcoreProject
             string suiteAvg = SuiteCount > 0
                 ? $"OMR {Suite.Average(r => r.PricePerNight):F2}"
                 : "N/A";
-            double overallAverage = rooms.Any() ? rooms.Average(r => r.PricePerNight) : 0;
+            double overallAverage = context.Rooms.Any() ? context.Rooms.Average(r => r.PricePerNight) : 0;
 
             Console.WriteLine("\n================ ROOM TYPE BREAKDOWN REPORT ================");
             Console.WriteLine($"Room Type | Count  | Average Price/Night");
