@@ -14,6 +14,7 @@
   <Project Path="C# Fundamentals Tasks 2/C# Fundamentals Tasks 2.csproj" Id="38fce574-05e0-454d-a7c6-c030693296bd" />
   <Project Path="C# Fundamentals Tasks 3/C# Fundamentals Tasks 3.csproj" Id="ee241b7c-24a5-49ff-95c6-a131c7473bbe" />
   <Project Path="C# Fundamentals Tasks/C# Fundamentals Tasks.csproj" Id="ac490879-d436-4a97-a464-f731ef498934" />
+  <Project Path="EFcoreProject/EFcoreProject.csproj" Id="f86b34d2-073b-4a7e-9f26-e86a08349d21" />
   <Project Path="FirstC#Project/FirstC#Project.csproj" />
   <Project Path="OOP Part 1 Tasks/OOP Part 1 Tasks.csproj" Id="9465d315-db07-4914-917a-864625659073" />
   <Project Path="TS-OOP-01/HotelManagementSystem/HotelManagementSystem.csproj" />
