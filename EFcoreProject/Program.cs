@@ -196,12 +196,13 @@ namespace EFcoreProject
         }
         static void ViewAllRooms()
         {
-            int count = rooms.Count;
+            using var context = new AppDbContext();
+            int count = context.Rooms.Count();
             Console.WriteLine("\n================================================");
             Console.WriteLine($"Room count: {count}");
             Console.WriteLine("================================================\n");
             if (count <= 0) { Console.WriteLine("no rooms has been added yet"); }
-            var sortedrooms = rooms.OrderBy(g => g.RoomNumber).ToList();
+            var sortedrooms = context.Rooms.OrderBy(r => r.RoomNumber).ToList();
             foreach (var room in sortedrooms)
             {
                 room.DisplayRoom();
