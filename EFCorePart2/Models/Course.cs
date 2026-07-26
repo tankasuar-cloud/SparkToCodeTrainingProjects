@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EFCorePart2.Models
 {
-    internal class Course
+    public class Course
     {
         [Key]
         public int Course_id { get; set; }
