@@ -22,5 +22,10 @@ namespace EFCorePart2.Models
         //Handled By
         public List<Course> Course { get; set; }
 
+
+
+        // Conducts
+        public List<Exam> Exam { get; set; }
+
     }
 }
