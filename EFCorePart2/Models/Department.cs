@@ -18,5 +18,9 @@ namespace EFCorePart2.Models
         // Belongs
         public List<Student> Student { get; set; }
 
+
+        //Handled By
+        public List<Course> Course { get; set; }
+
     }
 }

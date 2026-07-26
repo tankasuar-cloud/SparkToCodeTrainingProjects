@@ -16,5 +16,8 @@ namespace EFCorePart2.Models
         public string state { get; set; }
         public string city { get; set; }
 
+
+        //Lives in
+        public List<Student> Student { get; set; }
     }
 }
