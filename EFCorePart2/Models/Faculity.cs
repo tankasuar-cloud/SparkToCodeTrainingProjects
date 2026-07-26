@@ -18,8 +18,9 @@ namespace EFCorePart2.Models
         // Works in
         [ForeignKey("Department")]
         public int DepartmentId { get; set; }
-        public Department Department { get; set; } 
+        public Department Department { get; set; }
 
-
+        //TeachesSubjects
+        public List<TeachesSubject> TeachesSubjects { get; set; }
     }
 }

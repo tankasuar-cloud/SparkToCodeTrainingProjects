@@ -32,6 +32,8 @@
             // Takes
             public List<Takes> Takes { get; set; }
 
+            //TeachesSubjects
+            public List<TeachesSubject> TeachesSubjects { get; set; }
 
     }
     }

@@ -11,5 +11,8 @@ namespace EFCorePart2.Models
         [Key]
         public int SubjectID { get; set; }
         public string SubjectName { get; set; }
+
+        //TeachesSubjects
+        public List<TeachesSubject> TeachesSubjects { get; set; }
     }
 }

@@ -12,13 +12,13 @@ namespace EFCorePart2.Models
     {
         [ForeignKey("Student")]
         public int S_id { get; set; }
-        public virtual Student Student { get; set; }
+        public  Student Student { get; set; }
 
 
 
         [ForeignKey("Course")]
         public int Course_id { get; set; }
-        public virtual Course Course { get; set; }
+        public  Course Course { get; set; }
         
     }
 }
