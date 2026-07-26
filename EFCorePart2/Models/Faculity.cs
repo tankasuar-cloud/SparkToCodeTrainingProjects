@@ -15,5 +15,11 @@ namespace EFCorePart2.Models
         public double Salary { get; set; }
 
 
+
+        [ForeignKey("Department")]
+        public int DepartmentId { get; set; }
+        public Department Department { get; set; } // Navigation property
+
+
     }
 }

@@ -12,5 +12,8 @@ namespace EFCorePart2.Models
         public int DepartmentId { get; set; }
         public string DepartmentName { get; set; }
 
+
+        public List<Faculity> Faculty { get; set; }
+
     }
 }
