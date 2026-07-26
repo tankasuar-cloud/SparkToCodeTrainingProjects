@@ -22,7 +22,7 @@ namespace EFCorePart2.Models
         public Department Department { get; set; }
 
 
-        // Enroll
-        public List<Enrolls> Enrolls { get; set; }
+        // Takes
+        public List<Takes> Takes { get; set; }
     }
 }

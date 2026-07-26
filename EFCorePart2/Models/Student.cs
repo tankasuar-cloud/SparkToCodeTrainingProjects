@@ -25,5 +25,13 @@
             [ForeignKey("Hostel")]
             public int? HostelId { get; set; }
             public Hostel Hostel { get; set; }
-        }
+
+            // Takes
+             public List<Enrolls> Enrolls { get; set; }
+
+            // Takes
+            public List<Takes> Takes { get; set; }
+
+
+    }
     }
