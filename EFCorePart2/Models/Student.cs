@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace EFCorePart2.Models
@@ -14,5 +15,10 @@ namespace EFCorePart2.Models
         public DateTime DOB { get; set; }
         public int phone_number { get; set; }
 
+
+        // Belongs
+        [ForeignKey("Department")]
+        public int DepartmentId { get; set; }
+        public Department Department { get; set; }
     }
 }
