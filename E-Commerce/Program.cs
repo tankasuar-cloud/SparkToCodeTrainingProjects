@@ -1,5 +1,6 @@
 ﻿using E_Commerce.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using System.Xml.Linq;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -258,11 +259,139 @@ namespace E_Commerce
         }
         static void PlaceOrder()
         {
-            // TODO: implement - check loggedInUserId != 0 first
+            if (loggedInUserId == 0)
+            {
+                Console.WriteLine("No User Logged In");
+                return;
+            }
+
+            var productlist = context.Products.Include(p => p.Category).ToList();
+            if (!productlist.Any())
+            {
+                Console.WriteLine("No products available to order.");
+                return;
+            }
+
+            Console.WriteLine("--- Available Products ---");
+            foreach (var pro in productlist)
+            {
+                Console.WriteLine($"ID: {pro.ProductId} | Name: {pro.ProductName} | Price: {pro.Price:F2} OMR | Category: {pro.Category?.CategoryName}");
+            }
+
+            List<OrderProduct> cart = new List<OrderProduct>();
+            bool is_running = true;
+
+            while (is_running)
+            {
+                Console.Write("\nPlease Enter the product ID (Or 0 to Exit): ");
+                int option;
+                try
+                {
+                    option = int.Parse(Console.ReadLine() ?? "");
+                    if (option == 0)
+                    {
+                        is_running = false;
+                        continue;
+                    }
+
+                    var product = productlist.FirstOrDefault(p => p.ProductId == option);
+                    if (product == null)
+                    {
+                        Console.WriteLine("Please enter a valid product ID.");
+                        continue;
+                    }
+
+                    Console.Write($"Enter quantity for '{product.ProductName}': ");
+                    int quantity = int.Parse(Console.ReadLine() ?? "");
+
+                    if (quantity <= 0)
+                    {
+                        Console.WriteLine("Error: Quantity must be at least 1.");
+                        continue;
+                    }
+
+                    cart.Add(new OrderProduct
+                    {
+                        ProductId = option,
+                        Quantity = quantity
+                    });
+
+                    Console.WriteLine($"-> Added {quantity}x '{product.ProductName}' to your cart!");
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid Number");
+                    continue;
+                }
+            }
+
+            if (!cart.Any())
+            {
+                Console.WriteLine("No items in cart. Order canceled.");
+                return;
+            }
+
+            Order newOrder = new Order
+            {
+                UserId = loggedInUserId,
+                OrderDate = DateTime.Now
+            };
+
+            context.Orders.Add(newOrder);
+            context.SaveChanges(); 
+
+            foreach (var item in cart)
+            {
+                item.OrderId = newOrder.OrderId;
+                context.OrderProducts.Add(item);
+            }
+
+            context.SaveChanges();
+
+            Console.WriteLine($"============================================");
+            Console.WriteLine($"Success! Order #{newOrder.OrderId} placed successfully.");
+            Console.WriteLine($"============================================");
         }
         static void ViewMyOrders()
         {
-            // TODO: implement - check loggedInUserId != 0 first
+            if (loggedInUserId == 0)
+            {
+                Console.WriteLine("Error: You must be logged in to view your orders.");
+                return;
+            }
+
+            var userOrders = context.Orders
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                .Where(o => o.UserId == loggedInUserId)
+                .ToList();
+
+            if (!userOrders.Any())
+            {
+                Console.WriteLine("You have not placed any orders yet.");
+                return;
+            }
+
+            Console.WriteLine("\n--- My Orders ---");
+            foreach (var order in userOrders)
+            {
+                Console.WriteLine($"\n========================================");
+                Console.WriteLine($"Order ID   : #{order.OrderId}");
+                Console.WriteLine($"Order Date : {order.OrderDate:yyyy-MM-dd HH:mm}");
+                Console.WriteLine($"Items:");
+
+                decimal totalAmount = 0;
+                foreach (var item in order.OrderProducts)
+                {
+                    decimal itemTotal = (decimal)(item.Quantity * item.Product.Price);
+                    totalAmount += itemTotal;
+
+                    Console.WriteLine($"  - {item.Product.ProductName} | Qty: {item.Quantity} | Unit Price: {item.Product.Price:F2} OMR | Subtotal: {itemTotal:F2} OMR");
+                }
+
+                Console.WriteLine($"Total Order Amount: {totalAmount:F2} OMR");
+                Console.WriteLine($"========================================");
+            }
         }
         static void ViewOrderDetails()
         {
