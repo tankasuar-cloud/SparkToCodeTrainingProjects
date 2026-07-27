@@ -53,7 +53,7 @@ namespace E_Commerce
                     case 5: ViewAllProducts(); break;
                     case 6: PlaceOrder(); break;
                     case 7: ViewMyOrders(); break;
-                    case 8:ViewOrderDetails(); break;      
+                    case 8: ViewOrderDetails(); break;      
                     case 9: AddReview(); break;
                     case 10: ViewReviewsForProduct(); break;
                     case 11: Logout(); break;
@@ -395,7 +395,54 @@ namespace E_Commerce
         }
         static void ViewOrderDetails()
         {
-            // TODO: implement
+            Console.Write("Enter Order ID: ");
+            int orderId;
+            try { orderId = int.Parse(Console.ReadLine()??""); } catch (FormatException) { Console.WriteLine("Invalid number");return; }
+
+            var order = context.Orders
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                .Include(o => o.Review)
+                .FirstOrDefault(o => o.OrderId == orderId);
+
+            if (order == null)
+            {
+                Console.WriteLine($"Error: Order #{orderId} was not found.");
+                return;
+            }
+
+            Console.WriteLine($"\n========================================");
+            Console.WriteLine($"ORDER DETAILS FOR #{order.OrderId}");
+            Console.WriteLine($"Date: {order.OrderDate:yyyy-MM-dd HH:mm}");
+            Console.WriteLine($"----------------------------------------");
+            Console.WriteLine("Products Ordered:");
+
+            decimal grandTotal = 0;
+            foreach (var item in order.OrderProducts)
+            {
+                decimal itemTotal = (decimal)(item.Quantity * item.Product.Price);
+                grandTotal += itemTotal;
+
+                Console.WriteLine($"  * {item.Product.ProductName}");
+                Console.WriteLine($"    Qty: {item.Quantity} | Unit Price: {item.Product.Price:F2} OMR | Subtotal: {itemTotal:F2} OMR");
+            }
+
+            Console.WriteLine($"----------------------------------------");
+            Console.WriteLine($"ORDER TOTAL: {grandTotal:F2} OMR");
+            Console.WriteLine($"----------------------------------------");
+
+            if (order.Review != null)
+            {
+                Console.WriteLine($"Review:");
+                Console.WriteLine($"  Rating : {order.Review.Rating}");
+                Console.WriteLine($"  Comment: {order.Review.Comment}");
+            }
+            else
+            {
+                Console.WriteLine("Review: No review submitted for this order.");
+            }
+
+            Console.WriteLine($"========================================");
         }
         static void AddReview()
         {
