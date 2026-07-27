@@ -167,7 +167,7 @@ namespace E_Commerce
             bool exists = context.Products.Any(c => c.ProductName.ToLower() == Pname.ToLower());
             if (exists)
             {
-                Console.WriteLine($"Error: Category '{Pname}' already exists.");
+                Console.WriteLine($"Error: Product '{Pname}' already exists.");
                 return;
             }
             Console.Write("Please Enter the price: ");
@@ -446,16 +446,118 @@ namespace E_Commerce
         }
         static void AddReview()
         {
-            // TODO: implement - check loggedInUserId != 0 first
+            if (loggedInUserId == 0)
+            {
+                Console.WriteLine("Error: You must be logged in to add a review.");
+                return;
+            }
+            Console.Write("Enter the Order ID you want to review: ");
+            int orderId;
+            try { orderId = int.Parse(Console.ReadLine() ?? ""); } catch (FormatException) { Console.WriteLine("Invalid number"); return; }
+
+
+            var order = context.Orders.Include(o => o.Review).FirstOrDefault(o => o.OrderId == orderId);
+
+            if (order == null)
+            {
+                Console.WriteLine($"Error: Order #{orderId} does not exist.");
+                return;
+            }
+
+            if (order.UserId != loggedInUserId)
+            {
+                Console.WriteLine($"Error: You can only review your own orders.");
+                return;
+            }
+            if (order.Review != null)
+            {
+                Console.WriteLine($"Error: Order #{orderId} has already been reviewed.");
+                return;
+            }
+            Console.Write("Enter Rating (1 to 5 stars): ");
+            int rating;
+            try
+            {
+                rating = int.Parse(Console.ReadLine() ?? "");
+                if (rating < 1 || rating > 5)
+                {
+                    Console.WriteLine("Rating must be between 1 and 5.");
+                    return;
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid number.");
+                return;
+            }
+
+            Console.Write("Enter your review comment: ");
+            string comment = Console.ReadLine() ?? "";
+
+            Review newReview = new Review
+            {
+                OrderId = orderId,
+                Rating = rating,
+                Comment = comment
+            };
+
+            context.Reviews.Add(newReview);
+            context.SaveChanges();
+
+            Console.WriteLine($"Success! Your review for Order #{orderId} has been posted.");
         }
         static void ViewReviewsForProduct()
 
         {
-            // TODO: implement
+
+            Console.Write("Enter Product ID to view reviews: ");
+            int productId;
+            try{productId = int.Parse(Console.ReadLine() ?? "");}catch (FormatException){Console.WriteLine("Invalid number.");return; }
+
+            var product = context.Products
+                .Include(p => p.OrderProducts)
+                    .ThenInclude(op => op.Order)
+                        .ThenInclude(o => o.Review)
+                .FirstOrDefault(p => p.ProductId == productId);
+
+            if (product == null)
+            {
+                Console.WriteLine($"Error: Product ID {productId} does not exist.");
+                return;
+            }
+
+            var reviews = product.OrderProducts
+                .Select(op => op.Order?.Review)
+                .Where(r => r != null)
+                .ToList();
+
+            Console.WriteLine($"========================================");
+            Console.WriteLine($"REVIEWS FOR PRODUCT: {product.ProductName}");
+            Console.WriteLine($"========================================");
+
+            if (!reviews.Any())
+            {
+                Console.WriteLine("No reviews found for this product yet.");
+                return;
+            }
+
+            foreach (var review in reviews)
+            {
+                Console.WriteLine($"[Order #{review!.OrderId}]");
+                Console.WriteLine($"Rating : {review.Rating}/5 Stars");
+                Console.WriteLine($"Comment: {review.Comment}");
+                Console.WriteLine("----------------------------------------");
+            }
         }
         static void Logout()
         {
-            // TODO: implement - reset loggedInUserId back to 0
+            if (loggedInUserId == 0)
+            {
+                Console.WriteLine("No user is currently logged in.");
+                return;
+            }
+            loggedInUserId = 0;
+            Console.WriteLine("Successfully logged out.");
         }
     }
 }
