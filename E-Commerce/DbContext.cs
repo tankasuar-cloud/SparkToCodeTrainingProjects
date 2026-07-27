@@ -4,7 +4,9 @@ using System.Text;
 
 namespace E_Commerce
 {
-    internal class DbContext
+    public class DbContext
     {
+
+
     }
 }
