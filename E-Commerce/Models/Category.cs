@@ -7,7 +7,10 @@ namespace E_Commerce.Models
 {
     public class Category
     {
+        [Key]
         public int CategoryId { get; set; }
-        public string CategoryName { get; set; } = string.Empty;
+        public string CategoryName { get; set; }
+
+        public List<Product> Products { get; set; }
     }
 }
