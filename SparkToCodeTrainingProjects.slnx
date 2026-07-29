@@ -31,4 +31,7 @@
   <Project Path="FirstC#Project/FirstC#Project.csproj" />
   <Project Path="OOP Part 1 Tasks/OOP Part 1 Tasks.csproj" Id="9465d315-db07-4914-917a-864625659073" />
   <Project Path="TS-OOP-01/HotelManagementSystem/HotelManagementSystem.csproj" />
+  <Project Path="WebApiProject/WebApiProject.csproj" Id="a756a70e-e9f7-4da7-a010-848968babebb">
+    <BuildType Solution="Default|*" Project="Release" />
+  </Project>
 </Solution>
