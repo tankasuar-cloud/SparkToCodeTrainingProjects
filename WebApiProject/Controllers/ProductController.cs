@@ -8,16 +8,16 @@ namespace WebApiProject.Controllers
     public class ProductController : ControllerBase
     {
         
-        private Projectcontext context;
+        private Projectcontext _context;
         public ProductController(Projectcontext context)
         {
-            context = context;
+            _context = context;
         }
         [HttpPost("AddProduct")]
         public IActionResult AddProduct(Product p)
         {
-            context.Product.Add(p);
-            context.SaveChanges();
+            _context.Product.Add(p);
+            _context.SaveChanges();
             return Ok(p.ProductId) ;
         }
 
@@ -25,15 +25,15 @@ namespace WebApiProject.Controllers
         [HttpDelete("DeleteProduct")]
         public IActionResult DeleteProduct(int id)
         {
-           Product productt= context.Product.FirstOrDefault(p => p.ProductId == id);
+           Product productt= _context.Product.FirstOrDefault(p => p.ProductId == id);
             if (productt == null )
             {
                 return NotFound("Not Found");
             }
             else
             {
-                context.Product.Remove(productt);
-                context.SaveChanges();
+                _context.Product.Remove(productt);
+                _context.SaveChanges();
                 return Ok("removed successfully") ;
             }
         }
@@ -42,7 +42,7 @@ namespace WebApiProject.Controllers
         [HttpGet("GetProduct")]
         public IActionResult GetProduct(int id)
         {
-            Product productt = context.Product.FirstOrDefault(p => p.ProductId == id);
+            Product productt = _context.Product.FirstOrDefault(p => p.ProductId == id);
             return Ok(productt);
         }
 
@@ -50,7 +50,7 @@ namespace WebApiProject.Controllers
         [HttpGet("GetAllProducts")]
         public IActionResult GetAllProducts()
         {
-            List<Product> products = context.Product.ToList();
+            List<Product> products = _context.Product.ToList();
             return Ok(products);
 
         }
@@ -59,7 +59,7 @@ namespace WebApiProject.Controllers
         [HttpGet("GetByname")]
         public IActionResult GetByname(string name)
         {
-            List<Product> products = context.Product.Where(p=>p.ProductName.Contains( name)).ToList();
+            List<Product> products = _context.Product.Where(p=>p.ProductName.Contains( name)).ToList();
             return Ok(products);
         }
 
@@ -67,9 +67,9 @@ namespace WebApiProject.Controllers
         [HttpPatch("UpdateProductPrice")]
         public IActionResult UpdateProductPrice(int id,decimal newPrice)
         {
-            Product productt = context.Product.FirstOrDefault(p => p.ProductId == id);
+            Product productt = _context.Product.FirstOrDefault(p => p.ProductId == id);
             productt.Price = newPrice;
-            context.SaveChanges();
+            _context.SaveChanges();
             return Ok();
         }
 
@@ -77,9 +77,9 @@ namespace WebApiProject.Controllers
         [HttpPatch("UpdateProductname")]
         public IActionResult UpdateProductname(int id, string name)
         {
-            Product productt = context.Product.FirstOrDefault(p => p.ProductId == id);
+            Product productt = _context.Product.FirstOrDefault(p => p.ProductId == id);
             productt.ProductName = name;
-            context.SaveChanges();
+            _context.SaveChanges();
             return Ok();
         }
 
@@ -88,11 +88,11 @@ namespace WebApiProject.Controllers
         [HttpPut("updateProduct")]
         public IActionResult updateProduct(int id, Product newproduct)
         {
-            Product productt = context.Product.FirstOrDefault(p => p.ProductId == id);
+            Product productt = _context.Product.FirstOrDefault(p => p.ProductId == id);
             productt.Price=newproduct.Price;
             productt.ProductName = newproduct.ProductName;
             productt.ProductDescription = newproduct.ProductDescription;
-            context.SaveChanges();
+            _context.SaveChanges();
             return Ok();
 
 

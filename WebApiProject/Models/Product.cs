@@ -19,7 +19,7 @@ namespace WebApiProject.Models
         [ForeignKey("_Category")]
         public int CategoryId { get; set; }
         [JsonIgnore]
-        public Category _Category { get; set; } 
+        public Category? _Category { get; set; } 
     }
 }
     

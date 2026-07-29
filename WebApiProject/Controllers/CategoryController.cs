@@ -7,18 +7,19 @@ namespace WebApiProject.Controllers
     [Route("Category")]
     public class CategoryController : ControllerBase
     {
-        private Projectcontext context;
+        private readonly Projectcontext _context;
+
         public CategoryController(Projectcontext context)
         {
-            context = context;
+            _context = context; // Fixed context assignment
         }
 
 
         [HttpPost("addCategory")]
         public IActionResult addCategory(Category category)
         {
-            context.Category.Add(category);
-            context.SaveChanges();
+            _context.Category.Add(category);
+            _context.SaveChanges();
             return Ok(category.CategoryId);
         }
 
@@ -26,7 +27,7 @@ namespace WebApiProject.Controllers
         [HttpDelete("DeleteProduct")]
         public IActionResult DeleteProduct(int id)
         {
-            Category category = context.Category.FirstOrDefault(p => p.CategoryId == id);
+            Category category = _context.Category.FirstOrDefault(p => p.CategoryId == id);
             if (category == null)
             {
                 return NotFound("Not Found");
@@ -34,8 +35,8 @@ namespace WebApiProject.Controllers
             }
             else
             {
-                context.Category.Remove(category);
-                context.SaveChanges();
+                _context.Category.Remove(category);
+                _context.SaveChanges();
                 return Ok("removed successfully");
 
             }
@@ -45,7 +46,7 @@ namespace WebApiProject.Controllers
         [HttpGet("Getcategory")]
         public IActionResult Getcategory(int id)
         {
-            Category category = context.Category.FirstOrDefault(p => p.CategoryId == id);
+            Category category = _context.Category.FirstOrDefault(p => p.CategoryId == id);
             return Ok(category);
         }
 
@@ -53,7 +54,7 @@ namespace WebApiProject.Controllers
         [HttpGet("GetAllcategory")]
         public IActionResult GetAllcategory()
         {
-            List<Category> category = context.Category.ToList();
+            List<Category> category = _context.Category.ToList();
             return Ok(category);
 
         }
