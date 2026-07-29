@@ -1,8 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApiProject.Models;
 namespace WebApiProject.Controllers
 {
-    public class ProductController
+    [ApiController]
+    [Route("Product")]
+    public class ProductController : ControllerBase
     {
         
         private Projectcontext context;
