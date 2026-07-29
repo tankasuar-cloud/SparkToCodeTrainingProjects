@@ -27,5 +27,16 @@ namespace WebApiProject.Controllers
                 context.SaveChanges();
             }
         }
+        public Category Getcategory(int id)
+        {
+            Category category = context.Category.FirstOrDefault(p => p.CategoryId == id);
+            return category;
+        }
+        public List<Category> GetAllcategory()
+        {
+            List<Category> category = context.Category.ToList();
+            return category;
+
+        }
     }
 }
