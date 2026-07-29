@@ -74,7 +74,7 @@ namespace WebApiProject.Controllers
             User Userr = _context.User.FirstOrDefault(p => p.UserId == id);
             if (password == Userr.Password)
             {
-                return Ok("Cannot use the same password");
+                return BadRequest("Cannot use the same password");
             }
             else
             {
